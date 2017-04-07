@@ -15,6 +15,13 @@ namespace Service
         public Form1()
         {
             InitializeComponent();
+
+
+        }
+
+        private void Init_Log()
+        {
+
         }
     }
 }
