@@ -32,30 +32,31 @@
             this.tabPage_Language = new System.Windows.Forms.TabPage();
             this.tabPage_Editor = new System.Windows.Forms.TabPage();
             this.tabControl_Editor = new System.Windows.Forms.TabControl();
-            this.tabPage_Editor_Operation = new System.Windows.Forms.TabPage();
-            this.tabPage_Editor_CheckPoint = new System.Windows.Forms.TabPage();
-            this.tabPage_Editor_Section = new System.Windows.Forms.TabPage();
             this.tabPage_Editor_Scenario = new System.Windows.Forms.TabPage();
+            this.tabPage_Editor_Section = new System.Windows.Forms.TabPage();
+            this.tabPage_Editor_CheckPoint = new System.Windows.Forms.TabPage();
+            this.tabPage_Editor_Operation = new System.Windows.Forms.TabPage();
             this.tabPage_Scenarios = new System.Windows.Forms.TabPage();
             this.tabControl_Scenarios = new System.Windows.Forms.TabControl();
-            this.tabPage_Scenarios_CheckPoint = new System.Windows.Forms.TabPage();
-            this.tabPage_Scenarios_Section = new System.Windows.Forms.TabPage();
             this.tabPage_Scenarios_Scenario = new System.Windows.Forms.TabPage();
+            this.tabPage_Scenarios_Section = new System.Windows.Forms.TabPage();
+            this.tabPage_Scenarios_CheckPoint = new System.Windows.Forms.TabPage();
             this.tabPage_Database = new System.Windows.Forms.TabPage();
-            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabControl_Database = new System.Windows.Forms.TabControl();
             this.tabPage_Database_Connection = new System.Windows.Forms.TabPage();
             this.tabPage_Database_CreateScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_InsertScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.dataGridView_Log = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
             this.tabControl_Scenarios.SuspendLayout();
             this.tabPage_Database.SuspendLayout();
-            this.tabControl.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
+            this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,23 +102,15 @@
             this.tabControl_Editor.Size = new System.Drawing.Size(596, 482);
             this.tabControl_Editor.TabIndex = 0;
             // 
-            // tabPage_Editor_Operation
+            // tabPage_Editor_Scenario
             // 
-            this.tabPage_Editor_Operation.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_Editor_Operation.Name = "tabPage_Editor_Operation";
-            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(588, 452);
-            this.tabPage_Editor_Operation.TabIndex = 3;
-            this.tabPage_Editor_Operation.Text = "Operation";
-            this.tabPage_Editor_Operation.UseVisualStyleBackColor = true;
-            // 
-            // tabPage_Editor_CheckPoint
-            // 
-            this.tabPage_Editor_CheckPoint.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_Editor_CheckPoint.Name = "tabPage_Editor_CheckPoint";
-            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(588, 452);
-            this.tabPage_Editor_CheckPoint.TabIndex = 2;
-            this.tabPage_Editor_CheckPoint.Text = "CheckPoint";
-            this.tabPage_Editor_CheckPoint.UseVisualStyleBackColor = true;
+            this.tabPage_Editor_Scenario.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Editor_Scenario.Name = "tabPage_Editor_Scenario";
+            this.tabPage_Editor_Scenario.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Editor_Scenario.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_Scenario.TabIndex = 0;
+            this.tabPage_Editor_Scenario.Text = "Scenario";
+            this.tabPage_Editor_Scenario.UseVisualStyleBackColor = true;
             // 
             // tabPage_Editor_Section
             // 
@@ -129,15 +122,23 @@
             this.tabPage_Editor_Section.Text = "Section";
             this.tabPage_Editor_Section.UseVisualStyleBackColor = true;
             // 
-            // tabPage_Editor_Scenario
+            // tabPage_Editor_CheckPoint
             // 
-            this.tabPage_Editor_Scenario.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_Editor_Scenario.Name = "tabPage_Editor_Scenario";
-            this.tabPage_Editor_Scenario.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Editor_Scenario.Size = new System.Drawing.Size(588, 452);
-            this.tabPage_Editor_Scenario.TabIndex = 0;
-            this.tabPage_Editor_Scenario.Text = "Scenario";
-            this.tabPage_Editor_Scenario.UseVisualStyleBackColor = true;
+            this.tabPage_Editor_CheckPoint.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Editor_CheckPoint.Name = "tabPage_Editor_CheckPoint";
+            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_CheckPoint.TabIndex = 2;
+            this.tabPage_Editor_CheckPoint.Text = "CheckPoint";
+            this.tabPage_Editor_CheckPoint.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_Editor_Operation
+            // 
+            this.tabPage_Editor_Operation.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Editor_Operation.Name = "tabPage_Editor_Operation";
+            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_Operation.TabIndex = 3;
+            this.tabPage_Editor_Operation.Text = "Operation";
+            this.tabPage_Editor_Operation.UseVisualStyleBackColor = true;
             // 
             // tabPage_Scenarios
             // 
@@ -163,14 +164,15 @@
             this.tabControl_Scenarios.Size = new System.Drawing.Size(590, 476);
             this.tabControl_Scenarios.TabIndex = 0;
             // 
-            // tabPage_Scenarios_CheckPoint
+            // tabPage_Scenarios_Scenario
             // 
-            this.tabPage_Scenarios_CheckPoint.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_Scenarios_CheckPoint.Name = "tabPage_Scenarios_CheckPoint";
-            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(582, 446);
-            this.tabPage_Scenarios_CheckPoint.TabIndex = 2;
-            this.tabPage_Scenarios_CheckPoint.Text = "CheckPoint";
-            this.tabPage_Scenarios_CheckPoint.UseVisualStyleBackColor = true;
+            this.tabPage_Scenarios_Scenario.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Scenarios_Scenario.Name = "tabPage_Scenarios_Scenario";
+            this.tabPage_Scenarios_Scenario.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Scenarios_Scenario.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Scenarios_Scenario.TabIndex = 0;
+            this.tabPage_Scenarios_Scenario.Text = "Scenario";
+            this.tabPage_Scenarios_Scenario.UseVisualStyleBackColor = true;
             // 
             // tabPage_Scenarios_Section
             // 
@@ -182,15 +184,14 @@
             this.tabPage_Scenarios_Section.Text = "Section";
             this.tabPage_Scenarios_Section.UseVisualStyleBackColor = true;
             // 
-            // tabPage_Scenarios_Scenario
+            // tabPage_Scenarios_CheckPoint
             // 
-            this.tabPage_Scenarios_Scenario.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_Scenarios_Scenario.Name = "tabPage_Scenarios_Scenario";
-            this.tabPage_Scenarios_Scenario.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Scenarios_Scenario.Size = new System.Drawing.Size(582, 446);
-            this.tabPage_Scenarios_Scenario.TabIndex = 0;
-            this.tabPage_Scenarios_Scenario.Text = "Scenario";
-            this.tabPage_Scenarios_Scenario.UseVisualStyleBackColor = true;
+            this.tabPage_Scenarios_CheckPoint.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Scenarios_CheckPoint.Name = "tabPage_Scenarios_CheckPoint";
+            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Scenarios_CheckPoint.TabIndex = 2;
+            this.tabPage_Scenarios_CheckPoint.Text = "CheckPoint";
+            this.tabPage_Scenarios_CheckPoint.UseVisualStyleBackColor = true;
             // 
             // tabPage_Database
             // 
@@ -202,21 +203,6 @@
             this.tabPage_Database.TabIndex = 0;
             this.tabPage_Database.Text = "Database";
             this.tabPage_Database.UseVisualStyleBackColor = true;
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabPage_Database);
-            this.tabControl.Controls.Add(this.tabPage_Scenarios);
-            this.tabControl.Controls.Add(this.tabPage_Editor);
-            this.tabControl.Controls.Add(this.tabPage_Language);
-            this.tabControl.Controls.Add(this.tabPage_Export);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.Padding = new System.Drawing.Point(40, 10);
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(604, 522);
-            this.tabControl.TabIndex = 0;
             // 
             // tabControl_Database
             // 
@@ -270,6 +256,21 @@
             this.tabPage_Database_DropScript.Text = "Drop Script";
             this.tabPage_Database_DropScript.UseVisualStyleBackColor = true;
             // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage_Database);
+            this.tabControl.Controls.Add(this.tabPage_Scenarios);
+            this.tabControl.Controls.Add(this.tabPage_Editor);
+            this.tabControl.Controls.Add(this.tabPage_Language);
+            this.tabControl.Controls.Add(this.tabPage_Export);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.Padding = new System.Drawing.Point(40, 10);
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(604, 522);
+            this.tabControl.TabIndex = 0;
+            // 
             // dataGridView_Log
             // 
             this.dataGridView_Log.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -278,6 +279,10 @@
             this.dataGridView_Log.Name = "dataGridView_Log";
             this.dataGridView_Log.Size = new System.Drawing.Size(301, 522);
             this.dataGridView_Log.TabIndex = 1;
+            // 
+            // backgroundWorker_Connection
+            // 
+            this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Connection_DoWork);
             // 
             // Form1
             // 
@@ -297,8 +302,8 @@
             this.tabPage_Scenarios.ResumeLayout(false);
             this.tabControl_Scenarios.ResumeLayout(false);
             this.tabPage_Database.ResumeLayout(false);
-            this.tabControl.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).EndInit();
             this.ResumeLayout(false);
 
@@ -327,6 +332,7 @@
         private System.Windows.Forms.TabPage tabPage_Database_InsertScript;
         private System.Windows.Forms.TabPage tabPage_Database_DropScript;
         private System.Windows.Forms.DataGridView dataGridView_Log;
+        private System.ComponentModel.BackgroundWorker backgroundWorker_Connection;
     }
 }
 
