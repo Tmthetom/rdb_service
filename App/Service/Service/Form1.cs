@@ -12,16 +12,19 @@ namespace Service
 {
     public partial class Form1 : Form
     {
+        Log.Logger log;
+
         public Form1()
         {
             InitializeComponent();
-
+            Init_Log();
 
         }
 
         private void Init_Log()
         {
-
+            log = new Log.Logger();
+            dataGridView_Log.DataSource = log.GetList();
         }
     }
 }

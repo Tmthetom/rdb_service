@@ -48,6 +48,7 @@
             this.tabPage_Database_CreateScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_InsertScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
+            this.dataGridView_Log = new System.Windows.Forms.DataGridView();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
@@ -55,6 +56,7 @@
             this.tabPage_Database.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_Export
@@ -268,11 +270,21 @@
             this.tabPage_Database_DropScript.Text = "Drop Script";
             this.tabPage_Database_DropScript.UseVisualStyleBackColor = true;
             // 
+            // dataGridView_Log
+            // 
+            this.dataGridView_Log.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Log.Location = new System.Drawing.Point(604, 0);
+            this.dataGridView_Log.Name = "dataGridView_Log";
+            this.dataGridView_Log.Size = new System.Drawing.Size(301, 522);
+            this.dataGridView_Log.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 522);
+            this.Controls.Add(this.dataGridView_Log);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -287,6 +299,7 @@
             this.tabPage_Database.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -313,6 +326,7 @@
         private System.Windows.Forms.TabPage tabPage_Database_CreateScript;
         private System.Windows.Forms.TabPage tabPage_Database_InsertScript;
         private System.Windows.Forms.TabPage tabPage_Database_DropScript;
+        private System.Windows.Forms.DataGridView dataGridView_Log;
     }
 }
 
