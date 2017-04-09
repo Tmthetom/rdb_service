@@ -16,18 +16,18 @@ namespace AutoservisSimple
         public Form1()
         {
             InitializeComponent();
+            comboBox.SelectedIndex = 0;
         }
 
-        string connectionString = "" +
-                        "server=(local)\\SQLExpress;" +
-                        "database=Autoservis;" +
-                        "integrated Security=SSPI;";
         /*string connectionString = "" +
-                        "server=147.230.21.34;" +
-                        "database=RDB_TomasMoravec;" +
-                        "integrated Security=SSPI;" +
-                        "User ID=student" + 
-                        "password=student";*/
+            "server=(local)\\SQLExpress;" +
+            "database=Autoservis;" +
+            "integrated Security=SSPI;";*/
+        string connectionString = "Server=147.230.21.34;" +
+            "database=RDB_TomasMoravec;" +
+            "Trusted_Connection=yes" +
+            "User ID=student" + 
+            "password=student";
         Color OkeyColor = Color.Green;
         Color ErrorColor = Color.Red;
 
@@ -123,6 +123,8 @@ namespace AutoservisSimple
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            comboBox.Items.Clear();
+
                             while (reader.Read())
                             {
                                 comboBox.Items.Add(reader.GetString(0));

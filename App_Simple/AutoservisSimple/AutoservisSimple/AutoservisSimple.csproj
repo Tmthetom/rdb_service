@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Database_Export\CheckPoint.cs" />
     <Compile Include="Database_Export\Scenario.cs" />
+    <Compile Include="Database_Export\Section.cs" />
     <Compile Include="Database_Objects\CheckPoint.cs" />
     <Compile Include="Database_Objects\CheckPoint_Translation.cs" />
     <Compile Include="Database_Export\ExportToJson.cs" />

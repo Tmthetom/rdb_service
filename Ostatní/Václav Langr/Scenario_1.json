@@ -1,0 +1,209 @@
+{
+  "attributes": [],
+  "name": "Scenario_1",
+  "description": "Description_1",
+  "sections": [
+    {
+      "1": {
+        "attributes": [],
+        "check_points": {
+          "1": {
+            "attributes": [],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_1",
+                "description": "Description_1"
+              },
+              "2": {
+                "attributes": [],
+                "name": "Operation_5",
+                "description": "Description_5"
+              },
+              "3": {
+                "attributes": [],
+                "name": "Operation_6",
+                "description": "Description_6"
+              }
+            },
+            "name": "Check_point_1",
+            "description": "Description_1"
+          },
+          "2": {
+            "attributes": [],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_4",
+                "description": "Description_4"
+              },
+              "2": {
+                "attributes": [],
+                "name": "Operation_5",
+                "description": "Description_5"
+              }
+            },
+            "name": "Check_point_3",
+            "description": "Description_3"
+          }
+        },
+        "name": "Section_1",
+        "description": "Description_1"
+      }
+    },
+    {
+      "2": {
+        "attributes": [],
+        "check_points": {
+          "1": {
+            "attributes": [
+              {
+                "type": "name",
+                "value": "Check_point_4_csCZ",
+                "language": "cs_CZ"
+              }
+            ],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_6",
+                "description": "Description_6"
+              }
+            },
+            "name": "Check_point_4",
+            "description": "Description_4"
+          }
+        },
+        "name": "Section_3",
+        "description": "Description_3"
+      }
+    },
+    {
+      "3": {
+        "attributes": [],
+        "check_points": {
+          "1": {
+            "attributes": [],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_1",
+                "description": "Description_1"
+              },
+              "2": {
+                "attributes": [],
+                "name": "Operation_5",
+                "description": "Description_5"
+              },
+              "3": {
+                "attributes": [],
+                "name": "Operation_6",
+                "description": "Description_6"
+              }
+            },
+            "name": "Check_point_1",
+            "description": "Description_1"
+          }
+        },
+        "name": "Section_1",
+        "description": "Description_1"
+      }
+    },
+    {
+      "4": {
+        "attributes": [
+          {
+            "type": "name",
+            "value": "Section_4_csCZ",
+            "language": "cs_CZ"
+          }
+        ],
+        "check_points": {
+          "1": {
+            "attributes": [],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_1",
+                "description": "Description_1"
+              },
+              "2": {
+                "attributes": [],
+                "name": "Operation_5",
+                "description": "Description_5"
+              },
+              "3": {
+                "attributes": [],
+                "name": "Operation_6",
+                "description": "Description_6"
+              }
+            },
+            "name": "Check_point_1",
+            "description": "Description_1"
+          },
+          "2": {
+            "attributes": [],
+            "operations": {},
+            "name": "Check_point_2",
+            "description": "Description_2"
+          },
+          "3": {
+            "attributes": [],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_4",
+                "description": "Description_4"
+              },
+              "2": {
+                "attributes": [],
+                "name": "Operation_5",
+                "description": "Description_5"
+              }
+            },
+            "name": "Check_point_3",
+            "description": "Description_3"
+          },
+          "4": {
+            "attributes": [
+              {
+                "type": "name",
+                "value": "Check_point_4_csCZ",
+                "language": "cs_CZ"
+              }
+            ],
+            "operations": {
+              "1": {
+                "attributes": [],
+                "name": "Operation_6",
+                "description": "Description_6"
+              }
+            },
+            "name": "Check_point_4",
+            "description": "Description_4"
+          },
+          "5": {
+            "attributes": [
+              {
+                "type": "packet",
+                "value": "Kd01",
+                "language": ""
+              }
+            ],
+            "operations": {},
+            "name": "Check_point_5",
+            "description": "Description_5"
+          },
+          "6": {
+            "attributes": [],
+            "operations": {},
+            "name": "Check_point_6",
+            "description": "Description_6"
+          }
+        },
+        "name": "Section_4",
+        "description": "Description_4"
+      }
+    }
+  ]
+}

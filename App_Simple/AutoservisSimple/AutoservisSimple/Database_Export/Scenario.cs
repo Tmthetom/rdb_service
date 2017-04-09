@@ -1,8 +1,7 @@
-﻿using System;
+﻿using AutoservisSimple.Database_Objects;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoservisSimple.Database_Export
 {
@@ -11,8 +10,7 @@ namespace AutoservisSimple.Database_Export
         public string name;
         public string language;
 
-        public SortedList<int, Database_Objects.Section_Translation> sections;
-        public SortedList<int, CheckPoint> sections_CheckPoints;
+        public SortedList<int, Section_Translation> sections;
 
         /// <summary>
         /// Create scenario
@@ -21,8 +19,7 @@ namespace AutoservisSimple.Database_Export
         /// <param name="language">Language</param>
         public Scenario(string name, string language)
         {
-            sections = new SortedList<int, Database_Objects.Section_Translation>();
-            sections_CheckPoints = new SortedList<int, CheckPoint>();
+            sections = new SortedList<int, Section_Translation>();
             this.name = name;
             this.language = language;
         }
@@ -45,7 +42,14 @@ namespace AutoservisSimple.Database_Export
         /// <param name="checkPoint">CheckPoint object</param>
         public void AddCheckPoint(int section_OrderNumber, CheckPoint checkPoint)
         {
-            sections_CheckPoints.Add(section_OrderNumber, checkPoint);
+            foreach (KeyValuePair<int, Section_Translation> section in sections)
+            {
+                if (sections.ContainsKey(section_OrderNumber))
+                {
+                    section.Value.checkPoints.Add(checkPoint);
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -53,9 +57,27 @@ namespace AutoservisSimple.Database_Export
         /// </summary>
         public string ToJson()
         {
+            // Create Scenario
+            string json = "{\"name\":\"" + name + "\",";
+            json += "\"sections\":[";
+            bool arrayOpen = false;
 
+            // Create Sections
+            foreach (KeyValuePair<int, Section_Translation> section in sections)
+            {
+                arrayOpen = true;
+                json += "{\"" + section.Key + "\":";
+                json += JsonConvert.SerializeObject(section.Value) + "},";
+            }
 
-            return "";
+            // Final improvements
+            json = json.Remove(json.LastIndexOf(','));
+            if (arrayOpen)
+            {
+                json += "]";
+            }
+            json += "}";
+            return JValue.Parse(json).ToString(Formatting.Indented);
         }
     }
 }

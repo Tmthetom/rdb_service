@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoservisSimple.Database_Objects
 {
@@ -46,8 +43,8 @@ namespace AutoservisSimple.Database_Objects
             StreamWriter sw;
             foreach (string key in scenarios.Keys)
             {
-                sw = new StreamWriter(@".\export\" + language + @"\" + scenarios[key].name + ".json");
-                sw.Write(scenarios[key].ToJson());
+                sw = new StreamWriter(@".\export\" + language + @"\" + export_scenarios[key].name + ".json");
+                sw.Write(export_scenarios[key].ToJson());
                 sw.Flush();
                 sw.Close();
             }

@@ -94,6 +94,8 @@
             // comboBox
             // 
             this.comboBox.FormattingEnabled = true;
+            this.comboBox.Items.AddRange(new object[] {
+            "EN"});
             this.comboBox.Location = new System.Drawing.Point(102, 108);
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(146, 21);
