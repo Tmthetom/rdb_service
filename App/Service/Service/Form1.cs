@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,17 @@ namespace Service
         {
             InitializeComponent();
             Init_Log();
-            Log("Inicializace");
+            Log("Spuštění programu");
         }
 
         private void Init_Log()
         {
             log = new Log.Logger();
-            dataGridView_Log.DataSource = log.GetList();
         }
 
         private void Log(string message)
         {
+            dataGridView_Log.Rows.Add(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture), message);
             log.Add(message);
         }
 

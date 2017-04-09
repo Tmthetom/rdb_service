@@ -50,6 +50,8 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.dataGridView_Log = new System.Windows.Forms.DataGridView();
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
@@ -156,12 +158,11 @@
             this.tabControl_Scenarios.Controls.Add(this.tabPage_Scenarios_Scenario);
             this.tabControl_Scenarios.Controls.Add(this.tabPage_Scenarios_Section);
             this.tabControl_Scenarios.Controls.Add(this.tabPage_Scenarios_CheckPoint);
-            this.tabControl_Scenarios.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl_Scenarios.Location = new System.Drawing.Point(3, 3);
+            this.tabControl_Scenarios.Location = new System.Drawing.Point(0, 0);
             this.tabControl_Scenarios.Name = "tabControl_Scenarios";
             this.tabControl_Scenarios.Padding = new System.Drawing.Point(40, 5);
             this.tabControl_Scenarios.SelectedIndex = 0;
-            this.tabControl_Scenarios.Size = new System.Drawing.Size(590, 476);
+            this.tabControl_Scenarios.Size = new System.Drawing.Size(596, 482);
             this.tabControl_Scenarios.TabIndex = 0;
             // 
             // tabPage_Scenarios_Scenario
@@ -169,7 +170,7 @@
             this.tabPage_Scenarios_Scenario.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_Scenario.Name = "tabPage_Scenarios_Scenario";
             this.tabPage_Scenarios_Scenario.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Scenarios_Scenario.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Scenarios_Scenario.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Scenarios_Scenario.TabIndex = 0;
             this.tabPage_Scenarios_Scenario.Text = "Scenario";
             this.tabPage_Scenarios_Scenario.UseVisualStyleBackColor = true;
@@ -210,12 +211,11 @@
             this.tabControl_Database.Controls.Add(this.tabPage_Database_CreateScript);
             this.tabControl_Database.Controls.Add(this.tabPage_Database_InsertScript);
             this.tabControl_Database.Controls.Add(this.tabPage_Database_DropScript);
-            this.tabControl_Database.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl_Database.Location = new System.Drawing.Point(3, 3);
+            this.tabControl_Database.Location = new System.Drawing.Point(0, 0);
             this.tabControl_Database.Name = "tabControl_Database";
             this.tabControl_Database.Padding = new System.Drawing.Point(40, 5);
             this.tabControl_Database.SelectedIndex = 0;
-            this.tabControl_Database.Size = new System.Drawing.Size(590, 476);
+            this.tabControl_Database.Size = new System.Drawing.Size(596, 482);
             this.tabControl_Database.TabIndex = 1;
             // 
             // tabPage_Database_Connection
@@ -223,7 +223,7 @@
             this.tabPage_Database_Connection.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_Connection.Name = "tabPage_Database_Connection";
             this.tabPage_Database_Connection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Database_Connection.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Database_Connection.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Database_Connection.TabIndex = 0;
             this.tabPage_Database_Connection.Text = "Connection";
             this.tabPage_Database_Connection.UseVisualStyleBackColor = true;
@@ -233,7 +233,7 @@
             this.tabPage_Database_CreateScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_CreateScript.Name = "tabPage_Database_CreateScript";
             this.tabPage_Database_CreateScript.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Database_CreateScript.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Database_CreateScript.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Database_CreateScript.TabIndex = 1;
             this.tabPage_Database_CreateScript.Text = "Create Script";
             this.tabPage_Database_CreateScript.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             // 
             this.tabPage_Database_InsertScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_InsertScript.Name = "tabPage_Database_InsertScript";
-            this.tabPage_Database_InsertScript.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Database_InsertScript.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Database_InsertScript.TabIndex = 2;
             this.tabPage_Database_InsertScript.Text = "Insert Script";
             this.tabPage_Database_InsertScript.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             // 
             this.tabPage_Database_DropScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_DropScript.Name = "tabPage_Database_DropScript";
-            this.tabPage_Database_DropScript.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Database_DropScript.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Database_DropScript.TabIndex = 3;
             this.tabPage_Database_DropScript.Text = "Drop Script";
             this.tabPage_Database_DropScript.UseVisualStyleBackColor = true;
@@ -273,22 +273,41 @@
             // 
             // dataGridView_Log
             // 
+            this.dataGridView_Log.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Log.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Log.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Time,
+            this.Description});
             this.dataGridView_Log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Log.Location = new System.Drawing.Point(604, 0);
             this.dataGridView_Log.Name = "dataGridView_Log";
-            this.dataGridView_Log.Size = new System.Drawing.Size(301, 522);
+            this.dataGridView_Log.RowHeadersVisible = false;
+            this.dataGridView_Log.Size = new System.Drawing.Size(388, 522);
             this.dataGridView_Log.TabIndex = 1;
             // 
             // backgroundWorker_Connection
             // 
             this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Connection_DoWork);
             // 
+            // Time
+            // 
+            this.Time.FillWeight = 60.9137F;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // Description
+            // 
+            this.Description.FillWeight = 139.0863F;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 522);
+            this.ClientSize = new System.Drawing.Size(992, 522);
             this.Controls.Add(this.dataGridView_Log);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
@@ -333,6 +352,8 @@
         private System.Windows.Forms.TabPage tabPage_Database_DropScript;
         private System.Windows.Forms.DataGridView dataGridView_Log;
         private System.ComponentModel.BackgroundWorker backgroundWorker_Connection;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }
 
