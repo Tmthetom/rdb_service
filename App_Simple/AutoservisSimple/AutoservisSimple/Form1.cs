@@ -52,20 +52,27 @@ namespace AutoservisSimple
             connection.Open();
 
             // Load languages from database
-            SqlCommand command;
-            using (command = new SqlCommand("SELECT Language_Code FROM Languages", connection))
+            try
             {
-                using (SqlDataReader reader = command.ExecuteReader())
+                SqlCommand command;
+                using (command = new SqlCommand("SELECT Language_Code FROM Languages", connection))
                 {
-                    comboBox.Items.Clear();
-
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        comboBox.Items.Add(reader.GetString(0));
-                    }
-                }
+                        comboBox.Items.Clear();
 
-                comboBox.SelectedIndex = 0;
+                        while (reader.Read())
+                        {
+                            comboBox.Items.Add(reader.GetString(0));
+                        }
+                    }
+
+                    comboBox.SelectedIndex = 0;
+                }
+            }
+            catch
+            {
+                Report("Databáze je prázdná, prosím nahrajte tabulky a data.");
             }
         }
 
@@ -265,7 +272,7 @@ namespace AutoservisSimple
                 panel_InsertRows.BackColor = SystemColors.Control;
                 panel_SelectLanguage.BackColor = SystemColors.Control;
                 panel_Export.BackColor = SystemColors.Control;
-                panel_Clear.BackColor = SystemColors.Control;
+                panel_Clear.BackColor = OkeyColor;
             }
             catch (Exception exception)
             {

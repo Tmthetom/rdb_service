@@ -163,6 +163,7 @@
             this.Controls.Add(this.button_InsertRows);
             this.Controls.Add(this.button_CreateTables);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Autoservis";
             this.ResumeLayout(false);
             this.PerformLayout();
