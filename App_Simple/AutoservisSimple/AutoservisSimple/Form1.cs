@@ -50,6 +50,23 @@ namespace AutoservisSimple
 
             connection = new SqlConnection("Server=147.230.21.34;Database=RDB_Moravec;User Id=student;Password = student;");
             connection.Open();
+
+            // Load languages from database
+            SqlCommand command;
+            using (command = new SqlCommand("SELECT Language_Code FROM Languages", connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    comboBox.Items.Clear();
+
+                    while (reader.Read())
+                    {
+                        comboBox.Items.Add(reader.GetString(0));
+                    }
+                }
+
+                comboBox.SelectedIndex = 0;
+            }
         }
 
         private void Button_CreateTables_Click(object sender, EventArgs e)
@@ -188,7 +205,7 @@ namespace AutoservisSimple
         {
             try
             {
-                Database_Objects.ExportToJson.Generate("CS", connection);
+                Database_Objects.ExportToJson.Generate(comboBox.Text, connection);
                 panel_Export.BackColor = OkeyColor;
             }
             catch (Exception exception)
