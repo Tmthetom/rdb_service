@@ -40,6 +40,7 @@
             this.panel_Export = new System.Windows.Forms.Panel();
             this.panel_Clear = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button_CreateTables
@@ -146,11 +147,23 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(174, 215);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PasswordChar = '*';
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Text = "student";
+            this.textBox1.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(330, 232);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel_Clear);
             this.Controls.Add(this.panel_Export);
             this.Controls.Add(this.panel_SelectLanguage);
@@ -182,6 +195,7 @@
         private System.Windows.Forms.Panel panel_Export;
         private System.Windows.Forms.Panel panel_Clear;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

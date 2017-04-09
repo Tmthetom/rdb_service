@@ -8,28 +8,49 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Security;
 
 namespace AutoservisSimple
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-            comboBox.SelectedIndex = 0;
-        }
 
         /*string connectionString = "" +
             "server=(local)\\SQLExpress;" +
             "database=Autoservis;" +
             "integrated Security=SSPI;";*/
-        string connectionString = "Server=147.230.21.34;" +
+        /*string connectionString = "Server=147.230.21.34;" +
             "database=RDB_TomasMoravec;" +
-            "Trusted_Connection=yes" +
-            "User ID=student" + 
-            "password=student";
+            "Trusted_Connection=false";*/
         Color OkeyColor = Color.Green;
         Color ErrorColor = Color.Red;
+        SqlConnection connection;
+
+
+        public Form1()
+        {
+            InitializeComponent();
+            comboBox.SelectedIndex = 0;
+            /*
+            SqlCredential user = null;
+            SecureString secure = new SecureString();
+            foreach (char c in textBox1.Text)
+            {
+                secure.AppendChar(c);
+            }
+            secure.MakeReadOnly();
+            user = new SqlCredential(textBox1.Text, secure);
+
+            connection = new SqlConnection(connectionString, user);*/
+            /*connection = new SqlConnection(
+                "Server=147.230.21.34;" +
+                "Database=RDB_TomasMoravec;" +
+                "User Id=student;" +
+                "Password=student;");*/
+
+            connection = new SqlConnection("Server=147.230.21.34;Database=RDB_Moravec;User Id=student;Password = student;");
+            connection.Open();
+        }
 
         private void Button_CreateTables_Click(object sender, EventArgs e)
         {
@@ -44,9 +65,8 @@ namespace AutoservisSimple
                     IEnumerable<string> commandStrings = SplitSqlStatements(createScript);
 
                     // Database connection
-                    SqlConnection connection = new SqlConnection(connectionString);
+                    
                     SqlCommand command;
-                    connection.Open();
 
                     // Create tables
                     foreach (string oneCommand in commandStrings)
@@ -104,9 +124,7 @@ namespace AutoservisSimple
                     IEnumerable<string> commandStrings = SplitSqlStatements(createScript);
 
                     // Database connection
-                    SqlConnection connection = new SqlConnection(connectionString);
                     SqlCommand command;
-                    connection.Open();
 
                     // Insert rows
                     foreach (string oneCommand in commandStrings)
@@ -168,9 +186,16 @@ namespace AutoservisSimple
 
         private void Button_Export_Click(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            Database_Objects.ExportToJson.Generate("CS", connection);
+            try
+            {
+                Database_Objects.ExportToJson.Generate("CS", connection);
+                panel_Export.BackColor = OkeyColor;
+            }
+            catch (Exception exception)
+            {
+                Report(exception.ToString());
+                panel_Export.BackColor = ErrorColor;
+            }
 
             /*
             if (panel_SelectLanguage.BackColor == OkeyColor)
@@ -201,9 +226,7 @@ namespace AutoservisSimple
                     IEnumerable<string> commandStrings = SplitSqlStatements(createScript);
 
                     // Database connection
-                    SqlConnection connection = new SqlConnection(connectionString);
                     SqlCommand command;
-                    connection.Open();
 
                     // Drop tables
                     foreach (string oneCommand in commandStrings)
