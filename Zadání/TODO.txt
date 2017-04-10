@@ -1,0 +1,7 @@
+Úkoly do pøíštì:
+ - Before trigger
+ - Instead of trigger
+ - Logovací trigger
+ - Vytváøení a mazání jednotlivých komponent scénáøe
+ - Zmìny poøadí jednotlivých položek
+ - Vkládání nových položek do komponent scénáøe
