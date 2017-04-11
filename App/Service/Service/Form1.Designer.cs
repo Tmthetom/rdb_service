@@ -48,10 +48,9 @@
             this.tabPage_Database_InsertScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.dataGridView_Log = new System.Windows.Forms.DataGridView();
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
@@ -59,7 +58,7 @@
             this.tabPage_Database.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
             this.tabControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_Export
@@ -180,7 +179,7 @@
             this.tabPage_Scenarios_Section.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_Section.Name = "tabPage_Scenarios_Section";
             this.tabPage_Scenarios_Section.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Scenarios_Section.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Scenarios_Section.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Scenarios_Section.TabIndex = 1;
             this.tabPage_Scenarios_Section.Text = "Section";
             this.tabPage_Scenarios_Section.UseVisualStyleBackColor = true;
@@ -189,7 +188,7 @@
             // 
             this.tabPage_Scenarios_CheckPoint.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_CheckPoint.Name = "tabPage_Scenarios_CheckPoint";
-            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(582, 446);
+            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(588, 452);
             this.tabPage_Scenarios_CheckPoint.TabIndex = 2;
             this.tabPage_Scenarios_CheckPoint.Text = "CheckPoint";
             this.tabPage_Scenarios_CheckPoint.UseVisualStyleBackColor = true;
@@ -200,7 +199,7 @@
             this.tabPage_Database.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Database.Name = "tabPage_Database";
             this.tabPage_Database.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Database.Size = new System.Drawing.Size(596, 482);
+            this.tabPage_Database.Size = new System.Drawing.Size(597, 470);
             this.tabPage_Database.TabIndex = 0;
             this.tabPage_Database.Text = "Database";
             this.tabPage_Database.UseVisualStyleBackColor = true;
@@ -263,52 +262,40 @@
             this.tabControl.Controls.Add(this.tabPage_Editor);
             this.tabControl.Controls.Add(this.tabPage_Language);
             this.tabControl.Controls.Add(this.tabPage_Export);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(40, 10);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(604, 522);
+            this.tabControl.Size = new System.Drawing.Size(605, 510);
             this.tabControl.TabIndex = 0;
-            // 
-            // dataGridView_Log
-            // 
-            this.dataGridView_Log.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_Log.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Log.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Time,
-            this.Description});
-            this.dataGridView_Log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Log.Location = new System.Drawing.Point(604, 0);
-            this.dataGridView_Log.Name = "dataGridView_Log";
-            this.dataGridView_Log.RowHeadersVisible = false;
-            this.dataGridView_Log.Size = new System.Drawing.Size(388, 522);
-            this.dataGridView_Log.TabIndex = 1;
             // 
             // backgroundWorker_Connection
             // 
             this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Connection_DoWork);
             // 
-            // Time
+            // statusStrip1
             // 
-            this.Time.FillWeight = 60.9137F;
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 500);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(605, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // Description
+            // toolStripStatusLabel
             // 
-            this.Description.FillWeight = 139.0863F;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(112, 17);
+            this.toolStripStatusLabel.Text = "toolStripStatusLabel";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 522);
-            this.Controls.Add(this.dataGridView_Log);
+            this.ClientSize = new System.Drawing.Size(605, 522);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -323,8 +310,10 @@
             this.tabPage_Database.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Log)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -350,10 +339,9 @@
         private System.Windows.Forms.TabPage tabPage_Database_CreateScript;
         private System.Windows.Forms.TabPage tabPage_Database_InsertScript;
         private System.Windows.Forms.TabPage tabPage_Database_DropScript;
-        private System.Windows.Forms.DataGridView dataGridView_Log;
         private System.ComponentModel.BackgroundWorker backgroundWorker_Connection;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }
 

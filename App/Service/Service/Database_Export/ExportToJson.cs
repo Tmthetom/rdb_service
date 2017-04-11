@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace AutoservisSimple.Database_Objects
+namespace Service.Database_Export
 {
     class ExportToJson
     {
@@ -11,10 +11,10 @@ namespace AutoservisSimple.Database_Objects
         private static string defaultLanguage = "EN";
 
         // All translation objects
-        private static Dictionary<string, Scenario_Translation> scenarios = new Dictionary<string, Scenario_Translation>();
-        private static Dictionary<string, Section_Translation> sections = new Dictionary<string, Section_Translation>();
-        private static Dictionary<string, CheckPoint_Translation> checkpoints = new Dictionary<string, CheckPoint_Translation>();
-        private static Dictionary<string, Operation_Translation> operations = new Dictionary<string, Operation_Translation>();
+        private static Dictionary<string, Database_Objects.Scenario_Translation> scenarios = new Dictionary<string, Database_Objects.Scenario_Translation>();
+        private static Dictionary<string, Database_Objects.Section_Translation> sections = new Dictionary<string, Database_Objects.Section_Translation>();
+        private static Dictionary<string, Database_Objects.CheckPoint_Translation> checkpoints = new Dictionary<string, Database_Objects.CheckPoint_Translation>();
+        private static Dictionary<string, Database_Objects.Operation_Translation> operations = new Dictionary<string, Database_Objects.Operation_Translation>();
 
         // Exporting objects
         private static Dictionary<string, Database_Export.Scenario> export_scenarios = new Dictionary<string, Database_Export.Scenario>();
@@ -64,14 +64,14 @@ namespace AutoservisSimple.Database_Objects
         private static void BuildCheckPoints(SqlConnection myConnection)
         {
             // Create exported checkpoint for every checkpoint
-            foreach (KeyValuePair<string, CheckPoint_Translation> c in checkpoints)
+            foreach (KeyValuePair<string, Database_Objects.CheckPoint_Translation> c in checkpoints)
             {
                 export_checkpoints.Add(c.Key, new Database_Export.CheckPoint(c.Value.GetName(), c.Value.GetLanguage_Code()));
             }
 
             // Objects
             Database_Export.CheckPoint selected_checkPoint;
-            Operation_Translation selected_Operation;
+            Database_Objects.Operation_Translation selected_Operation;
 
             // Get connections
             SqlCommand query = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection);
@@ -92,14 +92,14 @@ namespace AutoservisSimple.Database_Objects
         private static void BuildScenarios(SqlConnection myConnection)
         {
             // Create exported scenario for every scenario
-            foreach (KeyValuePair<string, Scenario_Translation> s in scenarios)
+            foreach (KeyValuePair<string, Database_Objects.Scenario_Translation> s in scenarios)
             {
                 export_scenarios.Add(s.Key, new Database_Export.Scenario(s.Value.GetName(), s.Value.GetLanguage_Code()));
             }
 
             // Objects
             Database_Export.Scenario selected_Scenario;
-            Section_Translation selected_Section;
+            Database_Objects.Section_Translation selected_Section;
             Database_Export.CheckPoint selected_CheckPoint;
 
             // Get connections
@@ -140,13 +140,13 @@ namespace AutoservisSimple.Database_Objects
 
 
             // Object translations
-            List<Scenario_Translation> all_Translations = new List<Scenario_Translation>();
+            List<Database_Objects.Scenario_Translation> all_Translations = new List<Database_Objects.Scenario_Translation>();
             query = new SqlCommand("SELECT [ID_Scenario], [Language_Code], [Name] FROM [Scenarios_Translation]", myConnection);
             reader = query.ExecuteReader();
-            Scenario_Translation current_Translation;
+            Database_Objects.Scenario_Translation current_Translation;
             while (reader.Read())
             {
-                current_Translation = new Scenario_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                current_Translation = new Database_Objects.Scenario_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
                 all_Translations.Add(current_Translation);
             }
             reader.Close();
@@ -159,7 +159,7 @@ namespace AutoservisSimple.Database_Objects
                 haveTranslation = false;
 
                 // Find wanted translation
-                foreach (Scenario_Translation translation in all_Translations)
+                foreach (Database_Objects.Scenario_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
@@ -172,7 +172,7 @@ namespace AutoservisSimple.Database_Objects
                 // If no translation, use EN
                 if (haveTranslation == false)
                 {
-                    foreach (Scenario_Translation translation in all_Translations)
+                    foreach (Database_Objects.Scenario_Translation translation in all_Translations)
                     {
                         if (id == translation.GetID() && language == defaultLanguage)
                         {
@@ -207,13 +207,13 @@ namespace AutoservisSimple.Database_Objects
 
 
             // Object translations
-            List<Section_Translation> all_Translations = new List<Section_Translation>();
+            List<Database_Objects.Section_Translation> all_Translations = new List<Database_Objects.Section_Translation>();
             query = new SqlCommand("SELECT [ID_Section], [Language_Code], [Name] FROM [Sections_Translation]", myConnection);
             reader = query.ExecuteReader();
-            Section_Translation current_Translation;
+            Database_Objects.Section_Translation current_Translation;
             while (reader.Read())
             {
-                current_Translation = new Section_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                current_Translation = new Database_Objects.Section_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
                 all_Translations.Add(current_Translation);
             }
             reader.Close();
@@ -226,7 +226,7 @@ namespace AutoservisSimple.Database_Objects
                 haveTranslation = false;
 
                 // Find wanted translation
-                foreach (Section_Translation translation in all_Translations)
+                foreach (Database_Objects.Section_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
@@ -239,7 +239,7 @@ namespace AutoservisSimple.Database_Objects
                 // If no translation, use EN
                 if (haveTranslation == false)
                 {
-                    foreach (Section_Translation translation in all_Translations)
+                    foreach (Database_Objects.Section_Translation translation in all_Translations)
                     {
                         if (id == translation.GetID() && language == defaultLanguage)
                         {
@@ -250,7 +250,7 @@ namespace AutoservisSimple.Database_Objects
                 }
             }
         }
-        
+
         /// <summary>
         /// Get selected translation from database, if no translation, use default language
         /// </summary>
@@ -274,13 +274,13 @@ namespace AutoservisSimple.Database_Objects
 
 
             // Object translations
-            List<CheckPoint_Translation> all_Translations = new List<CheckPoint_Translation>();
+            List<Database_Objects.CheckPoint_Translation> all_Translations = new List<Database_Objects.CheckPoint_Translation>();
             query = new SqlCommand("SELECT [ID_CheckPoint], [Language_Code], [Name] FROM [CheckPoints_Translation]", myConnection);
             reader = query.ExecuteReader();
-            CheckPoint_Translation current_Translation;
+            Database_Objects.CheckPoint_Translation current_Translation;
             while (reader.Read())
             {
-                current_Translation = new CheckPoint_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                current_Translation = new Database_Objects.CheckPoint_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
                 all_Translations.Add(current_Translation);
             }
             reader.Close();
@@ -293,7 +293,7 @@ namespace AutoservisSimple.Database_Objects
                 haveTranslation = false;
 
                 // Find wanted translation
-                foreach (CheckPoint_Translation translation in all_Translations)
+                foreach (Database_Objects.CheckPoint_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
@@ -306,7 +306,7 @@ namespace AutoservisSimple.Database_Objects
                 // If no translation, use EN
                 if (haveTranslation == false)
                 {
-                    foreach (CheckPoint_Translation translation in all_Translations)
+                    foreach (Database_Objects.CheckPoint_Translation translation in all_Translations)
                     {
                         if (id == translation.GetID() && language == defaultLanguage)
                         {
@@ -341,13 +341,13 @@ namespace AutoservisSimple.Database_Objects
 
 
             // Object translations
-            List<Operation_Translation> all_Translations = new List<Operation_Translation>();
+            List<Database_Objects.Operation_Translation> all_Translations = new List<Database_Objects.Operation_Translation>();
             query = new SqlCommand("SELECT [ID_Operation], [Language_Code], [Name] FROM [Operations_Translation]", myConnection);
             reader = query.ExecuteReader();
-            Operation_Translation current_Translation;
+            Database_Objects.Operation_Translation current_Translation;
             while (reader.Read())
             {
-                current_Translation = new Operation_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                current_Translation = new Database_Objects.Operation_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
                 all_Translations.Add(current_Translation);
             }
             reader.Close();
@@ -360,7 +360,7 @@ namespace AutoservisSimple.Database_Objects
                 haveTranslation = false;
 
                 // Find wanted translation
-                foreach (Operation_Translation translation in all_Translations)
+                foreach (Database_Objects.Operation_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
@@ -373,7 +373,7 @@ namespace AutoservisSimple.Database_Objects
                 // If no translation, use EN
                 if (haveTranslation == false)
                 {
-                    foreach (Operation_Translation translation in all_Translations)
+                    foreach (Database_Objects.Operation_Translation translation in all_Translations)
                     {
                         if (id == translation.GetID() && language == defaultLanguage)
                         {
