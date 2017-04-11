@@ -14,17 +14,15 @@ namespace Service
 {
     public partial class Form1 : Form
     {
-        private SqlConnection myConnection;
+        private Database_Operation.Connection connection;
 
         public Form1()
         {
             InitializeComponent();
-            Log("Spuštění programu");
-        }
 
-        private void Log(string message)
-        {
-            //dataGridView_Log.Rows.Add(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture), message);
+            // Do this only when VPN online
+            connection = new Database_Operation.Connection("147.230.21.34", "RDB_Moravec", "student", "student");
+            Database_Export.ExportToJson.Generate("EN", connection.Get());
         }
 
         private void backgroundWorker_Connection_DoWork(object sender, DoWorkEventArgs e)

@@ -49,7 +49,7 @@
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
@@ -58,14 +58,14 @@
             this.tabPage_Database.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_Export
             // 
             this.tabPage_Export.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Export.Name = "tabPage_Export";
-            this.tabPage_Export.Size = new System.Drawing.Size(596, 482);
+            this.tabPage_Export.Size = new System.Drawing.Size(597, 470);
             this.tabPage_Export.TabIndex = 4;
             this.tabPage_Export.Text = "Export";
             this.tabPage_Export.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             // 
             this.tabPage_Language.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Language.Name = "tabPage_Language";
-            this.tabPage_Language.Size = new System.Drawing.Size(596, 482);
+            this.tabPage_Language.Size = new System.Drawing.Size(597, 470);
             this.tabPage_Language.TabIndex = 3;
             this.tabPage_Language.Text = "Language";
             this.tabPage_Language.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             this.tabPage_Editor.Controls.Add(this.tabControl_Editor);
             this.tabPage_Editor.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Editor.Name = "tabPage_Editor";
-            this.tabPage_Editor.Size = new System.Drawing.Size(596, 482);
+            this.tabPage_Editor.Size = new System.Drawing.Size(597, 470);
             this.tabPage_Editor.TabIndex = 2;
             this.tabPage_Editor.Text = "Editor";
             this.tabPage_Editor.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             this.tabControl_Editor.Name = "tabControl_Editor";
             this.tabControl_Editor.Padding = new System.Drawing.Point(40, 5);
             this.tabControl_Editor.SelectedIndex = 0;
-            this.tabControl_Editor.Size = new System.Drawing.Size(596, 482);
+            this.tabControl_Editor.Size = new System.Drawing.Size(597, 470);
             this.tabControl_Editor.TabIndex = 0;
             // 
             // tabPage_Editor_Scenario
@@ -108,7 +108,7 @@
             this.tabPage_Editor_Scenario.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_Scenario.Name = "tabPage_Editor_Scenario";
             this.tabPage_Editor_Scenario.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Editor_Scenario.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_Scenario.Size = new System.Drawing.Size(589, 440);
             this.tabPage_Editor_Scenario.TabIndex = 0;
             this.tabPage_Editor_Scenario.Text = "Scenario";
             this.tabPage_Editor_Scenario.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             this.tabPage_Editor_Section.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_Section.Name = "tabPage_Editor_Section";
             this.tabPage_Editor_Section.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Editor_Section.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_Section.Size = new System.Drawing.Size(589, 440);
             this.tabPage_Editor_Section.TabIndex = 1;
             this.tabPage_Editor_Section.Text = "Section";
             this.tabPage_Editor_Section.UseVisualStyleBackColor = true;
@@ -127,7 +127,7 @@
             // 
             this.tabPage_Editor_CheckPoint.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_CheckPoint.Name = "tabPage_Editor_CheckPoint";
-            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(589, 440);
             this.tabPage_Editor_CheckPoint.TabIndex = 2;
             this.tabPage_Editor_CheckPoint.Text = "CheckPoint";
             this.tabPage_Editor_CheckPoint.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             // 
             this.tabPage_Editor_Operation.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_Operation.Name = "tabPage_Editor_Operation";
-            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(589, 440);
             this.tabPage_Editor_Operation.TabIndex = 3;
             this.tabPage_Editor_Operation.Text = "Operation";
             this.tabPage_Editor_Operation.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             this.tabPage_Scenarios.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Scenarios.Name = "tabPage_Scenarios";
             this.tabPage_Scenarios.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Scenarios.Size = new System.Drawing.Size(596, 482);
+            this.tabPage_Scenarios.Size = new System.Drawing.Size(597, 470);
             this.tabPage_Scenarios.TabIndex = 1;
             this.tabPage_Scenarios.Text = "Scenarios";
             this.tabPage_Scenarios.UseVisualStyleBackColor = true;
@@ -257,10 +257,10 @@
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabPage_Database);
             this.tabControl.Controls.Add(this.tabPage_Scenarios);
             this.tabControl.Controls.Add(this.tabPage_Editor);
             this.tabControl.Controls.Add(this.tabPage_Language);
+            this.tabControl.Controls.Add(this.tabPage_Database);
             this.tabControl.Controls.Add(this.tabPage_Export);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -274,15 +274,15 @@
             // 
             this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_Connection_DoWork);
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 500);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(605, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Location = new System.Drawing.Point(0, 500);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(605, 22);
+            this.statusStrip.TabIndex = 1;
+            this.statusStrip.Text = "statusStrip";
             // 
             // toolStripStatusLabel
             // 
@@ -295,7 +295,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 522);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -310,8 +310,8 @@
             this.tabPage_Database.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,7 +340,7 @@
         private System.Windows.Forms.TabPage tabPage_Database_InsertScript;
         private System.Windows.Forms.TabPage tabPage_Database_DropScript;
         private System.ComponentModel.BackgroundWorker backgroundWorker_Connection;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }
