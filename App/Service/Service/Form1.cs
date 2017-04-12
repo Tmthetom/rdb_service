@@ -14,7 +14,7 @@ namespace Service
 {
     public partial class Form1 : Form
     {
-        private Database_Operation.Connection connection;
+        private Database_Operation.Connection myConnection;
 
         /// <summary>
         /// Loading of form
@@ -22,20 +22,80 @@ namespace Service
         public Form1()
         {
             InitializeComponent();
+            DatabaseConnection_Init();
+        }
+
+        #region Export
+        /// <summary>
+        /// Initialize export tab
+        /// </summary>
+        private void Export_Init()
+        {
+            Export_LanguagesRefresh();
+        }
+
+        /// <summary>
+        /// Export database into JSON in selected language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Database_Export.ExportToJson.Generate(comboBox_Export_ExportLanguage.Text, myConnection);
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Refresh languages for export
+        /// </summary>
+        private void Export_LanguagesRefresh()
+        {
+            List<string> languages = Database_Operation.GetLanguages.Get(myConnection);
+
+            try
+            {
+                comboBox_Export_ExportLanguage.Items.Clear();
+
+                foreach (string language in languages)
+                {
+                    comboBox_Export_ExportLanguage.Items.Add(language);
+                }
+
+                comboBox_Export_ExportLanguage.SelectedIndex = 0;  // Select first item
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        #endregion
+
+        #region Database Connection
+        /// <summary>
+        /// Initialize database connection
+        /// </summary>
+        private void DatabaseConnection_Init()
+        {
             backgroundWorker_Connection.RunWorkerAsync();
         }
 
-        #region Database Connection
         /// <summary>
         /// Connect to database with provided informations in different thread
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BackgroundWorker_Connection_DoWork(object sender, DoWorkEventArgs e)
+        private void DatabaseConnection_Run(object sender, DoWorkEventArgs e)
         {
             try
             {
-                connection = new Database_Operation.Connection("147.230.21.34", "RDB_Moravec", "student", "student");
+                myConnection = new Database_Operation.Connection("147.230.21.34", "RDB_Moravec", "student", "student");
             }
             catch (Exception exception)
             {
@@ -43,7 +103,7 @@ namespace Service
                 {
                     MessageBox.Show(exception.Message);
                 }
-                connection = null;
+                myConnection = null;
             }
         }
 
@@ -52,30 +112,46 @@ namespace Service
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BackgroundWorker_Connection_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void DatabaseConnection_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            CheckDatabaseConnection();
-            //Database_Export.ExportToJson.Generate("EN", connection.Get());
+            DatabaseConnection_Check();
         }
 
         /// <summary>
         /// Check database connection failed or success
         /// </summary>
-        private void CheckDatabaseConnection()
+        private void DatabaseConnection_Check()
         {
-            if (connection == null)  // Connection failed
+            // Connection failed
+            if (myConnection == null)
             {
+                // Toolstrip information
                 statusStrip.BackColor = Color.DarkRed;
                 toolStripStatusLabel.ForeColor = Color.White;
                 toolStripStatusLabel.Text = "Connection failed";
             }
-            else  // Connection success
+
+            // Connection success
+            else
             {
+                // Toolstrip information
                 statusStrip.BackColor = Color.YellowGreen;
                 toolStripStatusLabel.ForeColor = SystemColors.ControlText;
+                toolStripStatusLabel.Text = "Connected to " + myConnection.GetDatabaseName() + " at " + myConnection.GetServerAddress();
 
-                toolStripStatusLabel.Text = "Connected to " + connection.GetDatabaseName() + " at " + connection.GetServerAddress();
+                Export_Init();
             }
+        }
+        #endregion
+
+        #region Message
+        /// <summary>
+        /// Show message in messageBox
+        /// </summary>
+        /// <param name="message">Message to show</param>
+        private void Message(string message)
+        {
+            MessageBox.Show(message);
         }
         #endregion
     }

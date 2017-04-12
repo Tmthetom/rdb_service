@@ -51,6 +51,10 @@
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button_Export = new System.Windows.Forms.Button();
+            this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
+            this.comboBox_Export_ExportLanguage = new System.Windows.Forms.ComboBox();
+            this.tabPage_Export.SuspendLayout();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
@@ -63,6 +67,9 @@
             // 
             // tabPage_Export
             // 
+            this.tabPage_Export.Controls.Add(this.comboBox_Export_ExportLanguage);
+            this.tabPage_Export.Controls.Add(this.label_Export_ExportLanguage);
+            this.tabPage_Export.Controls.Add(this.button_Export);
             this.tabPage_Export.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Export.Name = "tabPage_Export";
             this.tabPage_Export.Size = new System.Drawing.Size(597, 460);
@@ -272,8 +279,8 @@
             // 
             // backgroundWorker_Connection
             // 
-            this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_Connection_DoWork);
-            this.backgroundWorker_Connection.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_Connection_RunWorkerCompleted);
+            this.backgroundWorker_Connection.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DatabaseConnection_Run);
+            this.backgroundWorker_Connection.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DatabaseConnection_Completed);
             // 
             // statusStrip
             // 
@@ -283,6 +290,7 @@
             this.statusStrip.Location = new System.Drawing.Point(0, 500);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(605, 22);
+            this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -291,6 +299,33 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(103, 17);
             this.toolStripStatusLabel.Text = "Connection status";
+            // 
+            // button_Export
+            // 
+            this.button_Export.Location = new System.Drawing.Point(8, 417);
+            this.button_Export.Name = "button_Export";
+            this.button_Export.Size = new System.Drawing.Size(581, 34);
+            this.button_Export.TabIndex = 0;
+            this.button_Export.Text = "Export";
+            this.button_Export.UseVisualStyleBackColor = true;
+            this.button_Export.Click += new System.EventHandler(this.Button_Export_Click);
+            // 
+            // label_Export_ExportLanguage
+            // 
+            this.label_Export_ExportLanguage.AutoSize = true;
+            this.label_Export_ExportLanguage.Location = new System.Drawing.Point(24, 24);
+            this.label_Export_ExportLanguage.Name = "label_Export_ExportLanguage";
+            this.label_Export_ExportLanguage.Size = new System.Drawing.Size(88, 13);
+            this.label_Export_ExportLanguage.TabIndex = 1;
+            this.label_Export_ExportLanguage.Text = "Export Language";
+            // 
+            // comboBox_Export_ExportLanguage
+            // 
+            this.comboBox_Export_ExportLanguage.FormattingEnabled = true;
+            this.comboBox_Export_ExportLanguage.Location = new System.Drawing.Point(194, 21);
+            this.comboBox_Export_ExportLanguage.Name = "comboBox_Export_ExportLanguage";
+            this.comboBox_Export_ExportLanguage.Size = new System.Drawing.Size(375, 21);
+            this.comboBox_Export_ExportLanguage.TabIndex = 2;
             // 
             // Form1
             // 
@@ -304,7 +339,10 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Car Service";
+            this.tabPage_Export.ResumeLayout(false);
+            this.tabPage_Export.PerformLayout();
             this.tabPage_Editor.ResumeLayout(false);
             this.tabControl_Editor.ResumeLayout(false);
             this.tabPage_Scenarios.ResumeLayout(false);
@@ -344,6 +382,9 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker_Connection;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Button button_Export;
+        private System.Windows.Forms.ComboBox comboBox_Export_ExportLanguage;
+        private System.Windows.Forms.Label label_Export_ExportLanguage;
     }
 }
 

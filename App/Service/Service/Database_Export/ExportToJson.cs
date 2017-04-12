@@ -25,8 +25,9 @@ namespace Service.Database_Export
         /// </summary>
         /// <param name="language">Selected language</param>
         /// <param name="myConnection">Database connection</param>
-        public static void Generate(string language, SqlConnection myConnection)
+        public static void Generate(string language, Database_Operation.Connection connection)
         {
+            SqlConnection myConnection = connection.GetConnection();
             Directory.CreateDirectory(@".\export\" + language);
 
             // Get translated object from database
@@ -55,6 +56,29 @@ namespace Service.Database_Export
             checkpoints = null;
             operations = null;
             GC.Collect();
+        }
+
+        public static string GetNumerOfComponents(string language, Database_Operation.Connection connection)
+        {
+
+        }
+
+        /// <summary>
+        /// Load components in selected language
+        /// </summary>
+        /// <param name="language">Selected language</param>
+        /// <param name="myConnection">Database connection</param>
+        private static void LoadComponents(string language, SqlConnection myConnection)
+        {
+            // Get translated object from database
+            GetScenarios(language, myConnection);
+            GetSections(language, myConnection);
+            GetCheckPoints(language, myConnection);
+            GetOperations(language, myConnection);
+
+            // Get connections from database
+            BuildCheckPoints(myConnection);
+            BuildScenarios(myConnection);
         }
 
         /// <summary>
