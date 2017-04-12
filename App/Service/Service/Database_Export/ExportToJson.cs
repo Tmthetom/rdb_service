@@ -27,20 +27,14 @@ namespace Service.Database_Export
         /// <param name="myConnection">Database connection</param>
         public static void Generate(string language, Database_Operation.Connection connection)
         {
+            // Get SQL Connection
             SqlConnection myConnection = connection.GetConnection();
-            Directory.CreateDirectory(@".\export\" + language);
 
-            // Get translated object from database
-            GetScenarios(language, myConnection);
-            GetSections(language, myConnection);
-            GetCheckPoints(language, myConnection);
-            GetOperations(language, myConnection);
-
-            // Get connections from database
-            BuildCheckPoints(myConnection);
-            BuildScenarios(myConnection);
+            // Load components
+            LoadComponents(language, myConnection);
 
             // Create JSON and save into file
+            Directory.CreateDirectory(@".\export\" + language);
             StreamWriter sw;
             foreach (string key in scenarios.Keys)
             {
@@ -51,16 +45,58 @@ namespace Service.Database_Export
             }
 
             // Clear old values
-            scenarios = null;
-            sections = null;
-            checkpoints = null;
-            operations = null;
-            GC.Collect();
+            ClearComponents();
         }
 
-        public static string GetNumerOfComponents(string language, Database_Operation.Connection connection)
+        /// <summary>
+        /// Get number of components for selected language
+        /// </summary>
+        /// <param name="language">Selected language</param>
+        /// <param name="connection">Database connection</param>
+        /// <returns></returns>
+        public static Dictionary<string, int> GetNumerOfComponents(string language, Database_Operation.Connection connection)
         {
+            // Get SQL Connection
+            SqlConnection myConnection = connection.GetConnection();
 
+            // Load components
+            LoadComponents(language, myConnection);
+
+            // Get number of component
+            Dictionary<string, int> numberOf = new Dictionary<string, int>();
+            int numberOfScenarios = 0;
+            int numberOfSections = 0;
+            int numberOfCheckPoints = 0;
+            int numberOfOperations = 0;
+
+            // Scenarios
+            numberOfScenarios = export_scenarios.Count;
+
+            // Sections
+            foreach (Database_Export.Scenario scenario in export_scenarios.Values)
+            {
+                numberOfSections += scenario.sections.Count;
+            }
+
+            // CheckPoints
+            numberOfCheckPoints = export_checkpoints.Count;
+
+            // Operations
+            foreach (Database_Export.CheckPoint checkPoint in export_checkpoints.Values)
+            {
+                numberOfOperations += checkPoint.operations.Count;
+            }
+
+            // Add all to output
+            numberOf.Add("Scenarios", numberOfScenarios);
+            numberOf.Add("Sections", numberOfSections);
+            numberOf.Add("CheckPoints", numberOfCheckPoints);
+            numberOf.Add("Operations", numberOfOperations);
+
+            // Clear old values
+            ClearComponents();
+
+            return numberOf;
         }
 
         /// <summary>
@@ -79,6 +115,25 @@ namespace Service.Database_Export
             // Get connections from database
             BuildCheckPoints(myConnection);
             BuildScenarios(myConnection);
+        }
+
+        /// <summary>
+        /// Destroy all resources
+        /// </summary>
+        private static void ClearComponents()
+        {
+            // All translation objects
+            scenarios = new Dictionary<string, Database_Objects.Scenario_Translation>();
+            sections = new Dictionary<string, Database_Objects.Section_Translation>();
+            checkpoints = new Dictionary<string, Database_Objects.CheckPoint_Translation>();
+            operations = new Dictionary<string, Database_Objects.Operation_Translation>();
+
+            // Exporting objects
+            export_scenarios = new Dictionary<string, Database_Export.Scenario>();
+            export_checkpoints = new Dictionary<string, Database_Export.CheckPoint>();
+
+            // Call garbage collector
+            GC.Collect();
         }
 
         /// <summary>

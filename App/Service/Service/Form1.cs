@@ -60,19 +60,37 @@ namespace Service
 
             try
             {
+                // Clear old languages
                 comboBox_Export_ExportLanguage.Items.Clear();
 
+                // Add new languages
                 foreach (string language in languages)
                 {
                     comboBox_Export_ExportLanguage.Items.Add(language);
                 }
 
-                comboBox_Export_ExportLanguage.SelectedIndex = 0;  // Select first item
+                // Select first item
+                comboBox_Export_ExportLanguage.SelectedIndex = 0;
             }
             catch (Exception exception)
             {
                 Message(exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Refresh export information for selected language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Export_ExportLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Dictionary<string, int> components = Database_Export.ExportToJson.GetNumerOfComponents(comboBox_Export_ExportLanguage.Text, myConnection);
+
+            textBox_Export_Scenarios.Text = components["Scenarios"].ToString();
+            textBox_Export_Sections.Text = components["Sections"].ToString();
+            textBox_Export_CheckPoints.Text = components["CheckPoints"].ToString();
+            textBox_Export_Operations.Text = components["Operations"].ToString();
         }
 
         #endregion
@@ -153,6 +171,6 @@ namespace Service
         {
             MessageBox.Show(message);
         }
-        #endregion
+        #endregion   
     }
 }

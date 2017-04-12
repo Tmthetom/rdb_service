@@ -56,6 +56,15 @@ namespace Service.Database_Export
         }
 
         /// <summary>
+        /// Get number of components
+        /// </summary>
+        /// <returns></returns>
+        public int GetNumberOfSections()
+        {
+            return sections.Count;
+        }
+
+        /// <summary>
         /// Convert object into JSON string
         /// </summary>
         public string ToJson()

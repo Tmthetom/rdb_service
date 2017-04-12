@@ -35,6 +35,15 @@ namespace Service.Database_Objects
         }
 
         /// <summary>
+        /// Get number of components
+        /// </summary>
+        /// <returns></returns>
+        public int GetNumberOfCheckPoints()
+        {
+            return checkPoints.Count;
+        }
+
+        /// <summary>
         /// Convert object into JSON string
         /// </summary>
         public string ToJson()

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.tabPage_Export = new System.Windows.Forms.TabPage();
+            this.comboBox_Export_ExportLanguage = new System.Windows.Forms.ComboBox();
+            this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
+            this.button_Export = new System.Windows.Forms.Button();
             this.tabPage_Language = new System.Windows.Forms.TabPage();
             this.tabPage_Editor = new System.Windows.Forms.TabPage();
             this.tabControl_Editor = new System.Windows.Forms.TabControl();
@@ -51,9 +54,15 @@
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button_Export = new System.Windows.Forms.Button();
-            this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
-            this.comboBox_Export_ExportLanguage = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_Export_Scenarios = new System.Windows.Forms.Label();
+            this.textBox_Export_Scenarios = new System.Windows.Forms.TextBox();
+            this.label_Export_Sections = new System.Windows.Forms.Label();
+            this.label_Export_CheckPoints = new System.Windows.Forms.Label();
+            this.label_Export_Operations = new System.Windows.Forms.Label();
+            this.textBox_Export_Sections = new System.Windows.Forms.TextBox();
+            this.textBox_Export_CheckPoints = new System.Windows.Forms.TextBox();
+            this.textBox_Export_Operations = new System.Windows.Forms.TextBox();
             this.tabPage_Export.SuspendLayout();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
@@ -63,10 +72,12 @@
             this.tabControl_Database.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_Export
             // 
+            this.tabPage_Export.Controls.Add(this.groupBox1);
             this.tabPage_Export.Controls.Add(this.comboBox_Export_ExportLanguage);
             this.tabPage_Export.Controls.Add(this.label_Export_ExportLanguage);
             this.tabPage_Export.Controls.Add(this.button_Export);
@@ -76,6 +87,34 @@
             this.tabPage_Export.TabIndex = 4;
             this.tabPage_Export.Text = "Export";
             this.tabPage_Export.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_Export_ExportLanguage
+            // 
+            this.comboBox_Export_ExportLanguage.FormattingEnabled = true;
+            this.comboBox_Export_ExportLanguage.Location = new System.Drawing.Point(194, 21);
+            this.comboBox_Export_ExportLanguage.Name = "comboBox_Export_ExportLanguage";
+            this.comboBox_Export_ExportLanguage.Size = new System.Drawing.Size(375, 21);
+            this.comboBox_Export_ExportLanguage.TabIndex = 2;
+            this.comboBox_Export_ExportLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Export_ExportLanguage_SelectedIndexChanged);
+            // 
+            // label_Export_ExportLanguage
+            // 
+            this.label_Export_ExportLanguage.AutoSize = true;
+            this.label_Export_ExportLanguage.Location = new System.Drawing.Point(24, 24);
+            this.label_Export_ExportLanguage.Name = "label_Export_ExportLanguage";
+            this.label_Export_ExportLanguage.Size = new System.Drawing.Size(88, 13);
+            this.label_Export_ExportLanguage.TabIndex = 1;
+            this.label_Export_ExportLanguage.Text = "Export Language";
+            // 
+            // button_Export
+            // 
+            this.button_Export.Location = new System.Drawing.Point(8, 417);
+            this.button_Export.Name = "button_Export";
+            this.button_Export.Size = new System.Drawing.Size(581, 34);
+            this.button_Export.TabIndex = 0;
+            this.button_Export.Text = "Export";
+            this.button_Export.UseVisualStyleBackColor = true;
+            this.button_Export.Click += new System.EventHandler(this.Button_Export_Click);
             // 
             // tabPage_Language
             // 
@@ -125,7 +164,7 @@
             this.tabPage_Editor_Section.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_Section.Name = "tabPage_Editor_Section";
             this.tabPage_Editor_Section.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Editor_Section.Size = new System.Drawing.Size(589, 440);
+            this.tabPage_Editor_Section.Size = new System.Drawing.Size(589, 430);
             this.tabPage_Editor_Section.TabIndex = 1;
             this.tabPage_Editor_Section.Text = "Section";
             this.tabPage_Editor_Section.UseVisualStyleBackColor = true;
@@ -134,7 +173,7 @@
             // 
             this.tabPage_Editor_CheckPoint.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_CheckPoint.Name = "tabPage_Editor_CheckPoint";
-            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(589, 440);
+            this.tabPage_Editor_CheckPoint.Size = new System.Drawing.Size(589, 430);
             this.tabPage_Editor_CheckPoint.TabIndex = 2;
             this.tabPage_Editor_CheckPoint.Text = "CheckPoint";
             this.tabPage_Editor_CheckPoint.UseVisualStyleBackColor = true;
@@ -143,7 +182,7 @@
             // 
             this.tabPage_Editor_Operation.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Editor_Operation.Name = "tabPage_Editor_Operation";
-            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(589, 440);
+            this.tabPage_Editor_Operation.Size = new System.Drawing.Size(589, 430);
             this.tabPage_Editor_Operation.TabIndex = 3;
             this.tabPage_Editor_Operation.Text = "Operation";
             this.tabPage_Editor_Operation.UseVisualStyleBackColor = true;
@@ -186,7 +225,7 @@
             this.tabPage_Scenarios_Section.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_Section.Name = "tabPage_Scenarios_Section";
             this.tabPage_Scenarios_Section.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Scenarios_Section.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Scenarios_Section.Size = new System.Drawing.Size(588, 430);
             this.tabPage_Scenarios_Section.TabIndex = 1;
             this.tabPage_Scenarios_Section.Text = "Section";
             this.tabPage_Scenarios_Section.UseVisualStyleBackColor = true;
@@ -195,7 +234,7 @@
             // 
             this.tabPage_Scenarios_CheckPoint.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_CheckPoint.Name = "tabPage_Scenarios_CheckPoint";
-            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(588, 452);
+            this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(588, 430);
             this.tabPage_Scenarios_CheckPoint.TabIndex = 2;
             this.tabPage_Scenarios_CheckPoint.Text = "CheckPoint";
             this.tabPage_Scenarios_CheckPoint.UseVisualStyleBackColor = true;
@@ -284,7 +323,7 @@
             // 
             // statusStrip
             // 
-            this.statusStrip.BackColor = System.Drawing.Color.YellowGreen;
+            this.statusStrip.BackColor = System.Drawing.Color.Orange;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 500);
@@ -297,35 +336,97 @@
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(103, 17);
-            this.toolStripStatusLabel.Text = "Connection status";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(78, 17);
+            this.toolStripStatusLabel.Text = "Connecting...";
             // 
-            // button_Export
+            // groupBox1
             // 
-            this.button_Export.Location = new System.Drawing.Point(8, 417);
-            this.button_Export.Name = "button_Export";
-            this.button_Export.Size = new System.Drawing.Size(581, 34);
-            this.button_Export.TabIndex = 0;
-            this.button_Export.Text = "Export";
-            this.button_Export.UseVisualStyleBackColor = true;
-            this.button_Export.Click += new System.EventHandler(this.Button_Export_Click);
+            this.groupBox1.Controls.Add(this.textBox_Export_Operations);
+            this.groupBox1.Controls.Add(this.textBox_Export_CheckPoints);
+            this.groupBox1.Controls.Add(this.textBox_Export_Sections);
+            this.groupBox1.Controls.Add(this.label_Export_Operations);
+            this.groupBox1.Controls.Add(this.label_Export_CheckPoints);
+            this.groupBox1.Controls.Add(this.label_Export_Sections);
+            this.groupBox1.Controls.Add(this.textBox_Export_Scenarios);
+            this.groupBox1.Controls.Add(this.label_Export_Scenarios);
+            this.groupBox1.Location = new System.Drawing.Point(27, 64);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(542, 331);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Detail informations";
             // 
-            // label_Export_ExportLanguage
+            // label_Export_Scenarios
             // 
-            this.label_Export_ExportLanguage.AutoSize = true;
-            this.label_Export_ExportLanguage.Location = new System.Drawing.Point(24, 24);
-            this.label_Export_ExportLanguage.Name = "label_Export_ExportLanguage";
-            this.label_Export_ExportLanguage.Size = new System.Drawing.Size(88, 13);
-            this.label_Export_ExportLanguage.TabIndex = 1;
-            this.label_Export_ExportLanguage.Text = "Export Language";
+            this.label_Export_Scenarios.AutoSize = true;
+            this.label_Export_Scenarios.Location = new System.Drawing.Point(37, 42);
+            this.label_Export_Scenarios.Name = "label_Export_Scenarios";
+            this.label_Export_Scenarios.Size = new System.Drawing.Size(54, 13);
+            this.label_Export_Scenarios.TabIndex = 4;
+            this.label_Export_Scenarios.Text = "Scenarios";
             // 
-            // comboBox_Export_ExportLanguage
+            // textBox_Export_Scenarios
             // 
-            this.comboBox_Export_ExportLanguage.FormattingEnabled = true;
-            this.comboBox_Export_ExportLanguage.Location = new System.Drawing.Point(194, 21);
-            this.comboBox_Export_ExportLanguage.Name = "comboBox_Export_ExportLanguage";
-            this.comboBox_Export_ExportLanguage.Size = new System.Drawing.Size(375, 21);
-            this.comboBox_Export_ExportLanguage.TabIndex = 2;
+            this.textBox_Export_Scenarios.Enabled = false;
+            this.textBox_Export_Scenarios.Location = new System.Drawing.Point(267, 39);
+            this.textBox_Export_Scenarios.Name = "textBox_Export_Scenarios";
+            this.textBox_Export_Scenarios.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Scenarios.TabIndex = 5;
+            this.textBox_Export_Scenarios.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_Export_Sections
+            // 
+            this.label_Export_Sections.AutoSize = true;
+            this.label_Export_Sections.Location = new System.Drawing.Point(37, 78);
+            this.label_Export_Sections.Name = "label_Export_Sections";
+            this.label_Export_Sections.Size = new System.Drawing.Size(48, 13);
+            this.label_Export_Sections.TabIndex = 6;
+            this.label_Export_Sections.Text = "Sections";
+            // 
+            // label_Export_CheckPoints
+            // 
+            this.label_Export_CheckPoints.AutoSize = true;
+            this.label_Export_CheckPoints.Location = new System.Drawing.Point(37, 115);
+            this.label_Export_CheckPoints.Name = "label_Export_CheckPoints";
+            this.label_Export_CheckPoints.Size = new System.Drawing.Size(67, 13);
+            this.label_Export_CheckPoints.TabIndex = 7;
+            this.label_Export_CheckPoints.Text = "CheckPoints";
+            // 
+            // label_Export_Operations
+            // 
+            this.label_Export_Operations.AutoSize = true;
+            this.label_Export_Operations.Location = new System.Drawing.Point(37, 152);
+            this.label_Export_Operations.Name = "label_Export_Operations";
+            this.label_Export_Operations.Size = new System.Drawing.Size(58, 13);
+            this.label_Export_Operations.TabIndex = 8;
+            this.label_Export_Operations.Text = "Operations";
+            // 
+            // textBox_Export_Sections
+            // 
+            this.textBox_Export_Sections.Enabled = false;
+            this.textBox_Export_Sections.Location = new System.Drawing.Point(267, 75);
+            this.textBox_Export_Sections.Name = "textBox_Export_Sections";
+            this.textBox_Export_Sections.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Sections.TabIndex = 9;
+            this.textBox_Export_Sections.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Export_CheckPoints
+            // 
+            this.textBox_Export_CheckPoints.Enabled = false;
+            this.textBox_Export_CheckPoints.Location = new System.Drawing.Point(267, 112);
+            this.textBox_Export_CheckPoints.Name = "textBox_Export_CheckPoints";
+            this.textBox_Export_CheckPoints.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_CheckPoints.TabIndex = 10;
+            this.textBox_Export_CheckPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Export_Operations
+            // 
+            this.textBox_Export_Operations.Enabled = false;
+            this.textBox_Export_Operations.Location = new System.Drawing.Point(267, 149);
+            this.textBox_Export_Operations.Name = "textBox_Export_Operations";
+            this.textBox_Export_Operations.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Operations.TabIndex = 11;
+            this.textBox_Export_Operations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
@@ -352,6 +453,8 @@
             this.tabControl.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,6 +488,15 @@
         private System.Windows.Forms.Button button_Export;
         private System.Windows.Forms.ComboBox comboBox_Export_ExportLanguage;
         private System.Windows.Forms.Label label_Export_ExportLanguage;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label_Export_Operations;
+        private System.Windows.Forms.Label label_Export_CheckPoints;
+        private System.Windows.Forms.Label label_Export_Sections;
+        private System.Windows.Forms.TextBox textBox_Export_Scenarios;
+        private System.Windows.Forms.Label label_Export_Scenarios;
+        private System.Windows.Forms.TextBox textBox_Export_Operations;
+        private System.Windows.Forms.TextBox textBox_Export_CheckPoints;
+        private System.Windows.Forms.TextBox textBox_Export_Sections;
     }
 }
 
