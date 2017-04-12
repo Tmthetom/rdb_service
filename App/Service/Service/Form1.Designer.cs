@@ -42,6 +42,8 @@
             this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
             this.button_Export = new System.Windows.Forms.Button();
             this.tabPage_Language = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage_Editor = new System.Windows.Forms.TabPage();
             this.tabControl_Editor = new System.Windows.Forms.TabControl();
             this.tabPage_Editor_Scenario = new System.Windows.Forms.TabPage();
@@ -69,14 +71,22 @@
             this.label_Connection_PreferedServer = new System.Windows.Forms.Label();
             this.button_Database_Connect = new System.Windows.Forms.Button();
             this.tabPage_Database_CreateScript = new System.Windows.Forms.TabPage();
+            this.panel_CreateScript_DragAndDrop = new System.Windows.Forms.Panel();
+            this.button_CreateScript = new System.Windows.Forms.Button();
             this.tabPage_Database_InsertScript = new System.Windows.Forms.TabPage();
+            this.panel_InsertScript_DragAndDrop = new System.Windows.Forms.Panel();
+            this.button_InsertScript = new System.Windows.Forms.Button();
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
+            this.panel_DropScript_DragAndDrop = new System.Windows.Forms.Panel();
+            this.button_DropScript = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabPage_Export.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage_Language.SuspendLayout();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
@@ -85,6 +95,9 @@
             this.tabControl_Database.SuspendLayout();
             this.tabPage_Database_Connection.SuspendLayout();
             this.groupBox_Connection.SuspendLayout();
+            this.tabPage_Database_CreateScript.SuspendLayout();
+            this.tabPage_Database_InsertScript.SuspendLayout();
+            this.tabPage_Database_DropScript.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -221,12 +234,31 @@
             // 
             // tabPage_Language
             // 
+            this.tabPage_Language.Controls.Add(this.comboBox1);
+            this.tabPage_Language.Controls.Add(this.label4);
             this.tabPage_Language.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Language.Name = "tabPage_Language";
             this.tabPage_Language.Size = new System.Drawing.Size(597, 460);
             this.tabPage_Language.TabIndex = 3;
             this.tabPage_Language.Text = "Language";
             this.tabPage_Language.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(194, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(375, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Selected Language";
             // 
             // tabPage_Editor
             // 
@@ -499,6 +531,8 @@
             // 
             // tabPage_Database_CreateScript
             // 
+            this.tabPage_Database_CreateScript.Controls.Add(this.panel_CreateScript_DragAndDrop);
+            this.tabPage_Database_CreateScript.Controls.Add(this.button_CreateScript);
             this.tabPage_Database_CreateScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_CreateScript.Name = "tabPage_Database_CreateScript";
             this.tabPage_Database_CreateScript.Padding = new System.Windows.Forms.Padding(3);
@@ -507,8 +541,36 @@
             this.tabPage_Database_CreateScript.Text = "Create Script";
             this.tabPage_Database_CreateScript.UseVisualStyleBackColor = true;
             // 
+            // panel_CreateScript_DragAndDrop
+            // 
+            this.panel_CreateScript_DragAndDrop.AllowDrop = true;
+            this.panel_CreateScript_DragAndDrop.BackColor = System.Drawing.Color.Transparent;
+            this.panel_CreateScript_DragAndDrop.BackgroundImage = global::Service.Properties.Resources.DragAndDrop;
+            this.panel_CreateScript_DragAndDrop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel_CreateScript_DragAndDrop.Location = new System.Drawing.Point(18, 22);
+            this.panel_CreateScript_DragAndDrop.Name = "panel_CreateScript_DragAndDrop";
+            this.panel_CreateScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
+            this.panel_CreateScript_DragAndDrop.TabIndex = 4;
+            this.panel_CreateScript_DragAndDrop.Click += new System.EventHandler(this.Panel_CreateScript_DragAndDrop_Click);
+            this.panel_CreateScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_CreateScript_DragAndDrop_DragDrop);
+            this.panel_CreateScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_CreateScript_DragAndDrop_DragEnter);
+            this.panel_CreateScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_CreateScript_DragAndDrop_DragLeave);
+            // 
+            // button_CreateScript
+            // 
+            this.button_CreateScript.Enabled = false;
+            this.button_CreateScript.Location = new System.Drawing.Point(4, 391);
+            this.button_CreateScript.Name = "button_CreateScript";
+            this.button_CreateScript.Size = new System.Drawing.Size(581, 34);
+            this.button_CreateScript.TabIndex = 2;
+            this.button_CreateScript.Text = "Create tables";
+            this.button_CreateScript.UseVisualStyleBackColor = true;
+            this.button_CreateScript.Click += new System.EventHandler(this.Button_CreateScript_Click);
+            // 
             // tabPage_Database_InsertScript
             // 
+            this.tabPage_Database_InsertScript.Controls.Add(this.panel_InsertScript_DragAndDrop);
+            this.tabPage_Database_InsertScript.Controls.Add(this.button_InsertScript);
             this.tabPage_Database_InsertScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_InsertScript.Name = "tabPage_Database_InsertScript";
             this.tabPage_Database_InsertScript.Size = new System.Drawing.Size(588, 431);
@@ -516,14 +578,66 @@
             this.tabPage_Database_InsertScript.Text = "Insert Script";
             this.tabPage_Database_InsertScript.UseVisualStyleBackColor = true;
             // 
+            // panel_InsertScript_DragAndDrop
+            // 
+            this.panel_InsertScript_DragAndDrop.AllowDrop = true;
+            this.panel_InsertScript_DragAndDrop.BackgroundImage = global::Service.Properties.Resources.DragAndDrop;
+            this.panel_InsertScript_DragAndDrop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel_InsertScript_DragAndDrop.Location = new System.Drawing.Point(18, 22);
+            this.panel_InsertScript_DragAndDrop.Name = "panel_InsertScript_DragAndDrop";
+            this.panel_InsertScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
+            this.panel_InsertScript_DragAndDrop.TabIndex = 5;
+            this.panel_InsertScript_DragAndDrop.Click += new System.EventHandler(this.Panel_InsertScript_DragAndDrop_Click);
+            this.panel_InsertScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_InsertScript_DragAndDrop_DragDrop);
+            this.panel_InsertScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_InsertScript_DragAndDrop_DragEnter);
+            this.panel_InsertScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_InsertScript_DragAndDrop_DragLeave);
+            // 
+            // button_InsertScript
+            // 
+            this.button_InsertScript.Enabled = false;
+            this.button_InsertScript.Location = new System.Drawing.Point(4, 391);
+            this.button_InsertScript.Name = "button_InsertScript";
+            this.button_InsertScript.Size = new System.Drawing.Size(581, 34);
+            this.button_InsertScript.TabIndex = 2;
+            this.button_InsertScript.Text = "Insert rows";
+            this.button_InsertScript.UseVisualStyleBackColor = true;
+            this.button_InsertScript.Click += new System.EventHandler(this.Button_InsertScript_Click);
+            // 
             // tabPage_Database_DropScript
             // 
+            this.tabPage_Database_DropScript.Controls.Add(this.panel_DropScript_DragAndDrop);
+            this.tabPage_Database_DropScript.Controls.Add(this.button_DropScript);
             this.tabPage_Database_DropScript.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_DropScript.Name = "tabPage_Database_DropScript";
             this.tabPage_Database_DropScript.Size = new System.Drawing.Size(588, 431);
             this.tabPage_Database_DropScript.TabIndex = 3;
             this.tabPage_Database_DropScript.Text = "Drop Script";
             this.tabPage_Database_DropScript.UseVisualStyleBackColor = true;
+            // 
+            // panel_DropScript_DragAndDrop
+            // 
+            this.panel_DropScript_DragAndDrop.AllowDrop = true;
+            this.panel_DropScript_DragAndDrop.BackgroundImage = global::Service.Properties.Resources.DragAndDrop;
+            this.panel_DropScript_DragAndDrop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel_DropScript_DragAndDrop.Location = new System.Drawing.Point(18, 22);
+            this.panel_DropScript_DragAndDrop.Name = "panel_DropScript_DragAndDrop";
+            this.panel_DropScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
+            this.panel_DropScript_DragAndDrop.TabIndex = 5;
+            this.panel_DropScript_DragAndDrop.Click += new System.EventHandler(this.Panel_DropScript_DragAndDrop_Click);
+            this.panel_DropScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DropScript_DragAndDrop_DragDrop);
+            this.panel_DropScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_DropScript_DragAndDrop_DragEnter);
+            this.panel_DropScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_DropScript_DragAndDrop_DragLeave);
+            // 
+            // button_DropScript
+            // 
+            this.button_DropScript.Enabled = false;
+            this.button_DropScript.Location = new System.Drawing.Point(4, 391);
+            this.button_DropScript.Name = "button_DropScript";
+            this.button_DropScript.Size = new System.Drawing.Size(581, 34);
+            this.button_DropScript.TabIndex = 2;
+            this.button_DropScript.Text = "Delete tables";
+            this.button_DropScript.UseVisualStyleBackColor = true;
+            this.button_DropScript.Click += new System.EventHandler(this.Button_DropScript_Click);
             // 
             // tabControl
             // 
@@ -563,6 +677,10 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(78, 17);
             this.toolStripStatusLabel.Text = "Connecting...";
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,6 +699,8 @@
             this.tabPage_Export.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage_Language.ResumeLayout(false);
+            this.tabPage_Language.PerformLayout();
             this.tabPage_Editor.ResumeLayout(false);
             this.tabControl_Editor.ResumeLayout(false);
             this.tabPage_Scenarios.ResumeLayout(false);
@@ -591,6 +711,9 @@
             this.tabPage_Database_Connection.PerformLayout();
             this.groupBox_Connection.ResumeLayout(false);
             this.groupBox_Connection.PerformLayout();
+            this.tabPage_Database_CreateScript.ResumeLayout(false);
+            this.tabPage_Database_InsertScript.ResumeLayout(false);
+            this.tabPage_Database_DropScript.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -648,6 +771,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_Connection_ServerAddress;
         private System.Windows.Forms.Label label_Connection_ServerAddress;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button_CreateScript;
+        private System.Windows.Forms.Button button_InsertScript;
+        private System.Windows.Forms.Button button_DropScript;
+        private System.Windows.Forms.Panel panel_CreateScript_DragAndDrop;
+        private System.Windows.Forms.Panel panel_InsertScript_DragAndDrop;
+        private System.Windows.Forms.Panel panel_DropScript_DragAndDrop;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 

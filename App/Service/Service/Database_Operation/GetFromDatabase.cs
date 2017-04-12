@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Service.Database_Operation
@@ -15,10 +14,10 @@ namespace Service.Database_Operation
         {
             List<string> languages = new List<string>();
             SqlConnection myConnection = connection.GetConnection();
-            SqlCommand command;
-            using (command = new SqlCommand("SELECT Language_Code FROM Languages", myConnection))
+            SqlCommand myCommand;
+            using (myCommand = new SqlCommand("SELECT Language_Code FROM Languages", myConnection))
             {
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader reader = myCommand.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -38,10 +37,10 @@ namespace Service.Database_Operation
         {
             int tables = 0;
             SqlConnection myConnection = connection.GetConnection();
-            SqlCommand command;
-            using (command = new SqlCommand("SELECT COUNT(*) FROM information_schema.tables WHERE table_type = 'base table'", myConnection))
+            SqlCommand myCommand;
+            using (myCommand = new SqlCommand("SELECT COUNT(*) FROM information_schema.tables WHERE table_type = 'base table'", myConnection))
             {
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader reader = myCommand.ExecuteReader())
                 {
                     if (reader.Read())
                     {
