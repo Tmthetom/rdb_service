@@ -25,6 +25,26 @@ namespace Service
             DatabaseConnection_Init();
         }
 
+        /// <summary>
+        /// When database connection completed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DatabaseConnection_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (DatabaseConnection_Check())  // If connection success
+            {
+                if (Database_Operation.GetFromDatabase.NumberOfTables(myConnection) > 0)  // Check if tables are here
+                {
+                    Export_Init();  // Load export tab
+                }
+                else
+                {
+                    Message("Database is empty");
+                }
+            }
+        }
+
         #region Export
         /// <summary>
         /// Initialize export tab
@@ -56,7 +76,7 @@ namespace Service
         /// </summary>
         private void Export_LanguagesRefresh()
         {
-            List<string> languages = Database_Operation.GetLanguages.Get(myConnection);
+            List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
 
             try
             {
@@ -101,6 +121,10 @@ namespace Service
         /// </summary>
         private void DatabaseConnection_Init()
         {
+             // Select first item
+            comboBox_Connection_PreferedServer.SelectedIndex = 0;
+
+            // Run initial connection
             backgroundWorker_Connection.RunWorkerAsync();
         }
 
@@ -113,7 +137,13 @@ namespace Service
         {
             try
             {
-                myConnection = new Database_Operation.Connection("147.230.21.34", "RDB_Moravec", "student", "student");
+                string serverAddress = textBox_Connection_ServerAddress.Text;
+                string databaseName = textBox_Connection_DatabaseName.Text;
+                string username = textBox_Connection_Username.Text;
+                string password = textBox_Connection_Password.Text;
+
+
+                myConnection = new Database_Operation.Connection(serverAddress, databaseName, username, password);
             }
             catch (Exception exception)
             {
@@ -126,19 +156,9 @@ namespace Service
         }
 
         /// <summary>
-        /// When database connection completed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DatabaseConnection_Completed(object sender, RunWorkerCompletedEventArgs e)
-        {
-            DatabaseConnection_Check();
-        }
-
-        /// <summary>
         /// Check database connection failed or success
         /// </summary>
-        private void DatabaseConnection_Check()
+        private bool DatabaseConnection_Check()
         {
             // Connection failed
             if (myConnection == null)
@@ -147,6 +167,7 @@ namespace Service
                 statusStrip.BackColor = Color.DarkRed;
                 toolStripStatusLabel.ForeColor = Color.White;
                 toolStripStatusLabel.Text = "Connection failed";
+                return false;
             }
 
             // Connection success
@@ -156,10 +177,49 @@ namespace Service
                 statusStrip.BackColor = Color.YellowGreen;
                 toolStripStatusLabel.ForeColor = SystemColors.ControlText;
                 toolStripStatusLabel.Text = "Connected to " + myConnection.GetDatabaseName() + " at " + myConnection.GetServerAddress();
-
-                Export_Init();
+                return true;
             }
         }
+
+        /// <summary>
+        /// Manual connect to database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Database_Connect_Click(object sender, EventArgs e)
+        {
+            // Toolstrip information
+            statusStrip.BackColor = Color.Orange;
+            toolStripStatusLabel.ForeColor = SystemColors.ControlText;
+            toolStripStatusLabel.Text = "Connecting...";
+
+            // Try to connect
+            backgroundWorker_Connection.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Database connection selected server changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Connection_PreferedServer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_Connection_PreferedServer.Text == "Technical University of Liberec")
+            {
+                textBox_Connection_ServerAddress.Text = "147.230.21.34";
+                textBox_Connection_DatabaseName.Text = "RDB_Moravec";
+                textBox_Connection_Username.Text = "student";
+                textBox_Connection_Password.Text = "student";
+            }
+            else
+            {
+                textBox_Connection_ServerAddress.Text = "";
+                textBox_Connection_DatabaseName.Text = "";
+                textBox_Connection_Username.Text = "";
+                textBox_Connection_Password.Text = "";
+            }
+        }
+
         #endregion
 
         #region Message
@@ -171,6 +231,6 @@ namespace Service
         {
             MessageBox.Show(message);
         }
-        #endregion   
+        #endregion
     }
 }

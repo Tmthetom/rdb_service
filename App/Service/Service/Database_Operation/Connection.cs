@@ -65,7 +65,7 @@ namespace Service.Database_Operation
         /// <summary>
         /// Return SqlConnection reference
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SqlConnection with connection string in</returns>
         public SqlConnection GetConnection()
         {
             return connection;

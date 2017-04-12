@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.tabPage_Export = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_Export_Operations = new System.Windows.Forms.TextBox();
+            this.textBox_Export_CheckPoints = new System.Windows.Forms.TextBox();
+            this.textBox_Export_Sections = new System.Windows.Forms.TextBox();
+            this.label_Export_Operations = new System.Windows.Forms.Label();
+            this.label_Export_CheckPoints = new System.Windows.Forms.Label();
+            this.label_Export_Sections = new System.Windows.Forms.Label();
+            this.textBox_Export_Scenarios = new System.Windows.Forms.TextBox();
+            this.label_Export_Scenarios = new System.Windows.Forms.Label();
             this.comboBox_Export_ExportLanguage = new System.Windows.Forms.ComboBox();
             this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
             this.button_Export = new System.Windows.Forms.Button();
@@ -47,6 +56,18 @@
             this.tabPage_Database = new System.Windows.Forms.TabPage();
             this.tabControl_Database = new System.Windows.Forms.TabControl();
             this.tabPage_Database_Connection = new System.Windows.Forms.TabPage();
+            this.groupBox_Connection = new System.Windows.Forms.GroupBox();
+            this.textBox_Connection_Password = new System.Windows.Forms.TextBox();
+            this.textBox_Connection_Username = new System.Windows.Forms.TextBox();
+            this.textBox_Connection_DatabaseName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_Connection_ServerAddress = new System.Windows.Forms.TextBox();
+            this.label_Connection_ServerAddress = new System.Windows.Forms.Label();
+            this.comboBox_Connection_PreferedServer = new System.Windows.Forms.ComboBox();
+            this.label_Connection_PreferedServer = new System.Windows.Forms.Label();
+            this.button_Database_Connect = new System.Windows.Forms.Button();
             this.tabPage_Database_CreateScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_InsertScript = new System.Windows.Forms.TabPage();
             this.tabPage_Database_DropScript = new System.Windows.Forms.TabPage();
@@ -54,25 +75,18 @@
             this.backgroundWorker_Connection = new System.ComponentModel.BackgroundWorker();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label_Export_Scenarios = new System.Windows.Forms.Label();
-            this.textBox_Export_Scenarios = new System.Windows.Forms.TextBox();
-            this.label_Export_Sections = new System.Windows.Forms.Label();
-            this.label_Export_CheckPoints = new System.Windows.Forms.Label();
-            this.label_Export_Operations = new System.Windows.Forms.Label();
-            this.textBox_Export_Sections = new System.Windows.Forms.TextBox();
-            this.textBox_Export_CheckPoints = new System.Windows.Forms.TextBox();
-            this.textBox_Export_Operations = new System.Windows.Forms.TextBox();
             this.tabPage_Export.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Scenarios.SuspendLayout();
             this.tabControl_Scenarios.SuspendLayout();
             this.tabPage_Database.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
+            this.tabPage_Database_Connection.SuspendLayout();
+            this.groupBox_Connection.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_Export
@@ -87,6 +101,95 @@
             this.tabPage_Export.TabIndex = 4;
             this.tabPage_Export.Text = "Export";
             this.tabPage_Export.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox_Export_Operations);
+            this.groupBox1.Controls.Add(this.textBox_Export_CheckPoints);
+            this.groupBox1.Controls.Add(this.textBox_Export_Sections);
+            this.groupBox1.Controls.Add(this.label_Export_Operations);
+            this.groupBox1.Controls.Add(this.label_Export_CheckPoints);
+            this.groupBox1.Controls.Add(this.label_Export_Sections);
+            this.groupBox1.Controls.Add(this.textBox_Export_Scenarios);
+            this.groupBox1.Controls.Add(this.label_Export_Scenarios);
+            this.groupBox1.Location = new System.Drawing.Point(27, 64);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(542, 331);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Detail informations";
+            // 
+            // textBox_Export_Operations
+            // 
+            this.textBox_Export_Operations.Enabled = false;
+            this.textBox_Export_Operations.Location = new System.Drawing.Point(267, 149);
+            this.textBox_Export_Operations.Name = "textBox_Export_Operations";
+            this.textBox_Export_Operations.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Operations.TabIndex = 11;
+            this.textBox_Export_Operations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Export_CheckPoints
+            // 
+            this.textBox_Export_CheckPoints.Enabled = false;
+            this.textBox_Export_CheckPoints.Location = new System.Drawing.Point(267, 112);
+            this.textBox_Export_CheckPoints.Name = "textBox_Export_CheckPoints";
+            this.textBox_Export_CheckPoints.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_CheckPoints.TabIndex = 10;
+            this.textBox_Export_CheckPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Export_Sections
+            // 
+            this.textBox_Export_Sections.Enabled = false;
+            this.textBox_Export_Sections.Location = new System.Drawing.Point(267, 75);
+            this.textBox_Export_Sections.Name = "textBox_Export_Sections";
+            this.textBox_Export_Sections.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Sections.TabIndex = 9;
+            this.textBox_Export_Sections.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_Export_Operations
+            // 
+            this.label_Export_Operations.AutoSize = true;
+            this.label_Export_Operations.Location = new System.Drawing.Point(37, 152);
+            this.label_Export_Operations.Name = "label_Export_Operations";
+            this.label_Export_Operations.Size = new System.Drawing.Size(58, 13);
+            this.label_Export_Operations.TabIndex = 8;
+            this.label_Export_Operations.Text = "Operations";
+            // 
+            // label_Export_CheckPoints
+            // 
+            this.label_Export_CheckPoints.AutoSize = true;
+            this.label_Export_CheckPoints.Location = new System.Drawing.Point(37, 115);
+            this.label_Export_CheckPoints.Name = "label_Export_CheckPoints";
+            this.label_Export_CheckPoints.Size = new System.Drawing.Size(67, 13);
+            this.label_Export_CheckPoints.TabIndex = 7;
+            this.label_Export_CheckPoints.Text = "CheckPoints";
+            // 
+            // label_Export_Sections
+            // 
+            this.label_Export_Sections.AutoSize = true;
+            this.label_Export_Sections.Location = new System.Drawing.Point(37, 78);
+            this.label_Export_Sections.Name = "label_Export_Sections";
+            this.label_Export_Sections.Size = new System.Drawing.Size(48, 13);
+            this.label_Export_Sections.TabIndex = 6;
+            this.label_Export_Sections.Text = "Sections";
+            // 
+            // textBox_Export_Scenarios
+            // 
+            this.textBox_Export_Scenarios.Enabled = false;
+            this.textBox_Export_Scenarios.Location = new System.Drawing.Point(267, 39);
+            this.textBox_Export_Scenarios.Name = "textBox_Export_Scenarios";
+            this.textBox_Export_Scenarios.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Export_Scenarios.TabIndex = 5;
+            this.textBox_Export_Scenarios.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_Export_Scenarios
+            // 
+            this.label_Export_Scenarios.AutoSize = true;
+            this.label_Export_Scenarios.Location = new System.Drawing.Point(37, 42);
+            this.label_Export_Scenarios.Name = "label_Export_Scenarios";
+            this.label_Export_Scenarios.Size = new System.Drawing.Size(54, 13);
+            this.label_Export_Scenarios.TabIndex = 4;
+            this.label_Export_Scenarios.Text = "Scenarios";
             // 
             // comboBox_Export_ExportLanguage
             // 
@@ -265,6 +368,10 @@
             // 
             // tabPage_Database_Connection
             // 
+            this.tabPage_Database_Connection.Controls.Add(this.groupBox_Connection);
+            this.tabPage_Database_Connection.Controls.Add(this.comboBox_Connection_PreferedServer);
+            this.tabPage_Database_Connection.Controls.Add(this.label_Connection_PreferedServer);
+            this.tabPage_Database_Connection.Controls.Add(this.button_Database_Connect);
             this.tabPage_Database_Connection.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Database_Connection.Name = "tabPage_Database_Connection";
             this.tabPage_Database_Connection.Padding = new System.Windows.Forms.Padding(3);
@@ -272,6 +379,123 @@
             this.tabPage_Database_Connection.TabIndex = 0;
             this.tabPage_Database_Connection.Text = "Connection";
             this.tabPage_Database_Connection.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_Connection
+            // 
+            this.groupBox_Connection.Controls.Add(this.textBox_Connection_Password);
+            this.groupBox_Connection.Controls.Add(this.textBox_Connection_Username);
+            this.groupBox_Connection.Controls.Add(this.textBox_Connection_DatabaseName);
+            this.groupBox_Connection.Controls.Add(this.label1);
+            this.groupBox_Connection.Controls.Add(this.label2);
+            this.groupBox_Connection.Controls.Add(this.label3);
+            this.groupBox_Connection.Controls.Add(this.textBox_Connection_ServerAddress);
+            this.groupBox_Connection.Controls.Add(this.label_Connection_ServerAddress);
+            this.groupBox_Connection.Location = new System.Drawing.Point(23, 74);
+            this.groupBox_Connection.Name = "groupBox_Connection";
+            this.groupBox_Connection.Size = new System.Drawing.Size(542, 307);
+            this.groupBox_Connection.TabIndex = 5;
+            this.groupBox_Connection.TabStop = false;
+            this.groupBox_Connection.Text = "Detail informations";
+            // 
+            // textBox_Connection_Password
+            // 
+            this.textBox_Connection_Password.Location = new System.Drawing.Point(267, 149);
+            this.textBox_Connection_Password.Name = "textBox_Connection_Password";
+            this.textBox_Connection_Password.PasswordChar = '*';
+            this.textBox_Connection_Password.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Connection_Password.TabIndex = 11;
+            this.textBox_Connection_Password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Connection_Username
+            // 
+            this.textBox_Connection_Username.Location = new System.Drawing.Point(267, 112);
+            this.textBox_Connection_Username.Name = "textBox_Connection_Username";
+            this.textBox_Connection_Username.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Connection_Username.TabIndex = 10;
+            this.textBox_Connection_Username.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox_Connection_DatabaseName
+            // 
+            this.textBox_Connection_DatabaseName.Location = new System.Drawing.Point(267, 75);
+            this.textBox_Connection_DatabaseName.Name = "textBox_Connection_DatabaseName";
+            this.textBox_Connection_DatabaseName.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Connection_DatabaseName.TabIndex = 9;
+            this.textBox_Connection_DatabaseName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(37, 152);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Password";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(37, 115);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Username";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(37, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Database name";
+            // 
+            // textBox_Connection_ServerAddress
+            // 
+            this.textBox_Connection_ServerAddress.Location = new System.Drawing.Point(267, 39);
+            this.textBox_Connection_ServerAddress.Name = "textBox_Connection_ServerAddress";
+            this.textBox_Connection_ServerAddress.Size = new System.Drawing.Size(232, 20);
+            this.textBox_Connection_ServerAddress.TabIndex = 5;
+            this.textBox_Connection_ServerAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_Connection_ServerAddress
+            // 
+            this.label_Connection_ServerAddress.AutoSize = true;
+            this.label_Connection_ServerAddress.Location = new System.Drawing.Point(37, 42);
+            this.label_Connection_ServerAddress.Name = "label_Connection_ServerAddress";
+            this.label_Connection_ServerAddress.Size = new System.Drawing.Size(79, 13);
+            this.label_Connection_ServerAddress.TabIndex = 4;
+            this.label_Connection_ServerAddress.Text = "Server Address";
+            // 
+            // comboBox_Connection_PreferedServer
+            // 
+            this.comboBox_Connection_PreferedServer.FormattingEnabled = true;
+            this.comboBox_Connection_PreferedServer.Items.AddRange(new object[] {
+            "Technical University of Liberec",
+            "None"});
+            this.comboBox_Connection_PreferedServer.Location = new System.Drawing.Point(187, 26);
+            this.comboBox_Connection_PreferedServer.Name = "comboBox_Connection_PreferedServer";
+            this.comboBox_Connection_PreferedServer.Size = new System.Drawing.Size(375, 21);
+            this.comboBox_Connection_PreferedServer.TabIndex = 4;
+            this.comboBox_Connection_PreferedServer.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Connection_PreferedServer_SelectedIndexChanged);
+            // 
+            // label_Connection_PreferedServer
+            // 
+            this.label_Connection_PreferedServer.AutoSize = true;
+            this.label_Connection_PreferedServer.Location = new System.Drawing.Point(21, 29);
+            this.label_Connection_PreferedServer.Name = "label_Connection_PreferedServer";
+            this.label_Connection_PreferedServer.Size = new System.Drawing.Size(87, 13);
+            this.label_Connection_PreferedServer.TabIndex = 3;
+            this.label_Connection_PreferedServer.Text = "Prefered servers:";
+            // 
+            // button_Database_Connect
+            // 
+            this.button_Database_Connect.Location = new System.Drawing.Point(4, 391);
+            this.button_Database_Connect.Name = "button_Database_Connect";
+            this.button_Database_Connect.Size = new System.Drawing.Size(581, 34);
+            this.button_Database_Connect.TabIndex = 1;
+            this.button_Database_Connect.Text = "Connect";
+            this.button_Database_Connect.UseVisualStyleBackColor = true;
+            this.button_Database_Connect.Click += new System.EventHandler(this.Button_Database_Connect_Click);
             // 
             // tabPage_Database_CreateScript
             // 
@@ -339,95 +563,6 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(78, 17);
             this.toolStripStatusLabel.Text = "Connecting...";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBox_Export_Operations);
-            this.groupBox1.Controls.Add(this.textBox_Export_CheckPoints);
-            this.groupBox1.Controls.Add(this.textBox_Export_Sections);
-            this.groupBox1.Controls.Add(this.label_Export_Operations);
-            this.groupBox1.Controls.Add(this.label_Export_CheckPoints);
-            this.groupBox1.Controls.Add(this.label_Export_Sections);
-            this.groupBox1.Controls.Add(this.textBox_Export_Scenarios);
-            this.groupBox1.Controls.Add(this.label_Export_Scenarios);
-            this.groupBox1.Location = new System.Drawing.Point(27, 64);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(542, 331);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Detail informations";
-            // 
-            // label_Export_Scenarios
-            // 
-            this.label_Export_Scenarios.AutoSize = true;
-            this.label_Export_Scenarios.Location = new System.Drawing.Point(37, 42);
-            this.label_Export_Scenarios.Name = "label_Export_Scenarios";
-            this.label_Export_Scenarios.Size = new System.Drawing.Size(54, 13);
-            this.label_Export_Scenarios.TabIndex = 4;
-            this.label_Export_Scenarios.Text = "Scenarios";
-            // 
-            // textBox_Export_Scenarios
-            // 
-            this.textBox_Export_Scenarios.Enabled = false;
-            this.textBox_Export_Scenarios.Location = new System.Drawing.Point(267, 39);
-            this.textBox_Export_Scenarios.Name = "textBox_Export_Scenarios";
-            this.textBox_Export_Scenarios.Size = new System.Drawing.Size(232, 20);
-            this.textBox_Export_Scenarios.TabIndex = 5;
-            this.textBox_Export_Scenarios.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label_Export_Sections
-            // 
-            this.label_Export_Sections.AutoSize = true;
-            this.label_Export_Sections.Location = new System.Drawing.Point(37, 78);
-            this.label_Export_Sections.Name = "label_Export_Sections";
-            this.label_Export_Sections.Size = new System.Drawing.Size(48, 13);
-            this.label_Export_Sections.TabIndex = 6;
-            this.label_Export_Sections.Text = "Sections";
-            // 
-            // label_Export_CheckPoints
-            // 
-            this.label_Export_CheckPoints.AutoSize = true;
-            this.label_Export_CheckPoints.Location = new System.Drawing.Point(37, 115);
-            this.label_Export_CheckPoints.Name = "label_Export_CheckPoints";
-            this.label_Export_CheckPoints.Size = new System.Drawing.Size(67, 13);
-            this.label_Export_CheckPoints.TabIndex = 7;
-            this.label_Export_CheckPoints.Text = "CheckPoints";
-            // 
-            // label_Export_Operations
-            // 
-            this.label_Export_Operations.AutoSize = true;
-            this.label_Export_Operations.Location = new System.Drawing.Point(37, 152);
-            this.label_Export_Operations.Name = "label_Export_Operations";
-            this.label_Export_Operations.Size = new System.Drawing.Size(58, 13);
-            this.label_Export_Operations.TabIndex = 8;
-            this.label_Export_Operations.Text = "Operations";
-            // 
-            // textBox_Export_Sections
-            // 
-            this.textBox_Export_Sections.Enabled = false;
-            this.textBox_Export_Sections.Location = new System.Drawing.Point(267, 75);
-            this.textBox_Export_Sections.Name = "textBox_Export_Sections";
-            this.textBox_Export_Sections.Size = new System.Drawing.Size(232, 20);
-            this.textBox_Export_Sections.TabIndex = 9;
-            this.textBox_Export_Sections.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox_Export_CheckPoints
-            // 
-            this.textBox_Export_CheckPoints.Enabled = false;
-            this.textBox_Export_CheckPoints.Location = new System.Drawing.Point(267, 112);
-            this.textBox_Export_CheckPoints.Name = "textBox_Export_CheckPoints";
-            this.textBox_Export_CheckPoints.Size = new System.Drawing.Size(232, 20);
-            this.textBox_Export_CheckPoints.TabIndex = 10;
-            this.textBox_Export_CheckPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox_Export_Operations
-            // 
-            this.textBox_Export_Operations.Enabled = false;
-            this.textBox_Export_Operations.Location = new System.Drawing.Point(267, 149);
-            this.textBox_Export_Operations.Name = "textBox_Export_Operations";
-            this.textBox_Export_Operations.Size = new System.Drawing.Size(232, 20);
-            this.textBox_Export_Operations.TabIndex = 11;
-            this.textBox_Export_Operations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,17 +579,21 @@
             this.Text = "Car Service";
             this.tabPage_Export.ResumeLayout(false);
             this.tabPage_Export.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage_Editor.ResumeLayout(false);
             this.tabControl_Editor.ResumeLayout(false);
             this.tabPage_Scenarios.ResumeLayout(false);
             this.tabControl_Scenarios.ResumeLayout(false);
             this.tabPage_Database.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
+            this.tabPage_Database_Connection.ResumeLayout(false);
+            this.tabPage_Database_Connection.PerformLayout();
+            this.groupBox_Connection.ResumeLayout(false);
+            this.groupBox_Connection.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,6 +636,18 @@
         private System.Windows.Forms.TextBox textBox_Export_Operations;
         private System.Windows.Forms.TextBox textBox_Export_CheckPoints;
         private System.Windows.Forms.TextBox textBox_Export_Sections;
+        private System.Windows.Forms.Button button_Database_Connect;
+        private System.Windows.Forms.ComboBox comboBox_Connection_PreferedServer;
+        private System.Windows.Forms.Label label_Connection_PreferedServer;
+        private System.Windows.Forms.GroupBox groupBox_Connection;
+        private System.Windows.Forms.TextBox textBox_Connection_Password;
+        private System.Windows.Forms.TextBox textBox_Connection_Username;
+        private System.Windows.Forms.TextBox textBox_Connection_DatabaseName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox_Connection_ServerAddress;
+        private System.Windows.Forms.Label label_Connection_ServerAddress;
     }
 }
 

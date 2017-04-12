@@ -21,7 +21,7 @@ namespace Service.Database_Export
         private static Dictionary<string, Database_Export.CheckPoint> export_checkpoints = new Dictionary<string, Database_Export.CheckPoint>();
 
         /// <summary>
-        /// Generate database output in JSON
+        /// Generate database output in JSON, into 'export' file, in program folder
         /// </summary>
         /// <param name="language">Selected language</param>
         /// <param name="myConnection">Database connection</param>
@@ -53,7 +53,7 @@ namespace Service.Database_Export
         /// </summary>
         /// <param name="language">Selected language</param>
         /// <param name="connection">Database connection</param>
-        /// <returns></returns>
+        /// <returns>Dictionary of components names and their numbers</returns>
         public static Dictionary<string, int> GetNumerOfComponents(string language, Database_Operation.Connection connection)
         {
             // Get SQL Connection

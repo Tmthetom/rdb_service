@@ -62,7 +62,7 @@
     <Compile Include="Database_Objects\Section.cs" />
     <Compile Include="Database_Objects\Section_Translation.cs" />
     <Compile Include="Database_Operation\Connection.cs" />
-    <Compile Include="Database_Operation\GetLanguages.cs" />
+    <Compile Include="Database_Operation\GetFromDatabase.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
