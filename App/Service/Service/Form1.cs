@@ -22,7 +22,8 @@ namespace Service
         public Form1()
         {
             InitializeComponent();
-            DatabaseConnection_Init();
+            ControlsDisable();  // Disable all controls, except of database connection
+            DatabaseConnection_Init();  // Try to connect into database
         }
 
         /// <summary>
@@ -46,7 +47,8 @@ namespace Service
             textBox_Export_Operations.Clear();
         }
 
-        
+
+        #region Database
 
         #region Database_Connection
         /// <summary>
@@ -120,6 +122,9 @@ namespace Service
                 statusStrip.BackColor = Color.DarkRed;
                 toolStripStatusLabel.ForeColor = Color.White;
                 toolStripStatusLabel.Text = "Connection failed";
+
+                // Controls lock
+                ControlsDisable();
                 return false;
             }
 
@@ -130,6 +135,9 @@ namespace Service
                 statusStrip.BackColor = Color.YellowGreen;
                 toolStripStatusLabel.ForeColor = SystemColors.ControlText;
                 toolStripStatusLabel.Text = "Connected to " + myConnection.GetDatabaseName() + " at " + myConnection.GetServerAddress();
+
+                // Controls lock
+                ControlsEnable();
                 return true;
             }
         }
@@ -147,7 +155,14 @@ namespace Service
             toolStripStatusLabel.Text = "Connecting...";
 
             // Try to connect
-            backgroundWorker_Connection.RunWorkerAsync();
+            if (!backgroundWorker_Connection.IsBusy)
+            {
+                backgroundWorker_Connection.RunWorkerAsync();
+            }
+            else
+            {
+                Message("Připojování již probíhá...");
+            }
         }
 
         /// <summary>
@@ -174,91 +189,167 @@ namespace Service
         }
         #endregion
 
-        #region Database_CreateScript
-        private void Panel_CreateScript_DragAndDrop_Click(object sender, EventArgs e)
+        #region Do Scripts
+        /// <summary>
+        /// When panel clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Database_DragAndDrop_Click(object sender, EventArgs e)
         {
+            // Show file dialog
+            DialogResult result = openFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                // Color panel
+                Panel panel = sender as Panel;
+                if (panel.Name == "panel_CreateScript_DragAndDrop")
+                {
+                    panel = panel_CreateScript_DragAndDrop;
+                }
+                else if (panel.Name == "panel_InsertScript_DragAndDrop")
+                {
+                    panel = panel_InsertScript_DragAndDrop;
+                }
+                else
+                {
+                    panel = panel_DropScript_DragAndDrop;
+                }
+                panel.BackColor = Color.GreenYellow;
 
+                Button button;
+                if (panel.Name == "panel_CreateScript_DragAndDrop")
+                {
+                    button = button_CreateScript;
+                }
+                else if (panel.Name == "panel_InsertScript_DragAndDrop")
+                {
+                    button = button_InsertScript;
+                }
+                else
+                {
+                    button = button_DropScript;
+                }
+                button.Enabled = true;
+            }
         }
 
-        private void Panel_CreateScript_DragAndDrop_DragEnter(object sender, DragEventArgs e)
+        /// <summary>
+        /// When file enter panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Database_DragAndDrop_DragEnter(object sender, DragEventArgs e)
         {
+            // Enable DragAndDrop
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-            panel_CreateScript_DragAndDrop.BackColor = Color.GreenYellow;
+
+            // Color panel
+            Panel panel = sender as Panel;
+            if (panel.Name == "panel_CreateScript_DragAndDrop")
+            {
+                panel = panel_CreateScript_DragAndDrop;
+            }
+            else if (panel.Name == "panel_InsertScript_DragAndDrop")
+            {
+                panel = panel_InsertScript_DragAndDrop;
+            }
+            else
+            {
+                panel = panel_DropScript_DragAndDrop;
+            }
+            panel.BackColor = Color.GreenYellow;
         }
 
-        private void Panel_CreateScript_DragAndDrop_DragLeave(object sender, EventArgs e)
+
+        /// <summary>
+        /// When file leave panel without drop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Database_DragAndDrop_DragLeave(object sender, EventArgs e)
         {
-            panel_CreateScript_DragAndDrop.BackColor = Color.Transparent;
+            // Reset panel
+            Panel panel = sender as Panel;
+            if (panel.Name == "panel_CreateScript_DragAndDrop")
+            {
+                panel = panel_CreateScript_DragAndDrop;
+            }
+            else if (panel.Name == "panel_InsertScript_DragAndDrop")
+            {
+                panel = panel_InsertScript_DragAndDrop;
+            }
+            else
+            {
+                panel = panel_DropScript_DragAndDrop;
+            }
+            panel.BackColor = Color.Transparent;
         }
 
-        private void Panel_CreateScript_DragAndDrop_DragDrop(object sender, DragEventArgs e)
+        /// <summary>
+        /// When file drop into panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Database_DragAndDrop_DragDrop(object sender, DragEventArgs e)
         {
-            button_CreateScript.Enabled = true;
+            // Enable button
+            Panel panel = sender as Panel;
+            Button button;
+            if (panel.Name == "panel_CreateScript_DragAndDrop")
+            {
+                button = button_CreateScript;
+            }
+            else if (panel.Name == "panel_InsertScript_DragAndDrop")
+            {
+                button = button_InsertScript;
+            }
+            else
+            {
+                button = button_DropScript;
+            }
+            button.Enabled = true;
         }
-
-        private void Button_CreateScript_Click(object sender, EventArgs e)
+        
+        /// <summary>
+        /// When do script button clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Database_Button_Click(object sender, EventArgs e)
         {
-            button_CreateScript.Enabled = false;
-            panel_CreateScript_DragAndDrop.BackColor = Color.Transparent;
+            // Reset button
+            Button button = sender as Button;
+            button.Enabled = false;
+
+            // Reset panel
+            Panel panel;
+            if (button.Name == "button_CreateScript")
+            {
+                panel = panel_CreateScript_DragAndDrop;
+            }
+            else if (button.Name == "button_InsertScript")
+            {
+                panel = panel_InsertScript_DragAndDrop;
+            }
+            else
+            {
+                panel = panel_DropScript_DragAndDrop;
+            }
+            panel.BackColor = Color.Transparent;
+
+            // Do script
+            try
+            {
+                Database_Operation.RunScript.FromFile(openFileDialog, myConnection);
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
         }
         #endregion
 
-        #region Database_InsertScript
-        private void Panel_InsertScript_DragAndDrop_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Panel_InsertScript_DragAndDrop_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-            panel_InsertScript_DragAndDrop.BackColor = Color.GreenYellow;
-        }
-
-        private void Panel_InsertScript_DragAndDrop_DragLeave(object sender, EventArgs e)
-        {
-            panel_InsertScript_DragAndDrop.BackColor = Color.Transparent;
-        }
-
-        private void Panel_InsertScript_DragAndDrop_DragDrop(object sender, DragEventArgs e)
-        {
-            button_InsertScript.Enabled = true;
-        }
-
-        private void Button_InsertScript_Click(object sender, EventArgs e)
-        {
-            button_InsertScript.Enabled = false;
-            panel_InsertScript_DragAndDrop.BackColor = Color.Transparent;
-        }
-        #endregion
-
-        #region Database_DropScript
-        private void Panel_DropScript_DragAndDrop_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Panel_DropScript_DragAndDrop_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-            panel_DropScript_DragAndDrop.BackColor = Color.GreenYellow;
-        }
-
-        private void Panel_DropScript_DragAndDrop_DragLeave(object sender, EventArgs e)
-        {
-            panel_DropScript_DragAndDrop.BackColor = Color.Transparent;
-        }
-
-        private void Panel_DropScript_DragAndDrop_DragDrop(object sender, DragEventArgs e)
-        {
-            button_DropScript.Enabled = true;
-        }
-
-        private void Button_DropScript_Click(object sender, EventArgs e)
-        {
-            button_DropScript.Enabled = false;
-            panel_DropScript_DragAndDrop.BackColor = Color.Transparent;
-        }
         #endregion
 
         #region Export
@@ -338,6 +429,44 @@ namespace Service
         private void Message(string message)
         {
             MessageBox.Show(message);
+        }
+
+        #endregion
+
+        #region FormControls
+
+        /// <summary>
+        /// Enable all controls, except of database connection
+        /// </summary>
+        private void ControlsEnable()
+        {
+            // Main tabs
+            tabPage_Scenarios.Enabled = true;  // Scenarios
+            tabPage_Editor.Enabled = true;  // Editor
+            tabPage_Language.Enabled = true;  // Language
+            tabPage_Export.Enabled = true;  // Export
+
+            // Database tabs
+            tabPage_Database_CreateScript.Enabled = true;  // Create script
+            tabPage_Database_InsertScript.Enabled = true;  // Insert script
+            tabPage_Database_DropScript.Enabled = true;  // Drop script
+        }
+
+        /// <summary>
+        /// Disable all control. except of database connection
+        /// </summary>
+        private void ControlsDisable()
+        {
+            tabPage_Scenarios.Enabled = false;  // Scenarios
+            tabPage_Editor.Enabled = false;  // Editor
+            tabPage_Language.Enabled = false;  // Language
+            tabPage_Export.Enabled = false;  // Export
+
+            // Database tabs
+            tabPage_Database_CreateScript.Enabled = false;  // Create script
+            tabPage_Database_InsertScript.Enabled = false;  // Insert script
+            tabPage_Database_DropScript.Enabled = false;  // Drop script
+
         }
 
         #endregion

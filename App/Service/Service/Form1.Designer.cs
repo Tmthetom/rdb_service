@@ -551,10 +551,10 @@
             this.panel_CreateScript_DragAndDrop.Name = "panel_CreateScript_DragAndDrop";
             this.panel_CreateScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
             this.panel_CreateScript_DragAndDrop.TabIndex = 4;
-            this.panel_CreateScript_DragAndDrop.Click += new System.EventHandler(this.Panel_CreateScript_DragAndDrop_Click);
-            this.panel_CreateScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_CreateScript_DragAndDrop_DragDrop);
-            this.panel_CreateScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_CreateScript_DragAndDrop_DragEnter);
-            this.panel_CreateScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_CreateScript_DragAndDrop_DragLeave);
+            this.panel_CreateScript_DragAndDrop.Click += new System.EventHandler(this.Database_DragAndDrop_Click);
+            this.panel_CreateScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragDrop);
+            this.panel_CreateScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragEnter);
+            this.panel_CreateScript_DragAndDrop.DragLeave += new System.EventHandler(this.Database_DragAndDrop_DragLeave);
             // 
             // button_CreateScript
             // 
@@ -565,7 +565,7 @@
             this.button_CreateScript.TabIndex = 2;
             this.button_CreateScript.Text = "Create tables";
             this.button_CreateScript.UseVisualStyleBackColor = true;
-            this.button_CreateScript.Click += new System.EventHandler(this.Button_CreateScript_Click);
+            this.button_CreateScript.Click += new System.EventHandler(this.Database_Button_Click);
             // 
             // tabPage_Database_InsertScript
             // 
@@ -587,10 +587,10 @@
             this.panel_InsertScript_DragAndDrop.Name = "panel_InsertScript_DragAndDrop";
             this.panel_InsertScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
             this.panel_InsertScript_DragAndDrop.TabIndex = 5;
-            this.panel_InsertScript_DragAndDrop.Click += new System.EventHandler(this.Panel_InsertScript_DragAndDrop_Click);
-            this.panel_InsertScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_InsertScript_DragAndDrop_DragDrop);
-            this.panel_InsertScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_InsertScript_DragAndDrop_DragEnter);
-            this.panel_InsertScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_InsertScript_DragAndDrop_DragLeave);
+            this.panel_InsertScript_DragAndDrop.Click += new System.EventHandler(this.Database_DragAndDrop_Click);
+            this.panel_InsertScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragDrop);
+            this.panel_InsertScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragEnter);
+            this.panel_InsertScript_DragAndDrop.DragLeave += new System.EventHandler(this.Database_DragAndDrop_DragLeave);
             // 
             // button_InsertScript
             // 
@@ -601,7 +601,7 @@
             this.button_InsertScript.TabIndex = 2;
             this.button_InsertScript.Text = "Insert rows";
             this.button_InsertScript.UseVisualStyleBackColor = true;
-            this.button_InsertScript.Click += new System.EventHandler(this.Button_InsertScript_Click);
+            this.button_InsertScript.Click += new System.EventHandler(this.Database_Button_Click);
             // 
             // tabPage_Database_DropScript
             // 
@@ -623,10 +623,10 @@
             this.panel_DropScript_DragAndDrop.Name = "panel_DropScript_DragAndDrop";
             this.panel_DropScript_DragAndDrop.Size = new System.Drawing.Size(547, 346);
             this.panel_DropScript_DragAndDrop.TabIndex = 5;
-            this.panel_DropScript_DragAndDrop.Click += new System.EventHandler(this.Panel_DropScript_DragAndDrop_Click);
-            this.panel_DropScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DropScript_DragAndDrop_DragDrop);
-            this.panel_DropScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Panel_DropScript_DragAndDrop_DragEnter);
-            this.panel_DropScript_DragAndDrop.DragLeave += new System.EventHandler(this.Panel_DropScript_DragAndDrop_DragLeave);
+            this.panel_DropScript_DragAndDrop.Click += new System.EventHandler(this.Database_DragAndDrop_Click);
+            this.panel_DropScript_DragAndDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragDrop);
+            this.panel_DropScript_DragAndDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.Database_DragAndDrop_DragEnter);
+            this.panel_DropScript_DragAndDrop.DragLeave += new System.EventHandler(this.Database_DragAndDrop_DragLeave);
             // 
             // button_DropScript
             // 
@@ -637,14 +637,14 @@
             this.button_DropScript.TabIndex = 2;
             this.button_DropScript.Text = "Delete tables";
             this.button_DropScript.UseVisualStyleBackColor = true;
-            this.button_DropScript.Click += new System.EventHandler(this.Button_DropScript_Click);
+            this.button_DropScript.Click += new System.EventHandler(this.Database_Button_Click);
             // 
             // tabControl
             // 
+            this.tabControl.Controls.Add(this.tabPage_Database);
             this.tabControl.Controls.Add(this.tabPage_Scenarios);
             this.tabControl.Controls.Add(this.tabPage_Editor);
             this.tabControl.Controls.Add(this.tabPage_Language);
-            this.tabControl.Controls.Add(this.tabPage_Database);
             this.tabControl.Controls.Add(this.tabPage_Export);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl.Location = new System.Drawing.Point(0, 0);

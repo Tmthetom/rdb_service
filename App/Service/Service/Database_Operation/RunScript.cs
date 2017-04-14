@@ -11,7 +11,7 @@ namespace Service.Database_Operation
     class RunScript
     {
         /// <summary>
-        /// Insert SQL script into database
+        /// Run SQL script from file
         /// </summary>
         /// <param name="file">File with SQL script</param>
         public static void FromFile(OpenFileDialog openFileDialog, Connection connection)
@@ -22,7 +22,7 @@ namespace Service.Database_Operation
         }
 
         /// <summary>
-        /// Insert SQL script into database
+        /// Run SQL script from string
         /// </summary>
         /// <param name="sqlScript">SQL script string</param>
         public static void Execute(string sqlScript, Connection connection)
