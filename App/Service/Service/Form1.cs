@@ -27,26 +27,22 @@ namespace Service
         }
 
         /// <summary>
-        /// Initialize when connection success
+        /// Initialize form when connection success
         /// </summary>
-        private void InitializeForm()
+        private void Form_Initialize()
         {
-            Export_Init();  // Load export tab
+            Export_Init();
+            Language_Init();
         }
 
         /// <summary>
         /// Clear form when connection lost
         /// </summary>
-        private void ClearForm()
+        private void Form_Clear()
         {
-            // Export tab
-            comboBox_Export_ExportLanguage.Items.Clear();
-            textBox_Export_Scenarios.Clear();
-            textBox_Export_Sections.Clear();
-            textBox_Export_CheckPoints.Clear();
-            textBox_Export_Operations.Clear();
+            Export_Clear();
+            Language_Clear();
         }
-
 
         #region Database
 
@@ -64,6 +60,29 @@ namespace Service
         }
 
         /// <summary>
+        /// Manual connect to database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Database_Connect_Click(object sender, EventArgs e)
+        {
+            // Toolstrip information
+            statusStrip.BackColor = Color.Orange;
+            toolStripStatusLabel.ForeColor = SystemColors.ControlText;
+            toolStripStatusLabel.Text = "Connecting...";
+
+            // Try to connect
+            if (!backgroundWorker_Connection.IsBusy)
+            {
+                backgroundWorker_Connection.RunWorkerAsync();
+            }
+            else
+            {
+                Message("Please wait for current connecting to finish...");
+            }
+        }
+
+        /// <summary>
         /// Connect to database with provided informations in different thread
         /// </summary>
         /// <param name="sender"></param>
@@ -77,8 +96,17 @@ namespace Service
                 string username = textBox_Connection_Username.Text;
                 string password = textBox_Connection_Password.Text;
 
+                // Connection without credentials
+                if (username == "")
+                {
+                    myConnection = new Database_Operation.Connection(serverAddress, databaseName);
+                }
 
-                myConnection = new Database_Operation.Connection(serverAddress, databaseName, username, password);
+                // Connection with credentials
+                else
+                {
+                    myConnection = new Database_Operation.Connection(serverAddress, databaseName, username, password);
+                }
             }
             catch (Exception exception)
             {
@@ -101,10 +129,11 @@ namespace Service
             {
                 if (Database_Operation.GetFromDatabase.NumberOfTables(myConnection) > 0)  // Check if tables are here
                 {
-                    InitializeForm();  // Load export tab
+                    Form_Initialize();  // Initialize form
                 }
                 else
                 {
+                    Form_Clear();  // Clear form
                     Message("Database is empty");
                 }
             }
@@ -143,41 +172,27 @@ namespace Service
         }
 
         /// <summary>
-        /// Manual connect to database
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Database_Connect_Click(object sender, EventArgs e)
-        {
-            // Toolstrip information
-            statusStrip.BackColor = Color.Orange;
-            toolStripStatusLabel.ForeColor = SystemColors.ControlText;
-            toolStripStatusLabel.Text = "Connecting...";
-
-            // Try to connect
-            if (!backgroundWorker_Connection.IsBusy)
-            {
-                backgroundWorker_Connection.RunWorkerAsync();
-            }
-            else
-            {
-                Message("Připojování již probíhá...");
-            }
-        }
-
-        /// <summary>
         /// Database connection selected server changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ComboBox_Connection_PreferedServer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox_Connection_PreferedServer.Text == "Technical University of Liberec")
+            string preferedServer = comboBox_Connection_PreferedServer.Text;
+
+            if (preferedServer == "Technical University of Liberec")
             {
                 textBox_Connection_ServerAddress.Text = "147.230.21.34";
                 textBox_Connection_DatabaseName.Text = "RDB_Moravec";
                 textBox_Connection_Username.Text = "student";
                 textBox_Connection_Password.Text = "student";
+            }
+            else if (preferedServer == "Local - Tomas Moravec")
+            {
+                textBox_Connection_ServerAddress.Text = "TOMASMORAVEC-PC\\SQLEXPRESS";
+                textBox_Connection_DatabaseName.Text = "Autoservis";
+                textBox_Connection_Username.Text = "";
+                textBox_Connection_Password.Text = "";
             }
             else
             {
@@ -293,6 +308,10 @@ namespace Service
         /// <param name="e"></param>
         private void Database_DragAndDrop_DragDrop(object sender, DragEventArgs e)
         {
+            // Save file path
+            string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            openFileDialog.FileName = filePaths[0];
+
             // Enable button
             Panel panel = sender as Panel;
             Button button;
@@ -342,95 +361,17 @@ namespace Service
             try
             {
                 Database_Operation.RunScript.FromFile(openFileDialog, myConnection);
-            }
-            catch (Exception exception)
-            {
-                Message(exception.Message);
-            }
-        }
-        #endregion
 
-        #endregion
-
-        #region Export
-        /// <summary>
-        /// Initialize export tab
-        /// </summary>
-        private void Export_Init()
-        {
-            Export_LanguagesRefresh();
-        }
-
-        /// <summary>
-        /// Export database into JSON in selected language
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Export_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Database_Export.ExportToJson.Generate(comboBox_Export_ExportLanguage.Text, myConnection);
-            }
-            catch (Exception exception)
-            {
-                Message(exception.Message);
-            }
-        }
-
-        /// <summary>
-        /// Refresh languages for export
-        /// </summary>
-        private void Export_LanguagesRefresh()
-        {
-            List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
-
-            try
-            {
-                // Clear old languages
-                comboBox_Export_ExportLanguage.Items.Clear();
-
-                // Add new languages
-                foreach (string language in languages)
+                if (button.Name == "button_InsertScript")
                 {
-                    comboBox_Export_ExportLanguage.Items.Add(language);
+                    Form_Initialize();
                 }
-
-                // Select first item
-                comboBox_Export_ExportLanguage.SelectedIndex = 0;
             }
             catch (Exception exception)
             {
                 Message(exception.Message);
             }
         }
-
-        /// <summary>
-        /// Refresh export information for selected language
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBox_Export_ExportLanguage_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Dictionary<string, int> components = Database_Export.ExportToJson.GetNumerOfComponents(comboBox_Export_ExportLanguage.Text, myConnection);
-
-            textBox_Export_Scenarios.Text = components["Scenarios"].ToString();
-            textBox_Export_Sections.Text = components["Sections"].ToString();
-            textBox_Export_CheckPoints.Text = components["CheckPoints"].ToString();
-            textBox_Export_Operations.Text = components["Operations"].ToString();
-        }
-        #endregion
-
-        #region Message
-        /// <summary>
-        /// Show message in messageBox
-        /// </summary>
-        /// <param name="message">Message to show</param>
-        private void Message(string message)
-        {
-            MessageBox.Show(message);
-        }
-
         #endregion
 
         #region FormControls
@@ -467,6 +408,166 @@ namespace Service
             tabPage_Database_InsertScript.Enabled = false;  // Insert script
             tabPage_Database_DropScript.Enabled = false;  // Drop script
 
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Language
+        /// <summary>
+        /// Initialize export tab
+        /// </summary>
+        private void Language_Init()
+        {
+            Language_SelectedLanguageRefresh();
+        }
+
+        /// <summary>
+        /// Clear export tab
+        /// </summary>
+        private void Language_Clear()
+        {
+            // Clear selected language
+            comboBox_Language_SelectedLanguage.Items.Clear();
+            comboBox_Language_SelectedLanguage.Text = "";
+        }
+
+        /// <summary>
+        /// Refresh languages
+        /// </summary>
+        private void Language_SelectedLanguageRefresh()
+        {
+            try
+            {
+                // Load languages
+                List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
+
+                // Clear old languages
+                comboBox_Language_SelectedLanguage.Items.Clear();
+
+                // Add new languages
+                foreach (string language in languages)
+                {
+                    comboBox_Language_SelectedLanguage.Items.Add(language);
+                }
+
+                // Select first item
+                comboBox_Language_SelectedLanguage.SelectedIndex = 0;
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+        #endregion
+
+        #region Export
+        /// <summary>
+        /// Initialize export tab
+        /// </summary>
+        private void Export_Init()
+        {
+            Export_LanguagesRefresh();
+        }
+
+        /// <summary>
+        /// Clear export tab
+        /// </summary>
+        private void Export_Clear()
+        {
+            comboBox_Export_ExportLanguage.Items.Clear();
+            comboBox_Export_ExportLanguage.Text = "";
+            textBox_Export_Scenarios.Clear();
+            textBox_Export_Sections.Clear();
+            textBox_Export_CheckPoints.Clear();
+            textBox_Export_Operations.Clear();
+        }
+
+        /// <summary>
+        /// Export database into JSON in selected language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBox_Export_ExportLanguage.Text != "" || comboBox_Export_ExportLanguage.Text != null)
+                {
+                    Database_Export.ExportToJson.Generate(comboBox_Export_ExportLanguage.Text, myConnection);
+                }
+                else
+                {
+                    Message("Database is empty.");
+                }
+                
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Refresh languages for export
+        /// </summary>
+        private void Export_LanguagesRefresh()
+        {
+            try
+            {
+                // Load languages
+                List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
+
+                // Clear old languages
+                comboBox_Export_ExportLanguage.Items.Clear();
+
+                // Add new languages
+                foreach (string language in languages)
+                {
+                    comboBox_Export_ExportLanguage.Items.Add(language);
+                }
+
+                // Select first item
+                comboBox_Export_ExportLanguage.SelectedIndex = 0;
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Refresh export information for selected language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Export_ExportLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Dictionary<string, int> components = Database_Export.ExportToJson.GetNumerOfComponents(comboBox_Export_ExportLanguage.Text, myConnection);
+
+                textBox_Export_Scenarios.Text = components["Scenarios"].ToString();
+                textBox_Export_Sections.Text = components["Sections"].ToString();
+                textBox_Export_CheckPoints.Text = components["CheckPoints"].ToString();
+                textBox_Export_Operations.Text = components["Operations"].ToString();
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+        #endregion
+
+        #region Message
+        /// <summary>
+        /// Show message in messageBox
+        /// </summary>
+        /// <param name="message">Message to show</param>
+        private void Message(string message)
+        {
+            MessageBox.Show(message);
         }
 
         #endregion

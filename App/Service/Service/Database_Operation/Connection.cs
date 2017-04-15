@@ -11,6 +11,7 @@ namespace Service.Database_Operation
         private string database = "; Database = ";
         private string user = "; User Id = ";
         private string pass = "; Password = ";
+        private string trusted = "; Trusted_Connection = True";
 
         // Database information
         private string serverAddress;
@@ -25,7 +26,7 @@ namespace Service.Database_Operation
         {
             this.serverAddress = serverAddress;
             this.databaseName = databaseName;
-            string connectionString = server + serverAddress + database + databaseName + ";";
+            string connectionString = server + serverAddress + database + databaseName + trusted + ";";
             connection = new SqlConnection(connectionString);
             connection.Open();
         }

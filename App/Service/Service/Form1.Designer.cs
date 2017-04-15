@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabPage_Export = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_Export_Operations = new System.Windows.Forms.TextBox();
@@ -42,7 +43,7 @@
             this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
             this.button_Export = new System.Windows.Forms.Button();
             this.tabPage_Language = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_Language_SelectedLanguage = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage_Editor = new System.Windows.Forms.TabPage();
             this.tabControl_Editor = new System.Windows.Forms.TabControl();
@@ -234,7 +235,7 @@
             // 
             // tabPage_Language
             // 
-            this.tabPage_Language.Controls.Add(this.comboBox1);
+            this.tabPage_Language.Controls.Add(this.comboBox_Language_SelectedLanguage);
             this.tabPage_Language.Controls.Add(this.label4);
             this.tabPage_Language.Location = new System.Drawing.Point(4, 36);
             this.tabPage_Language.Name = "tabPage_Language";
@@ -243,13 +244,13 @@
             this.tabPage_Language.Text = "Language";
             this.tabPage_Language.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // comboBox_Language_SelectedLanguage
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(194, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(375, 21);
-            this.comboBox1.TabIndex = 4;
+            this.comboBox_Language_SelectedLanguage.FormattingEnabled = true;
+            this.comboBox_Language_SelectedLanguage.Location = new System.Drawing.Point(194, 21);
+            this.comboBox_Language_SelectedLanguage.Name = "comboBox_Language_SelectedLanguage";
+            this.comboBox_Language_SelectedLanguage.Size = new System.Drawing.Size(375, 21);
+            this.comboBox_Language_SelectedLanguage.TabIndex = 4;
             // 
             // label4
             // 
@@ -503,6 +504,7 @@
             this.comboBox_Connection_PreferedServer.FormattingEnabled = true;
             this.comboBox_Connection_PreferedServer.Items.AddRange(new object[] {
             "Technical University of Liberec",
+            "Local - Tomas Moravec",
             "None"});
             this.comboBox_Connection_PreferedServer.Location = new System.Drawing.Point(187, 26);
             this.comboBox_Connection_PreferedServer.Name = "comboBox_Connection_PreferedServer";
@@ -690,9 +692,9 @@
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Car Service";
             this.tabPage_Export.ResumeLayout(false);
@@ -771,7 +773,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_Connection_ServerAddress;
         private System.Windows.Forms.Label label_Connection_ServerAddress;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_Language_SelectedLanguage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_CreateScript;
         private System.Windows.Forms.Button button_InsertScript;
