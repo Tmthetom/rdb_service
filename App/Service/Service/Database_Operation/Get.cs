@@ -114,7 +114,7 @@ namespace Service.Database_Operation
                 {
                     foreach (Database_Objects.Scenario_Translation translation in all_Translations)
                     {
-                        if (id == translation.GetID() && language == defaultLanguage)
+                        if (id == translation.GetID() && defaultLanguage == translation.GetLanguage_Code())
                         {
                             scenarios.Add(translation);
                             break;
@@ -187,7 +187,7 @@ namespace Service.Database_Operation
                 {
                     foreach (Database_Objects.Section_Translation translation in all_Translations)
                     {
-                        if (id == translation.GetID() && language == defaultLanguage)
+                        if (id == translation.GetID() && defaultLanguage == translation.GetLanguage_Code())
                         {
                             sections.Add(translation);
                             break;
@@ -247,7 +247,7 @@ namespace Service.Database_Operation
                 // Find wanted translation
                 foreach (Database_Objects.CheckPoint_Translation translation in all_Translations)
                 {
-                    if (id == translation.GetID() && language == translation.GetLanguage_Code())
+                    if (id == translation.GetID() && defaultLanguage == translation.GetLanguage_Code())
                     {
                         checkpoints.Add(translation);
                         haveTranslation = true;
@@ -320,7 +320,7 @@ namespace Service.Database_Operation
                 // Find wanted translation
                 foreach (Database_Objects.Operation_Translation translation in all_Translations)
                 {
-                    if (id == translation.GetID() && language == translation.GetLanguage_Code())
+                    if (id == translation.GetID() && defaultLanguage == translation.GetLanguage_Code())
                     {
                         operations.Add(translation);
                         haveTranslation = true;
