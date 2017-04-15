@@ -460,6 +460,9 @@ namespace Service
         private void Editor_Init()
         {
             Editor_Scenario_Init();
+            Editor_Section_Init();
+            Editor_CheckPoint_Init();
+            Editor_Operation_Init();
         }
 
         /// <summary>
@@ -468,12 +471,14 @@ namespace Service
         private void Editor_Clear()
         {
             Editor_Scenario_Clear();
+            Editor_Section_Clear();
+            Editor_CheckPoint_Clear();
+            Editor_Operation_Clear();
         }
 
         #region Scenario
-
         /// <summary>
-        /// Initialize scenario tab
+        /// Initialize tab
         /// </summary>
         private void Editor_Scenario_Init()
         {
@@ -482,7 +487,7 @@ namespace Service
         }
 
         /// <summary>
-        /// Clear scenario tab
+        /// Clear tab
         /// </summary>
         private void Editor_Scenario_Clear()
         {
@@ -492,16 +497,16 @@ namespace Service
         }
 
         /// <summary>
-        /// Table load in scenario tab
+        /// Table load in tab
         /// </summary>
         private void Editor_Scenario_LoadTable()
         {
             // Get objects
-            List<Database_Objects.Scenario_Translation> scenarios = Database_Operation.Get.Scenarios(selectedLanguage.Text, myConnection);
+            List<Database_Objects.Scenario_Translation> objects = Database_Operation.Get.Scenarios(selectedLanguage.Text, myConnection);
 
             // Add new objects
             dataGridView_Editor_Scenario.Rows.Clear();
-            foreach (Database_Objects.Scenario_Translation o in scenarios)
+            foreach (Database_Objects.Scenario_Translation o in objects)
             {
                 dataGridView_Editor_Scenario.Rows.Add(o.id_Scenario, o.language_Code, o.name, "Delete");
             }
@@ -512,7 +517,7 @@ namespace Service
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridView_Editor_Scenario_SelectionChanged(object sender, EventArgs e)
+        private void DataGridView_Editor_Scenario_SelectionChanged(object sender, EventArgs e)
         {
             // Get row data
             DataGridView dataGridView = sender as DataGridView;
@@ -617,19 +622,450 @@ namespace Service
                 Message(exception.Message);
             }
         }
-
         #endregion Scenario
 
         #region Section
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Editor_Section_Init()
+        {
+            Editor_Section_Clear();
+            Editor_Section_LoadTable();
+        }
 
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Editor_Section_Clear()
+        {
+            textBox_Editor_Section_SelectedName.Clear();
+            textBox_Editor_Section_NewName.Clear();
+            dataGridView_Editor_Section.Rows.Clear();
+        }
+
+        /// <summary>
+        /// Table load in tab
+        /// </summary>
+        private void Editor_Section_LoadTable()
+        {
+            // Get objects
+            List<Database_Objects.Section_Translation> objects = Database_Operation.Get.Sections(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            dataGridView_Editor_Section.Rows.Clear();
+            foreach (Database_Objects.Section_Translation o in objects)
+            {
+                dataGridView_Editor_Section.Rows.Add(o.id_Section, o.language_Code, o.name, "Delete");
+            }
+        }
+
+        /// <summary>
+        /// Table select
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_Section_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get row data
+            DataGridView dataGridView = sender as DataGridView;
+            int selectedRow = dataGridView.CurrentCell.RowIndex;
+            string selectedID = dataGridView.Rows[selectedRow].Cells[0].Value.ToString();
+            string selectedName = dataGridView.Rows[selectedRow].Cells[2].Value.ToString();
+
+            // Set selected
+            textBox_Editor_Section_ID.Text = selectedID;
+            textBox_Editor_Section_SelectedName.Text = selectedName;
+        }
+
+        /// <summary>
+        /// Add new row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Section_Add_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string language = selectedLanguage.Text;
+                string newName = textBox_Editor_Section_NewName.Text;
+
+                if (newName != "")
+                {
+                    Database_Operation.Insert.Section(language, newName, myConnection);
+                    Editor_Section_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Section_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string id = textBox_Editor_Section_ID.Text;
+                string language = selectedLanguage.Text;
+                string updateName = textBox_Editor_Section_SelectedName.Text;
+
+                if (updateName != "")
+                {
+                    Database_Operation.Update.Section(id, language, updateName, myConnection);
+                    Editor_Section_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_Section_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if delete button clicked
+            if (e.ColumnIndex != 3)
+            {
+                return;
+            }
+
+            // Delete
+            try
+            {
+                string id = textBox_Editor_Section_ID.Text;
+                string name = textBox_Editor_Section_SelectedName.Text;
+                string language = selectedLanguage.Text;
+
+                // Ask if sure about this...
+                string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
+                string component = "Selected component: [" + id + "] = [" + name + "]";
+                DialogResult dialogResult = MessageBox.Show(dialog + component, "Deleting component", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Database_Operation.Delete.Sections(id, myConnection);
+                    Editor_Section_Init();
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
         #endregion Section
 
         #region CheckPoint
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Editor_CheckPoint_Init()
+        {
+            Editor_CheckPoint_Clear();
+            Editor_CheckPoint_LoadTable();
+        }
 
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Editor_CheckPoint_Clear()
+        {
+            textBox_Editor_CheckPoint_SelectedName.Clear();
+            textBox_Editor_CheckPoint_NewName.Clear();
+            dataGridView_Editor_CheckPoint.Rows.Clear();
+        }
+
+        /// <summary>
+        /// Table load in tab
+        /// </summary>
+        private void Editor_CheckPoint_LoadTable()
+        {
+            // Get objects
+            List<Database_Objects.CheckPoint_Translation> objects = Database_Operation.Get.CheckPoints(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            dataGridView_Editor_CheckPoint.Rows.Clear();
+            foreach (Database_Objects.CheckPoint_Translation o in objects)
+            {
+                dataGridView_Editor_CheckPoint.Rows.Add(o.id_CheckPoint, o.language_Code, o.name, "Delete");
+            }
+        }
+
+        /// <summary>
+        /// Table select
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_CheckPoint_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get row data
+            DataGridView dataGridView = sender as DataGridView;
+            int selectedRow = dataGridView.CurrentCell.RowIndex;
+            string selectedID = dataGridView.Rows[selectedRow].Cells[0].Value.ToString();
+            string selectedName = dataGridView.Rows[selectedRow].Cells[2].Value.ToString();
+
+            // Set selected
+            textBox_Editor_CheckPoint_ID.Text = selectedID;
+            textBox_Editor_CheckPoint_SelectedName.Text = selectedName;
+        }
+
+        /// <summary>
+        /// Add new row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_CheckPoint_Add_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string language = selectedLanguage.Text;
+                string newName = textBox_Editor_CheckPoint_NewName.Text;
+
+                if (newName != "")
+                {
+                    Database_Operation.Insert.CheckPoint(language, newName, myConnection);
+                    Editor_CheckPoint_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_CheckPoint_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string id = textBox_Editor_CheckPoint_ID.Text;
+                string language = selectedLanguage.Text;
+                string updateName = textBox_Editor_CheckPoint_SelectedName.Text;
+
+                if (updateName != "")
+                {
+                    Database_Operation.Update.CheckPoint(id, language, updateName, myConnection);
+                    Editor_CheckPoint_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_CheckPoint_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if delete button clicked
+            if (e.ColumnIndex != 3)
+            {
+                return;
+            }
+
+            // Delete
+            try
+            {
+                string id = textBox_Editor_CheckPoint_ID.Text;
+                string name = textBox_Editor_CheckPoint_SelectedName.Text;
+                string language = selectedLanguage.Text;
+
+                // Ask if sure about this...
+                string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
+                string component = "Selected component: [" + id + "] = [" + name + "]";
+                DialogResult dialogResult = MessageBox.Show(dialog + component, "Deleting component", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Database_Operation.Delete.CheckPoint(id, myConnection);
+                    Editor_CheckPoint_Init();
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
         #endregion CheckPoint
 
         #region Operation
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Editor_Operation_Init()
+        {
+            Editor_Operation_Clear();
+            Editor_Operation_LoadTable();
+        }
 
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Editor_Operation_Clear()
+        {
+            textBox_Editor_Operation_SelectedName.Clear();
+            textBox_Editor_Operation_NewName.Clear();
+            dataGridView_Editor_Operation.Rows.Clear();
+        }
+
+        /// <summary>
+        /// Table load in tab
+        /// </summary>
+        private void Editor_Operation_LoadTable()
+        {
+            // Get objects
+            List<Database_Objects.Operation_Translation> objects = Database_Operation.Get.Operations(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            dataGridView_Editor_Operation.Rows.Clear();
+            foreach (Database_Objects.Operation_Translation o in objects)
+            {
+                dataGridView_Editor_Operation.Rows.Add(o.id_Operation, o.language_Code, o.name, "Delete");
+            }
+        }
+
+        /// <summary>
+        /// Table select
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_Operation_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get row data
+            DataGridView dataGridView = sender as DataGridView;
+            int selectedRow = dataGridView.CurrentCell.RowIndex;
+            string selectedID = dataGridView.Rows[selectedRow].Cells[0].Value.ToString();
+            string selectedName = dataGridView.Rows[selectedRow].Cells[2].Value.ToString();
+
+            // Set selected
+            textBox_Editor_Operation_ID.Text = selectedID;
+            textBox_Editor_Operation_SelectedName.Text = selectedName;
+        }
+
+        /// <summary>
+        /// Add new row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Operation_Add_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string language = selectedLanguage.Text;
+                string newName = textBox_Editor_Operation_NewName.Text;
+
+                if (newName != "")
+                {
+                    Database_Operation.Insert.Operation(language, newName, myConnection);
+                    Editor_Operation_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Operation_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string id = textBox_Editor_Operation_ID.Text;
+                string language = selectedLanguage.Text;
+                string updateName = textBox_Editor_Operation_SelectedName.Text;
+
+                if (updateName != "")
+                {
+                    Database_Operation.Update.Operation(id, language, updateName, myConnection);
+                    Editor_Operation_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_Operation_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if delete button clicked
+            if (e.ColumnIndex != 3)
+            {
+                return;
+            }
+
+            // Delete
+            try
+            {
+                string id = textBox_Editor_Operation_ID.Text;
+                string name = textBox_Editor_Operation_SelectedName.Text;
+                string language = selectedLanguage.Text;
+
+                // Ask if sure about this...
+                string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
+                string component = "Selected component: [" + id + "] = [" + name + "]";
+                DialogResult dialogResult = MessageBox.Show(dialog + component, "Deleting component", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Database_Operation.Delete.Operation(id, myConnection);
+                    Editor_Operation_Init();
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
         #endregion Operation
 
         #endregion Editor

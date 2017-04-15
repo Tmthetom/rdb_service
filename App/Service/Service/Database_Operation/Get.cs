@@ -123,7 +123,7 @@ namespace Service.Database_Operation
 
             // Object ID
             List<int> all = new List<int>();
-            myCommand = new SqlCommand("SELECT [ID_Sections] FROM [Sections]", myConnection);
+            myCommand = new SqlCommand("SELECT [ID_Section] FROM [Sections]", myConnection);
             reader = myCommand.ExecuteReader();
             while (reader.Read())
             {
@@ -134,7 +134,7 @@ namespace Service.Database_Operation
 
             // Object translations
             List<Database_Objects.Section_Translation> all_Translations = new List<Database_Objects.Section_Translation>();
-            myCommand = new SqlCommand("SELECT [ID_Sections], [Language_Code], [Name] FROM [Sections_Translation]", myConnection);
+            myCommand = new SqlCommand("SELECT [ID_Section], [Language_Code], [Name] FROM [Sections_Translation]", myConnection);
             reader = myCommand.ExecuteReader();
             Database_Objects.Section_Translation current_Translation;
             while (reader.Read())
