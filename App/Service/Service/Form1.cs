@@ -567,8 +567,9 @@ namespace Service
         {
             try
             {
+                int selectedRow = dataGridView_Editor_Scenario.CurrentCell.RowIndex;
+                string language = dataGridView_Editor_Scenario.Rows[selectedRow].Cells[1].Value.ToString();
                 string id = textBox_Editor_Scenario_ID.Text;
-                string language = selectedLanguage.Text;
                 string updateName = textBox_Editor_Scenario_SelectedName.Text;
 
                 if (updateName != "")
@@ -605,7 +606,6 @@ namespace Service
             {
                 string id = textBox_Editor_Scenario_ID.Text;
                 string name = textBox_Editor_Scenario_SelectedName.Text;
-                string language = selectedLanguage.Text;
 
                 // Ask if sure about this...
                 string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
@@ -715,8 +715,9 @@ namespace Service
         {
             try
             {
+                int selectedRow = dataGridView_Editor_Section.CurrentCell.RowIndex;
+                string language = dataGridView_Editor_Section.Rows[selectedRow].Cells[1].Value.ToString();
                 string id = textBox_Editor_Section_ID.Text;
-                string language = selectedLanguage.Text;
                 string updateName = textBox_Editor_Section_SelectedName.Text;
 
                 if (updateName != "")
@@ -753,7 +754,6 @@ namespace Service
             {
                 string id = textBox_Editor_Section_ID.Text;
                 string name = textBox_Editor_Section_SelectedName.Text;
-                string language = selectedLanguage.Text;
 
                 // Ask if sure about this...
                 string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
@@ -863,8 +863,9 @@ namespace Service
         {
             try
             {
+                int selectedRow = dataGridView_Editor_CheckPoint.CurrentCell.RowIndex;
+                string language = dataGridView_Editor_CheckPoint.Rows[selectedRow].Cells[1].Value.ToString();
                 string id = textBox_Editor_CheckPoint_ID.Text;
-                string language = selectedLanguage.Text;
                 string updateName = textBox_Editor_CheckPoint_SelectedName.Text;
 
                 if (updateName != "")
@@ -901,7 +902,6 @@ namespace Service
             {
                 string id = textBox_Editor_CheckPoint_ID.Text;
                 string name = textBox_Editor_CheckPoint_SelectedName.Text;
-                string language = selectedLanguage.Text;
 
                 // Ask if sure about this...
                 string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
@@ -1011,8 +1011,9 @@ namespace Service
         {
             try
             {
+                int selectedRow = dataGridView_Editor_Operation.CurrentCell.RowIndex;
+                string language = dataGridView_Editor_Operation.Rows[selectedRow].Cells[1].Value.ToString();
                 string id = textBox_Editor_Operation_ID.Text;
-                string language = selectedLanguage.Text;
                 string updateName = textBox_Editor_Operation_SelectedName.Text;
 
                 if (updateName != "")
@@ -1049,7 +1050,6 @@ namespace Service
             {
                 string id = textBox_Editor_Operation_ID.Text;
                 string name = textBox_Editor_Operation_SelectedName.Text;
-                string language = selectedLanguage.Text;
 
                 // Ask if sure about this...
                 string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
@@ -1094,32 +1094,43 @@ namespace Service
         /// </summary>
         private void Language_SelectedLanguageRefresh()
         {
+            /*
             selectedLanguage.Items.Add("EN");
             selectedLanguage.SelectedIndex = 0;
+            */
 
-            /*
             try
             {
                 // Load languages
                 List<string> languages = Database_Operation.Get.Languages(myConnection);
 
                 // Clear old languages
-                comboBox_Language_SelectedLanguage.Items.Clear();
+                selectedLanguage.Items.Clear();
 
                 // Add new languages
                 foreach (string language in languages)
                 {
-                    comboBox_Language_SelectedLanguage.Items.Add(language);
+                    selectedLanguage.Items.Add(language);
                 }
 
                 // Select first item
-                comboBox_Language_SelectedLanguage.SelectedIndex = 0;
+                selectedLanguage.SelectedIndex = 0;
             }
             catch (Exception exception)
             {
                 Message(exception.Message);
             }
-            */
+        }
+
+        /// <summary>
+        /// Selected language changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectedLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Scenarios_Init();
+            Editor_Init();
         }
         #endregion Language
 

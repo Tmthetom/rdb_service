@@ -5,6 +5,8 @@ namespace Service.Database_Operation
 {
     class Get
     {
+        private static string defaultLanguage = "EN";
+
         /// <summary>
         /// Return number of all tables in database
         /// </summary>
@@ -90,15 +92,33 @@ namespace Service.Database_Operation
             reader.Close();
 
             // Select wanted translation
+            bool haveTranslation;
             foreach (int id in all)
             {
+                // Reset flag
+                haveTranslation = false;
+
                 // Find wanted translation
                 foreach (Database_Objects.Scenario_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
                         scenarios.Add(translation);
+                        haveTranslation = true;
                         break;
+                    }
+                }
+
+                // If no translation, use EN
+                if (haveTranslation == false)
+                {
+                    foreach (Database_Objects.Scenario_Translation translation in all_Translations)
+                    {
+                        if (id == translation.GetID() && language == defaultLanguage)
+                        {
+                            scenarios.Add(translation);
+                            break;
+                        }
                     }
                 }
             }
@@ -145,18 +165,37 @@ namespace Service.Database_Operation
             reader.Close();
 
             // Select wanted translation
+            bool haveTranslation;
             foreach (int id in all)
             {
+                // Reset flag
+                haveTranslation = false;
+
                 // Find wanted translation
                 foreach (Database_Objects.Section_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
                         sections.Add(translation);
+                        haveTranslation = true;
                         break;
                     }
                 }
+
+                // If no translation, use EN
+                if (haveTranslation == false)
+                {
+                    foreach (Database_Objects.Section_Translation translation in all_Translations)
+                    {
+                        if (id == translation.GetID() && language == defaultLanguage)
+                        {
+                            sections.Add(translation);
+                            break;
+                        }
+                    }
+                }
             }
+
             return sections;
         }
 
@@ -199,18 +238,37 @@ namespace Service.Database_Operation
             reader.Close();
 
             // Select wanted translation
+            bool haveTranslation;
             foreach (int id in all)
             {
+                // Reset flag
+                haveTranslation = false;
+
                 // Find wanted translation
                 foreach (Database_Objects.CheckPoint_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
                         checkpoints.Add(translation);
+                        haveTranslation = true;
                         break;
                     }
                 }
+
+                // If no translation, use EN
+                if (haveTranslation == false)
+                {
+                    foreach (Database_Objects.CheckPoint_Translation translation in all_Translations)
+                    {
+                        if (id == translation.GetID() && language == defaultLanguage)
+                        {
+                            checkpoints.Add(translation);
+                            break;
+                        }
+                    }
+                }
             }
+
             return checkpoints;
         }
 
@@ -253,18 +311,37 @@ namespace Service.Database_Operation
             reader.Close();
 
             // Select wanted translation
+            bool haveTranslation;
             foreach (int id in all)
             {
+                // Reset flag
+                haveTranslation = false;
+
                 // Find wanted translation
                 foreach (Database_Objects.Operation_Translation translation in all_Translations)
                 {
                     if (id == translation.GetID() && language == translation.GetLanguage_Code())
                     {
                         operations.Add(translation);
+                        haveTranslation = true;
                         break;
                     }
                 }
+
+                // If no translation, use EN
+                if (haveTranslation == false)
+                {
+                    foreach (Database_Objects.Operation_Translation translation in all_Translations)
+                    {
+                        if (id == translation.GetID() && language == defaultLanguage)
+                        {
+                            operations.Add(translation);
+                            break;
+                        }
+                    }
+                }
             }
+
             return operations;
         }
     }

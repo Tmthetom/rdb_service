@@ -145,6 +145,17 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.dataGridView_Language = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox_Language_Translation = new System.Windows.Forms.GroupBox();
+            this.button_Language_Save = new System.Windows.Forms.Button();
+            this.label_Language_Original = new System.Windows.Forms.Label();
+            this.label_Language_Translation = new System.Windows.Forms.Label();
+            this.textBox_Language_Original = new System.Windows.Forms.TextBox();
+            this.textBox_Language_Translation = new System.Windows.Forms.TextBox();
             this.tabPage_Export.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage_Language.SuspendLayout();
@@ -177,6 +188,8 @@
             this.tabPage_Database_DropScript.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).BeginInit();
+            this.groupBox_Language_Translation.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage_Export
@@ -311,6 +324,8 @@
             // 
             // tabPage_Language
             // 
+            this.tabPage_Language.Controls.Add(this.groupBox_Language_Translation);
+            this.tabPage_Language.Controls.Add(this.dataGridView_Language);
             this.tabPage_Language.Controls.Add(this.selectedLanguage);
             this.tabPage_Language.Controls.Add(this.label4);
             this.tabPage_Language.Location = new System.Drawing.Point(4, 36);
@@ -327,6 +342,7 @@
             this.selectedLanguage.Name = "selectedLanguage";
             this.selectedLanguage.Size = new System.Drawing.Size(375, 21);
             this.selectedLanguage.TabIndex = 4;
+            this.selectedLanguage.SelectedIndexChanged += new System.EventHandler(this.SelectedLanguage_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -1373,6 +1389,113 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // dataGridView_Language
+            // 
+            this.dataGridView_Language.AllowUserToAddRows = false;
+            this.dataGridView_Language.AllowUserToDeleteRows = false;
+            this.dataGridView_Language.AllowUserToResizeRows = false;
+            this.dataGridView_Language.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Language.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Language.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewButtonColumn4});
+            this.dataGridView_Language.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView_Language.Location = new System.Drawing.Point(0, 177);
+            this.dataGridView_Language.MultiSelect = false;
+            this.dataGridView_Language.Name = "dataGridView_Language";
+            this.dataGridView_Language.ReadOnly = true;
+            this.dataGridView_Language.RowHeadersVisible = false;
+            this.dataGridView_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Language.Size = new System.Drawing.Size(597, 283);
+            this.dataGridView_Language.TabIndex = 5;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.FillWeight = 31.20407F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.FillWeight = 50.76143F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Language";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.FillWeight = 250.1467F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewButtonColumn4
+            // 
+            this.dataGridViewButtonColumn4.FillWeight = 67.8879F;
+            this.dataGridViewButtonColumn4.HeaderText = "Action";
+            this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
+            this.dataGridViewButtonColumn4.ReadOnly = true;
+            this.dataGridViewButtonColumn4.Text = "";
+            // 
+            // groupBox_Language_Translation
+            // 
+            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Translation);
+            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Original);
+            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Translation);
+            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Original);
+            this.groupBox_Language_Translation.Controls.Add(this.button_Language_Save);
+            this.groupBox_Language_Translation.Location = new System.Drawing.Point(27, 54);
+            this.groupBox_Language_Translation.Name = "groupBox_Language_Translation";
+            this.groupBox_Language_Translation.Size = new System.Drawing.Size(542, 100);
+            this.groupBox_Language_Translation.TabIndex = 6;
+            this.groupBox_Language_Translation.TabStop = false;
+            this.groupBox_Language_Translation.Text = "Create Translation";
+            // 
+            // button_Language_Save
+            // 
+            this.button_Language_Save.Location = new System.Drawing.Point(461, 19);
+            this.button_Language_Save.Name = "button_Language_Save";
+            this.button_Language_Save.Size = new System.Drawing.Size(75, 65);
+            this.button_Language_Save.TabIndex = 0;
+            this.button_Language_Save.Text = "Save";
+            this.button_Language_Save.UseVisualStyleBackColor = true;
+            // 
+            // label_Language_Original
+            // 
+            this.label_Language_Original.AutoSize = true;
+            this.label_Language_Original.Location = new System.Drawing.Point(21, 29);
+            this.label_Language_Original.Name = "label_Language_Original";
+            this.label_Language_Original.Size = new System.Drawing.Size(42, 13);
+            this.label_Language_Original.TabIndex = 1;
+            this.label_Language_Original.Text = "Original";
+            // 
+            // label_Language_Translation
+            // 
+            this.label_Language_Translation.AutoSize = true;
+            this.label_Language_Translation.Location = new System.Drawing.Point(21, 58);
+            this.label_Language_Translation.Name = "label_Language_Translation";
+            this.label_Language_Translation.Size = new System.Drawing.Size(59, 13);
+            this.label_Language_Translation.TabIndex = 2;
+            this.label_Language_Translation.Text = "Translation";
+            // 
+            // textBox_Language_Original
+            // 
+            this.textBox_Language_Original.Location = new System.Drawing.Point(98, 26);
+            this.textBox_Language_Original.Name = "textBox_Language_Original";
+            this.textBox_Language_Original.ReadOnly = true;
+            this.textBox_Language_Original.Size = new System.Drawing.Size(348, 20);
+            this.textBox_Language_Original.TabIndex = 3;
+            // 
+            // textBox_Language_Translation
+            // 
+            this.textBox_Language_Translation.Location = new System.Drawing.Point(98, 55);
+            this.textBox_Language_Translation.Name = "textBox_Language_Translation";
+            this.textBox_Language_Translation.Size = new System.Drawing.Size(348, 20);
+            this.textBox_Language_Translation.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1433,6 +1556,9 @@
             this.tabControl.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).EndInit();
+            this.groupBox_Language_Translation.ResumeLayout(false);
+            this.groupBox_Language_Translation.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1556,6 +1682,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn3;
+        private System.Windows.Forms.GroupBox groupBox_Language_Translation;
+        private System.Windows.Forms.DataGridView dataGridView_Language;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn4;
+        private System.Windows.Forms.TextBox textBox_Language_Translation;
+        private System.Windows.Forms.TextBox textBox_Language_Original;
+        private System.Windows.Forms.Label label_Language_Translation;
+        private System.Windows.Forms.Label label_Language_Original;
+        private System.Windows.Forms.Button button_Language_Save;
     }
 }
 
