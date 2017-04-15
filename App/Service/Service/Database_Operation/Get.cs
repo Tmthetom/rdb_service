@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 
 namespace Service.Database_Operation
 {
-    class GetFromDatabase
+    class Get
     {
-                /// <summary>
+        /// <summary>
         /// Return number of all tables in database
         /// </summary>
         /// <param name="connection">Database connection</param>

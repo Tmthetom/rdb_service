@@ -16,6 +16,7 @@ namespace Service
     {
         private Database_Operation.Connection myConnection;
 
+        #region Initialization
         /// <summary>
         /// Loading of form
         /// </summary>
@@ -31,8 +32,10 @@ namespace Service
         /// </summary>
         private void Form_Initialize()
         {
-            Export_Init();
             Language_Init();
+            Scenarios_Init();
+            Editor_Init();
+            Export_Init();
         }
 
         /// <summary>
@@ -40,9 +43,12 @@ namespace Service
         /// </summary>
         private void Form_Clear()
         {
-            Export_Clear();
             Language_Clear();
+            Scenarios_Clear();
+            Editor_Clear();
+            Export_Clear();
         }
+        #endregion Initialization
 
         #region Database
 
@@ -127,7 +133,7 @@ namespace Service
         {
             if (DatabaseConnection_Check())  // If connection success
             {
-                if (Database_Operation.GetFromDatabase.NumberOfTables(myConnection) > 0)  // Check if tables are here
+                if (Database_Operation.Get.NumberOfTables(myConnection) > 0)  // Check if tables are here
                 {
                     Form_Initialize();  // Initialize form
                 }
@@ -202,7 +208,7 @@ namespace Service
                 textBox_Connection_Password.Text = "";
             }
         }
-        #endregion
+        #endregion Database_Connection
 
         #region Do Scripts
         /// <summary>
@@ -372,7 +378,7 @@ namespace Service
                 Message(exception.Message);
             }
         }
-        #endregion
+        #endregion Do Scripts
 
         #region FormControls
 
@@ -410,9 +416,223 @@ namespace Service
 
         }
 
-        #endregion
+        #endregion FormControls
 
-        #endregion
+        #endregion Database
+
+        #region Scenarios
+
+        /// <summary>
+        /// Initialize scenarios tab
+        /// </summary>
+        private void Scenarios_Init()
+        {
+
+        }
+
+        /// <summary>
+        /// Clear scenarios tab
+        /// </summary>
+        private void Scenarios_Clear()
+        {
+
+        }
+
+        #region Scenario
+
+        #endregion Scenario
+
+        #region Section
+
+        #endregion Section
+
+        #region CheckPoint
+
+        #endregion CheckPoint
+
+        #endregion Scenarios
+
+        #region Editor
+
+        /// <summary>
+        /// Initialize editor tab
+        /// </summary>
+        private void Editor_Init()
+        {
+            Editor_Scenario_Init();
+        }
+
+        /// <summary>
+        /// Clear editor tab
+        /// </summary>
+        private void Editor_Clear()
+        {
+            Editor_Scenario_Clear();
+        }
+
+        #region Scenario
+
+        /// <summary>
+        /// Initialize scenario tab
+        /// </summary>
+        private void Editor_Scenario_Init()
+        {
+            Editor_Scenario_Clear();
+            Editor_Scenario_LoadTable();
+        }
+
+        /// <summary>
+        /// Clear scenario tab
+        /// </summary>
+        private void Editor_Scenario_Clear()
+        {
+            textBox_Editor_Scenario_SelectedName.Clear();
+            textBox_Editor_Scenario_NewName.Clear();
+            dataGridView_Editor_Scenario.Rows.Clear();
+        }
+
+        /// <summary>
+        /// Table load in scenario tab
+        /// </summary>
+        private void Editor_Scenario_LoadTable()
+        {
+            // Get objects
+            List<Database_Objects.Scenario_Translation> scenarios = Database_Operation.Get.Scenarios(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            dataGridView_Editor_Scenario.Rows.Clear();
+            foreach (Database_Objects.Scenario_Translation o in scenarios)
+            {
+                dataGridView_Editor_Scenario.Rows.Add(o.id_Scenario, o.language_Code, o.name, "Delete");
+            }
+        }
+
+        /// <summary>
+        /// Table select
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView_Editor_Scenario_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get row data
+            DataGridView dataGridView = sender as DataGridView;
+            int selectedRow = dataGridView.CurrentCell.RowIndex;
+            string selectedID = dataGridView.Rows[selectedRow].Cells[0].Value.ToString();
+            string selectedName = dataGridView.Rows[selectedRow].Cells[2].Value.ToString();
+
+            // Set selected
+            textBox_Editor_Scenario_ID.Text = selectedID;
+            textBox_Editor_Scenario_SelectedName.Text = selectedName;
+        }
+
+        /// <summary>
+        /// Add new row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Scenario_Add_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string language = selectedLanguage.Text;
+                string newName = textBox_Editor_Scenario_NewName.Text;
+
+                if (newName != "")
+                {
+                    Database_Operation.Insert.Scenario(language, newName, myConnection);
+                    Editor_Scenario_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Editor_Scenario_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string id = textBox_Editor_Scenario_ID.Text;
+                string language = selectedLanguage.Text;
+                string updateName = textBox_Editor_Scenario_SelectedName.Text;
+
+                if (updateName != "")
+                {
+                    Database_Operation.Update.Scenario(id, language, updateName, myConnection);
+                    Editor_Scenario_Init();
+                }
+                else
+                {
+                    Message("Name cannot be empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Editor_Scenario_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if delete button clicked
+            if (e.ColumnIndex != 3)
+            {
+                return;
+            }
+
+            // Delete
+            try
+            {
+                string id = textBox_Editor_Scenario_ID.Text;
+                string name = textBox_Editor_Scenario_SelectedName.Text;
+                string language = selectedLanguage.Text;
+
+                // Ask if sure about this...
+                string dialog = "Are you sure you want to delete selected component? This cant be reversed." + Environment.NewLine;
+                string component = "Selected component: [" + id + "] = [" + name + "]";
+                DialogResult dialogResult = MessageBox.Show(dialog + component, "Deleting component", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Database_Operation.Delete.Scenario(id, myConnection);
+                    Editor_Scenario_Init();
+                }                
+            }
+            catch (Exception exception)
+            {
+                Message(exception.Message);
+            }
+        }
+
+        #endregion Scenario
+
+        #region Section
+
+        #endregion Section
+
+        #region CheckPoint
+
+        #endregion CheckPoint
+
+        #region Operation
+
+        #endregion Operation
+
+        #endregion Editor
 
         #region Language
         /// <summary>
@@ -429,8 +649,8 @@ namespace Service
         private void Language_Clear()
         {
             // Clear selected language
-            comboBox_Language_SelectedLanguage.Items.Clear();
-            comboBox_Language_SelectedLanguage.Text = "";
+            selectedLanguage.Items.Clear();
+            selectedLanguage.Text = "";
         }
 
         /// <summary>
@@ -438,10 +658,14 @@ namespace Service
         /// </summary>
         private void Language_SelectedLanguageRefresh()
         {
+            selectedLanguage.Items.Add("EN");
+            selectedLanguage.SelectedIndex = 0;
+
+            /*
             try
             {
                 // Load languages
-                List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
+                List<string> languages = Database_Operation.Get.Languages(myConnection);
 
                 // Clear old languages
                 comboBox_Language_SelectedLanguage.Items.Clear();
@@ -459,8 +683,9 @@ namespace Service
             {
                 Message(exception.Message);
             }
+            */
         }
-        #endregion
+        #endregion Language
 
         #region Export
         /// <summary>
@@ -517,7 +742,7 @@ namespace Service
             try
             {
                 // Load languages
-                List<string> languages = Database_Operation.GetFromDatabase.Languages(myConnection);
+                List<string> languages = Database_Operation.Get.Languages(myConnection);
 
                 // Clear old languages
                 comboBox_Export_ExportLanguage.Items.Clear();
@@ -558,7 +783,7 @@ namespace Service
                 Message(exception.Message);
             }
         }
-        #endregion
+        #endregion Export
 
         #region Message
         /// <summary>
@@ -570,6 +795,9 @@ namespace Service
             MessageBox.Show(message);
         }
 
-        #endregion
+
+
+
+        #endregion Message
     }
 }

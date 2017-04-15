@@ -65,8 +65,11 @@
     <Compile Include="Database_Objects\Section.cs" />
     <Compile Include="Database_Objects\Section_Translation.cs" />
     <Compile Include="Database_Operation\Connection.cs" />
-    <Compile Include="Database_Operation\GetFromDatabase.cs" />
+    <Compile Include="Database_Operation\Delete.cs" />
+    <Compile Include="Database_Operation\Get.cs" />
+    <Compile Include="Database_Operation\Insert.cs" />
     <Compile Include="Database_Operation\RunScript.cs" />
+    <Compile Include="Database_Operation\Update.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
