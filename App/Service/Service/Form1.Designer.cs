@@ -43,6 +43,17 @@
             this.label_Export_ExportLanguage = new System.Windows.Forms.Label();
             this.button_Export = new System.Windows.Forms.Button();
             this.tabPage_Language = new System.Windows.Forms.TabPage();
+            this.groupBox_Language_Translation = new System.Windows.Forms.GroupBox();
+            this.textBox_Language_Translation = new System.Windows.Forms.TextBox();
+            this.textBox_Language_Original = new System.Windows.Forms.TextBox();
+            this.label_Language_Translation = new System.Windows.Forms.Label();
+            this.label_Language_Original = new System.Windows.Forms.Label();
+            this.button_Language_Save = new System.Windows.Forms.Button();
+            this.dataGridView_Language = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.selectedLanguage = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage_Editor = new System.Windows.Forms.TabPage();
@@ -114,6 +125,17 @@
             this.tabPage_Scenarios = new System.Windows.Forms.TabPage();
             this.tabControl_Scenarios = new System.Windows.Forms.TabControl();
             this.tabPage_Scenarios_Scenario = new System.Windows.Forms.TabPage();
+            this.button_Scenarios_Scenario_Delete = new System.Windows.Forms.Button();
+            this.treeView_Scenarios_Scenario = new System.Windows.Forms.TreeView();
+            this.button_Scenarios_Scenario_Add = new System.Windows.Forms.Button();
+            this.groupBox_Scenarios_Scenario_Section = new System.Windows.Forms.GroupBox();
+            this.dataGridView_Scenarios_Scenario_Section = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox_Scenarios_Scenario_Scenarios = new System.Windows.Forms.GroupBox();
+            this.dataGridView_Scenarios_Scenario_Scenario = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Scenarios_Section = new System.Windows.Forms.TabPage();
             this.tabPage_Scenarios_CheckPoint = new System.Windows.Forms.TabPage();
             this.tabPage_Database = new System.Windows.Forms.TabPage();
@@ -145,31 +167,22 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.dataGridView_Language = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox_Language_Translation = new System.Windows.Forms.GroupBox();
-            this.button_Language_Save = new System.Windows.Forms.Button();
-            this.label_Language_Original = new System.Windows.Forms.Label();
-            this.label_Language_Translation = new System.Windows.Forms.Label();
-            this.textBox_Language_Original = new System.Windows.Forms.TextBox();
-            this.textBox_Language_Translation = new System.Windows.Forms.TextBox();
-            this.dataGridView_Scenarios_Scenario_Section = new System.Windows.Forms.DataGridView();
-            this.groupBox_Scenarios_Scenario_Scenarios = new System.Windows.Forms.GroupBox();
-            this.groupBox_Scenarios_Scenario_Section = new System.Windows.Forms.GroupBox();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView_Scenarios_Scenario_Scenario = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_Scenarios_Scenario_Add = new System.Windows.Forms.Button();
-            this.treeView_Scenarios_Scenario = new System.Windows.Forms.TreeView();
-            this.button_Scenarios_Scenario_Delete = new System.Windows.Forms.Button();
+            this.button_Scenarios_CheckPoint_Delete = new System.Windows.Forms.Button();
+            this.treeView_Scenarios_CheckPoint = new System.Windows.Forms.TreeView();
+            this.button_Scenarios_CheckPoint_Add = new System.Windows.Forms.Button();
+            this.groupBox_Scenarios_CheckPoint_Operations = new System.Windows.Forms.GroupBox();
+            this.dataGridView_Scenarios_CheckPoint_Operations = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox_Scenarios_CheckPoint_CheckPoints = new System.Windows.Forms.GroupBox();
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Export.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage_Language.SuspendLayout();
+            this.groupBox_Language_Translation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).BeginInit();
             this.tabPage_Editor.SuspendLayout();
             this.tabControl_Editor.SuspendLayout();
             this.tabPage_Editor_Scenario.SuspendLayout();
@@ -191,6 +204,11 @@
             this.tabPage_Scenarios.SuspendLayout();
             this.tabControl_Scenarios.SuspendLayout();
             this.tabPage_Scenarios_Scenario.SuspendLayout();
+            this.groupBox_Scenarios_Scenario_Section.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Section)).BeginInit();
+            this.groupBox_Scenarios_Scenario_Scenarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Scenario)).BeginInit();
+            this.tabPage_Scenarios_CheckPoint.SuspendLayout();
             this.tabPage_Database.SuspendLayout();
             this.tabControl_Database.SuspendLayout();
             this.tabPage_Database_Connection.SuspendLayout();
@@ -200,12 +218,10 @@
             this.tabPage_Database_DropScript.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).BeginInit();
-            this.groupBox_Language_Translation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Section)).BeginInit();
-            this.groupBox_Scenarios_Scenario_Scenarios.SuspendLayout();
-            this.groupBox_Scenarios_Scenario_Section.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Scenario)).BeginInit();
+            this.groupBox_Scenarios_CheckPoint_Operations.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_CheckPoint_Operations)).BeginInit();
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_CheckPoint_CheckPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_Export
@@ -350,6 +366,113 @@
             this.tabPage_Language.TabIndex = 3;
             this.tabPage_Language.Text = "Language";
             this.tabPage_Language.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_Language_Translation
+            // 
+            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Translation);
+            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Original);
+            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Translation);
+            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Original);
+            this.groupBox_Language_Translation.Controls.Add(this.button_Language_Save);
+            this.groupBox_Language_Translation.Location = new System.Drawing.Point(27, 54);
+            this.groupBox_Language_Translation.Name = "groupBox_Language_Translation";
+            this.groupBox_Language_Translation.Size = new System.Drawing.Size(542, 100);
+            this.groupBox_Language_Translation.TabIndex = 6;
+            this.groupBox_Language_Translation.TabStop = false;
+            this.groupBox_Language_Translation.Text = "Create Translation";
+            // 
+            // textBox_Language_Translation
+            // 
+            this.textBox_Language_Translation.Location = new System.Drawing.Point(98, 55);
+            this.textBox_Language_Translation.Name = "textBox_Language_Translation";
+            this.textBox_Language_Translation.Size = new System.Drawing.Size(348, 20);
+            this.textBox_Language_Translation.TabIndex = 4;
+            // 
+            // textBox_Language_Original
+            // 
+            this.textBox_Language_Original.Location = new System.Drawing.Point(98, 26);
+            this.textBox_Language_Original.Name = "textBox_Language_Original";
+            this.textBox_Language_Original.ReadOnly = true;
+            this.textBox_Language_Original.Size = new System.Drawing.Size(348, 20);
+            this.textBox_Language_Original.TabIndex = 3;
+            // 
+            // label_Language_Translation
+            // 
+            this.label_Language_Translation.AutoSize = true;
+            this.label_Language_Translation.Location = new System.Drawing.Point(21, 58);
+            this.label_Language_Translation.Name = "label_Language_Translation";
+            this.label_Language_Translation.Size = new System.Drawing.Size(59, 13);
+            this.label_Language_Translation.TabIndex = 2;
+            this.label_Language_Translation.Text = "Translation";
+            // 
+            // label_Language_Original
+            // 
+            this.label_Language_Original.AutoSize = true;
+            this.label_Language_Original.Location = new System.Drawing.Point(21, 29);
+            this.label_Language_Original.Name = "label_Language_Original";
+            this.label_Language_Original.Size = new System.Drawing.Size(42, 13);
+            this.label_Language_Original.TabIndex = 1;
+            this.label_Language_Original.Text = "Original";
+            // 
+            // button_Language_Save
+            // 
+            this.button_Language_Save.Location = new System.Drawing.Point(461, 19);
+            this.button_Language_Save.Name = "button_Language_Save";
+            this.button_Language_Save.Size = new System.Drawing.Size(75, 65);
+            this.button_Language_Save.TabIndex = 0;
+            this.button_Language_Save.Text = "Save";
+            this.button_Language_Save.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_Language
+            // 
+            this.dataGridView_Language.AllowUserToAddRows = false;
+            this.dataGridView_Language.AllowUserToDeleteRows = false;
+            this.dataGridView_Language.AllowUserToResizeRows = false;
+            this.dataGridView_Language.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Language.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Language.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewButtonColumn4});
+            this.dataGridView_Language.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView_Language.Location = new System.Drawing.Point(0, 177);
+            this.dataGridView_Language.MultiSelect = false;
+            this.dataGridView_Language.Name = "dataGridView_Language";
+            this.dataGridView_Language.ReadOnly = true;
+            this.dataGridView_Language.RowHeadersVisible = false;
+            this.dataGridView_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Language.Size = new System.Drawing.Size(597, 283);
+            this.dataGridView_Language.TabIndex = 5;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.FillWeight = 31.20407F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.FillWeight = 50.76143F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Language";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.FillWeight = 250.1467F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewButtonColumn4
+            // 
+            this.dataGridViewButtonColumn4.FillWeight = 67.8879F;
+            this.dataGridViewButtonColumn4.HeaderText = "Action";
+            this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
+            this.dataGridViewButtonColumn4.ReadOnly = true;
+            this.dataGridViewButtonColumn4.Text = "";
             // 
             // selectedLanguage
             // 
@@ -1083,6 +1206,117 @@
             this.tabPage_Scenarios_Scenario.Text = "Scenario";
             this.tabPage_Scenarios_Scenario.UseVisualStyleBackColor = true;
             // 
+            // button_Scenarios_Scenario_Delete
+            // 
+            this.button_Scenarios_Scenario_Delete.Location = new System.Drawing.Point(269, 6);
+            this.button_Scenarios_Scenario_Delete.Name = "button_Scenarios_Scenario_Delete";
+            this.button_Scenarios_Scenario_Delete.Size = new System.Drawing.Size(33, 198);
+            this.button_Scenarios_Scenario_Delete.TabIndex = 6;
+            this.button_Scenarios_Scenario_Delete.Text = "<";
+            this.button_Scenarios_Scenario_Delete.UseVisualStyleBackColor = true;
+            // 
+            // treeView_Scenarios_Scenario
+            // 
+            this.treeView_Scenarios_Scenario.Location = new System.Drawing.Point(308, 6);
+            this.treeView_Scenarios_Scenario.Name = "treeView_Scenarios_Scenario";
+            this.treeView_Scenarios_Scenario.Size = new System.Drawing.Size(274, 418);
+            this.treeView_Scenarios_Scenario.TabIndex = 5;
+            // 
+            // button_Scenarios_Scenario_Add
+            // 
+            this.button_Scenarios_Scenario_Add.Location = new System.Drawing.Point(269, 210);
+            this.button_Scenarios_Scenario_Add.Name = "button_Scenarios_Scenario_Add";
+            this.button_Scenarios_Scenario_Add.Size = new System.Drawing.Size(33, 214);
+            this.button_Scenarios_Scenario_Add.TabIndex = 4;
+            this.button_Scenarios_Scenario_Add.Text = ">";
+            this.button_Scenarios_Scenario_Add.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_Scenarios_Scenario_Section
+            // 
+            this.groupBox_Scenarios_Scenario_Section.Controls.Add(this.dataGridView_Scenarios_Scenario_Section);
+            this.groupBox_Scenarios_Scenario_Section.Location = new System.Drawing.Point(6, 210);
+            this.groupBox_Scenarios_Scenario_Section.Name = "groupBox_Scenarios_Scenario_Section";
+            this.groupBox_Scenarios_Scenario_Section.Size = new System.Drawing.Size(257, 214);
+            this.groupBox_Scenarios_Scenario_Section.TabIndex = 3;
+            this.groupBox_Scenarios_Scenario_Section.TabStop = false;
+            this.groupBox_Scenarios_Scenario_Section.Text = "Sections";
+            // 
+            // dataGridView_Scenarios_Scenario_Section
+            // 
+            this.dataGridView_Scenarios_Scenario_Section.AllowUserToAddRows = false;
+            this.dataGridView_Scenarios_Scenario_Section.AllowUserToDeleteRows = false;
+            this.dataGridView_Scenarios_Scenario_Section.AllowUserToResizeRows = false;
+            this.dataGridView_Scenarios_Scenario_Section.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Scenarios_Scenario_Section.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Scenarios_Scenario_Section.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn15});
+            this.dataGridView_Scenarios_Scenario_Section.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView_Scenarios_Scenario_Section.MultiSelect = false;
+            this.dataGridView_Scenarios_Scenario_Section.Name = "dataGridView_Scenarios_Scenario_Section";
+            this.dataGridView_Scenarios_Scenario_Section.ReadOnly = true;
+            this.dataGridView_Scenarios_Scenario_Section.RowHeadersVisible = false;
+            this.dataGridView_Scenarios_Scenario_Section.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Scenarios_Scenario_Section.Size = new System.Drawing.Size(245, 189);
+            this.dataGridView_Scenarios_Scenario_Section.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.FillWeight = 31.41988F;
+            this.dataGridViewTextBoxColumn13.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.FillWeight = 249.9309F;
+            this.dataGridViewTextBoxColumn15.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // groupBox_Scenarios_Scenario_Scenarios
+            // 
+            this.groupBox_Scenarios_Scenario_Scenarios.Controls.Add(this.dataGridView_Scenarios_Scenario_Scenario);
+            this.groupBox_Scenarios_Scenario_Scenarios.Location = new System.Drawing.Point(6, 6);
+            this.groupBox_Scenarios_Scenario_Scenarios.Name = "groupBox_Scenarios_Scenario_Scenarios";
+            this.groupBox_Scenarios_Scenario_Scenarios.Size = new System.Drawing.Size(257, 198);
+            this.groupBox_Scenarios_Scenario_Scenarios.TabIndex = 2;
+            this.groupBox_Scenarios_Scenario_Scenarios.TabStop = false;
+            this.groupBox_Scenarios_Scenario_Scenarios.Text = "Scenarios";
+            // 
+            // dataGridView_Scenarios_Scenario_Scenario
+            // 
+            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToAddRows = false;
+            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToDeleteRows = false;
+            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToResizeRows = false;
+            this.dataGridView_Scenarios_Scenario_Scenario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Scenarios_Scenario_Scenario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Scenarios_Scenario_Scenario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn16});
+            this.dataGridView_Scenarios_Scenario_Scenario.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView_Scenarios_Scenario_Scenario.MultiSelect = false;
+            this.dataGridView_Scenarios_Scenario_Scenario.Name = "dataGridView_Scenarios_Scenario_Scenario";
+            this.dataGridView_Scenarios_Scenario_Scenario.ReadOnly = true;
+            this.dataGridView_Scenarios_Scenario_Scenario.RowHeadersVisible = false;
+            this.dataGridView_Scenarios_Scenario_Scenario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Scenarios_Scenario_Scenario.Size = new System.Drawing.Size(245, 173);
+            this.dataGridView_Scenarios_Scenario_Scenario.TabIndex = 2;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.FillWeight = 31.41988F;
+            this.dataGridViewTextBoxColumn14.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.FillWeight = 249.9309F;
+            this.dataGridViewTextBoxColumn16.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
             // tabPage_Scenarios_Section
             // 
             this.tabPage_Scenarios_Section.Location = new System.Drawing.Point(4, 26);
@@ -1095,6 +1329,11 @@
             // 
             // tabPage_Scenarios_CheckPoint
             // 
+            this.tabPage_Scenarios_CheckPoint.Controls.Add(this.button_Scenarios_CheckPoint_Delete);
+            this.tabPage_Scenarios_CheckPoint.Controls.Add(this.treeView_Scenarios_CheckPoint);
+            this.tabPage_Scenarios_CheckPoint.Controls.Add(this.button_Scenarios_CheckPoint_Add);
+            this.tabPage_Scenarios_CheckPoint.Controls.Add(this.groupBox_Scenarios_CheckPoint_Operations);
+            this.tabPage_Scenarios_CheckPoint.Controls.Add(this.groupBox_Scenarios_CheckPoint_CheckPoints);
             this.tabPage_Scenarios_CheckPoint.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Scenarios_CheckPoint.Name = "tabPage_Scenarios_CheckPoint";
             this.tabPage_Scenarios_CheckPoint.Size = new System.Drawing.Size(588, 430);
@@ -1410,223 +1649,116 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
-            // dataGridView_Language
+            // button_Scenarios_CheckPoint_Delete
             // 
-            this.dataGridView_Language.AllowUserToAddRows = false;
-            this.dataGridView_Language.AllowUserToDeleteRows = false;
-            this.dataGridView_Language.AllowUserToResizeRows = false;
-            this.dataGridView_Language.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_Language.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Language.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewButtonColumn4});
-            this.dataGridView_Language.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView_Language.Location = new System.Drawing.Point(0, 177);
-            this.dataGridView_Language.MultiSelect = false;
-            this.dataGridView_Language.Name = "dataGridView_Language";
-            this.dataGridView_Language.ReadOnly = true;
-            this.dataGridView_Language.RowHeadersVisible = false;
-            this.dataGridView_Language.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Language.Size = new System.Drawing.Size(597, 283);
-            this.dataGridView_Language.TabIndex = 5;
+            this.button_Scenarios_CheckPoint_Delete.Location = new System.Drawing.Point(269, 6);
+            this.button_Scenarios_CheckPoint_Delete.Name = "button_Scenarios_CheckPoint_Delete";
+            this.button_Scenarios_CheckPoint_Delete.Size = new System.Drawing.Size(33, 198);
+            this.button_Scenarios_CheckPoint_Delete.TabIndex = 11;
+            this.button_Scenarios_CheckPoint_Delete.Text = "<";
+            this.button_Scenarios_CheckPoint_Delete.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn10
+            // treeView_Scenarios_CheckPoint
             // 
-            this.dataGridViewTextBoxColumn10.FillWeight = 31.20407F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.treeView_Scenarios_CheckPoint.Location = new System.Drawing.Point(308, 6);
+            this.treeView_Scenarios_CheckPoint.Name = "treeView_Scenarios_CheckPoint";
+            this.treeView_Scenarios_CheckPoint.Size = new System.Drawing.Size(274, 418);
+            this.treeView_Scenarios_CheckPoint.TabIndex = 10;
             // 
-            // dataGridViewTextBoxColumn11
+            // button_Scenarios_CheckPoint_Add
             // 
-            this.dataGridViewTextBoxColumn11.FillWeight = 50.76143F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Language";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.button_Scenarios_CheckPoint_Add.Location = new System.Drawing.Point(269, 210);
+            this.button_Scenarios_CheckPoint_Add.Name = "button_Scenarios_CheckPoint_Add";
+            this.button_Scenarios_CheckPoint_Add.Size = new System.Drawing.Size(33, 214);
+            this.button_Scenarios_CheckPoint_Add.TabIndex = 9;
+            this.button_Scenarios_CheckPoint_Add.Text = ">";
+            this.button_Scenarios_CheckPoint_Add.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn12
+            // groupBox_Scenarios_CheckPoint_Operations
             // 
-            this.dataGridViewTextBoxColumn12.FillWeight = 250.1467F;
-            this.dataGridViewTextBoxColumn12.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.groupBox_Scenarios_CheckPoint_Operations.Controls.Add(this.dataGridView_Scenarios_CheckPoint_Operations);
+            this.groupBox_Scenarios_CheckPoint_Operations.Location = new System.Drawing.Point(6, 210);
+            this.groupBox_Scenarios_CheckPoint_Operations.Name = "groupBox_Scenarios_CheckPoint_Operations";
+            this.groupBox_Scenarios_CheckPoint_Operations.Size = new System.Drawing.Size(257, 214);
+            this.groupBox_Scenarios_CheckPoint_Operations.TabIndex = 8;
+            this.groupBox_Scenarios_CheckPoint_Operations.TabStop = false;
+            this.groupBox_Scenarios_CheckPoint_Operations.Text = "Operations";
             // 
-            // dataGridViewButtonColumn4
+            // dataGridView_Scenarios_CheckPoint_Operations
             // 
-            this.dataGridViewButtonColumn4.FillWeight = 67.8879F;
-            this.dataGridViewButtonColumn4.HeaderText = "Action";
-            this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
-            this.dataGridViewButtonColumn4.ReadOnly = true;
-            this.dataGridViewButtonColumn4.Text = "";
+            this.dataGridView_Scenarios_CheckPoint_Operations.AllowUserToAddRows = false;
+            this.dataGridView_Scenarios_CheckPoint_Operations.AllowUserToDeleteRows = false;
+            this.dataGridView_Scenarios_CheckPoint_Operations.AllowUserToResizeRows = false;
+            this.dataGridView_Scenarios_CheckPoint_Operations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Scenarios_CheckPoint_Operations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Scenarios_CheckPoint_Operations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18});
+            this.dataGridView_Scenarios_CheckPoint_Operations.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView_Scenarios_CheckPoint_Operations.MultiSelect = false;
+            this.dataGridView_Scenarios_CheckPoint_Operations.Name = "dataGridView_Scenarios_CheckPoint_Operations";
+            this.dataGridView_Scenarios_CheckPoint_Operations.ReadOnly = true;
+            this.dataGridView_Scenarios_CheckPoint_Operations.RowHeadersVisible = false;
+            this.dataGridView_Scenarios_CheckPoint_Operations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Scenarios_CheckPoint_Operations.Size = new System.Drawing.Size(245, 189);
+            this.dataGridView_Scenarios_CheckPoint_Operations.TabIndex = 1;
             // 
-            // groupBox_Language_Translation
+            // dataGridViewTextBoxColumn17
             // 
-            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Translation);
-            this.groupBox_Language_Translation.Controls.Add(this.textBox_Language_Original);
-            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Translation);
-            this.groupBox_Language_Translation.Controls.Add(this.label_Language_Original);
-            this.groupBox_Language_Translation.Controls.Add(this.button_Language_Save);
-            this.groupBox_Language_Translation.Location = new System.Drawing.Point(27, 54);
-            this.groupBox_Language_Translation.Name = "groupBox_Language_Translation";
-            this.groupBox_Language_Translation.Size = new System.Drawing.Size(542, 100);
-            this.groupBox_Language_Translation.TabIndex = 6;
-            this.groupBox_Language_Translation.TabStop = false;
-            this.groupBox_Language_Translation.Text = "Create Translation";
+            this.dataGridViewTextBoxColumn17.FillWeight = 31.41988F;
+            this.dataGridViewTextBoxColumn17.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
             // 
-            // button_Language_Save
+            // dataGridViewTextBoxColumn18
             // 
-            this.button_Language_Save.Location = new System.Drawing.Point(461, 19);
-            this.button_Language_Save.Name = "button_Language_Save";
-            this.button_Language_Save.Size = new System.Drawing.Size(75, 65);
-            this.button_Language_Save.TabIndex = 0;
-            this.button_Language_Save.Text = "Save";
-            this.button_Language_Save.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn18.FillWeight = 249.9309F;
+            this.dataGridViewTextBoxColumn18.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
             // 
-            // label_Language_Original
+            // groupBox_Scenarios_CheckPoint_CheckPoints
             // 
-            this.label_Language_Original.AutoSize = true;
-            this.label_Language_Original.Location = new System.Drawing.Point(21, 29);
-            this.label_Language_Original.Name = "label_Language_Original";
-            this.label_Language_Original.Size = new System.Drawing.Size(42, 13);
-            this.label_Language_Original.TabIndex = 1;
-            this.label_Language_Original.Text = "Original";
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.Controls.Add(this.dataGridView_Scenarios_CheckPoint_CheckPoints);
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.Location = new System.Drawing.Point(6, 6);
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.Name = "groupBox_Scenarios_CheckPoint_CheckPoints";
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.Size = new System.Drawing.Size(257, 198);
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.TabIndex = 7;
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.TabStop = false;
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.Text = "CheckPoints";
             // 
-            // label_Language_Translation
+            // dataGridView_Scenarios_CheckPoint_CheckPoints
             // 
-            this.label_Language_Translation.AutoSize = true;
-            this.label_Language_Translation.Location = new System.Drawing.Point(21, 58);
-            this.label_Language_Translation.Name = "label_Language_Translation";
-            this.label_Language_Translation.Size = new System.Drawing.Size(59, 13);
-            this.label_Language_Translation.TabIndex = 2;
-            this.label_Language_Translation.Text = "Translation";
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.AllowUserToAddRows = false;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.AllowUserToDeleteRows = false;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.AllowUserToResizeRows = false;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20});
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.Location = new System.Drawing.Point(6, 19);
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.MultiSelect = false;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.Name = "dataGridView_Scenarios_CheckPoint_CheckPoints";
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.ReadOnly = true;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.RowHeadersVisible = false;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.Size = new System.Drawing.Size(245, 173);
+            this.dataGridView_Scenarios_CheckPoint_CheckPoints.TabIndex = 2;
             // 
-            // textBox_Language_Original
+            // dataGridViewTextBoxColumn19
             // 
-            this.textBox_Language_Original.Location = new System.Drawing.Point(98, 26);
-            this.textBox_Language_Original.Name = "textBox_Language_Original";
-            this.textBox_Language_Original.ReadOnly = true;
-            this.textBox_Language_Original.Size = new System.Drawing.Size(348, 20);
-            this.textBox_Language_Original.TabIndex = 3;
+            this.dataGridViewTextBoxColumn19.FillWeight = 31.41988F;
+            this.dataGridViewTextBoxColumn19.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
             // 
-            // textBox_Language_Translation
+            // dataGridViewTextBoxColumn20
             // 
-            this.textBox_Language_Translation.Location = new System.Drawing.Point(98, 55);
-            this.textBox_Language_Translation.Name = "textBox_Language_Translation";
-            this.textBox_Language_Translation.Size = new System.Drawing.Size(348, 20);
-            this.textBox_Language_Translation.TabIndex = 4;
-            // 
-            // dataGridView_Scenarios_Scenario_Section
-            // 
-            this.dataGridView_Scenarios_Scenario_Section.AllowUserToAddRows = false;
-            this.dataGridView_Scenarios_Scenario_Section.AllowUserToDeleteRows = false;
-            this.dataGridView_Scenarios_Scenario_Section.AllowUserToResizeRows = false;
-            this.dataGridView_Scenarios_Scenario_Section.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_Scenarios_Scenario_Section.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Scenarios_Scenario_Section.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn15});
-            this.dataGridView_Scenarios_Scenario_Section.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView_Scenarios_Scenario_Section.MultiSelect = false;
-            this.dataGridView_Scenarios_Scenario_Section.Name = "dataGridView_Scenarios_Scenario_Section";
-            this.dataGridView_Scenarios_Scenario_Section.ReadOnly = true;
-            this.dataGridView_Scenarios_Scenario_Section.RowHeadersVisible = false;
-            this.dataGridView_Scenarios_Scenario_Section.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Scenarios_Scenario_Section.Size = new System.Drawing.Size(245, 189);
-            this.dataGridView_Scenarios_Scenario_Section.TabIndex = 1;
-            // 
-            // groupBox_Scenarios_Scenario_Scenarios
-            // 
-            this.groupBox_Scenarios_Scenario_Scenarios.Controls.Add(this.dataGridView_Scenarios_Scenario_Scenario);
-            this.groupBox_Scenarios_Scenario_Scenarios.Location = new System.Drawing.Point(6, 6);
-            this.groupBox_Scenarios_Scenario_Scenarios.Name = "groupBox_Scenarios_Scenario_Scenarios";
-            this.groupBox_Scenarios_Scenario_Scenarios.Size = new System.Drawing.Size(257, 198);
-            this.groupBox_Scenarios_Scenario_Scenarios.TabIndex = 2;
-            this.groupBox_Scenarios_Scenario_Scenarios.TabStop = false;
-            this.groupBox_Scenarios_Scenario_Scenarios.Text = "Scenarios";
-            // 
-            // groupBox_Scenarios_Scenario_Section
-            // 
-            this.groupBox_Scenarios_Scenario_Section.Controls.Add(this.dataGridView_Scenarios_Scenario_Section);
-            this.groupBox_Scenarios_Scenario_Section.Location = new System.Drawing.Point(6, 210);
-            this.groupBox_Scenarios_Scenario_Section.Name = "groupBox_Scenarios_Scenario_Section";
-            this.groupBox_Scenarios_Scenario_Section.Size = new System.Drawing.Size(257, 214);
-            this.groupBox_Scenarios_Scenario_Section.TabIndex = 3;
-            this.groupBox_Scenarios_Scenario_Section.TabStop = false;
-            this.groupBox_Scenarios_Scenario_Section.Text = "Sections";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.FillWeight = 31.41988F;
-            this.dataGridViewTextBoxColumn13.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.FillWeight = 249.9309F;
-            this.dataGridViewTextBoxColumn15.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridView_Scenarios_Scenario_Scenario
-            // 
-            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToAddRows = false;
-            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToDeleteRows = false;
-            this.dataGridView_Scenarios_Scenario_Scenario.AllowUserToResizeRows = false;
-            this.dataGridView_Scenarios_Scenario_Scenario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_Scenarios_Scenario_Scenario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Scenarios_Scenario_Scenario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn16});
-            this.dataGridView_Scenarios_Scenario_Scenario.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView_Scenarios_Scenario_Scenario.MultiSelect = false;
-            this.dataGridView_Scenarios_Scenario_Scenario.Name = "dataGridView_Scenarios_Scenario_Scenario";
-            this.dataGridView_Scenarios_Scenario_Scenario.ReadOnly = true;
-            this.dataGridView_Scenarios_Scenario_Scenario.RowHeadersVisible = false;
-            this.dataGridView_Scenarios_Scenario_Scenario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Scenarios_Scenario_Scenario.Size = new System.Drawing.Size(245, 173);
-            this.dataGridView_Scenarios_Scenario_Scenario.TabIndex = 2;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.FillWeight = 31.41988F;
-            this.dataGridViewTextBoxColumn14.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.FillWeight = 249.9309F;
-            this.dataGridViewTextBoxColumn16.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // button_Scenarios_Scenario_Add
-            // 
-            this.button_Scenarios_Scenario_Add.Location = new System.Drawing.Point(269, 210);
-            this.button_Scenarios_Scenario_Add.Name = "button_Scenarios_Scenario_Add";
-            this.button_Scenarios_Scenario_Add.Size = new System.Drawing.Size(33, 214);
-            this.button_Scenarios_Scenario_Add.TabIndex = 4;
-            this.button_Scenarios_Scenario_Add.Text = ">";
-            this.button_Scenarios_Scenario_Add.UseVisualStyleBackColor = true;
-            // 
-            // treeView_Scenarios_Scenario
-            // 
-            this.treeView_Scenarios_Scenario.Location = new System.Drawing.Point(308, 6);
-            this.treeView_Scenarios_Scenario.Name = "treeView_Scenarios_Scenario";
-            this.treeView_Scenarios_Scenario.Size = new System.Drawing.Size(274, 418);
-            this.treeView_Scenarios_Scenario.TabIndex = 5;
-            // 
-            // button_Scenarios_Scenario_Delete
-            // 
-            this.button_Scenarios_Scenario_Delete.Location = new System.Drawing.Point(269, 6);
-            this.button_Scenarios_Scenario_Delete.Name = "button_Scenarios_Scenario_Delete";
-            this.button_Scenarios_Scenario_Delete.Size = new System.Drawing.Size(33, 198);
-            this.button_Scenarios_Scenario_Delete.TabIndex = 6;
-            this.button_Scenarios_Scenario_Delete.Text = "<";
-            this.button_Scenarios_Scenario_Delete.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn20.FillWeight = 249.9309F;
+            this.dataGridViewTextBoxColumn20.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
             // 
             // Form1
             // 
@@ -1648,6 +1780,9 @@
             this.groupBox1.PerformLayout();
             this.tabPage_Language.ResumeLayout(false);
             this.tabPage_Language.PerformLayout();
+            this.groupBox_Language_Translation.ResumeLayout(false);
+            this.groupBox_Language_Translation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).EndInit();
             this.tabPage_Editor.ResumeLayout(false);
             this.tabControl_Editor.ResumeLayout(false);
             this.tabPage_Editor_Scenario.ResumeLayout(false);
@@ -1677,6 +1812,11 @@
             this.tabPage_Scenarios.ResumeLayout(false);
             this.tabControl_Scenarios.ResumeLayout(false);
             this.tabPage_Scenarios_Scenario.ResumeLayout(false);
+            this.groupBox_Scenarios_Scenario_Section.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Section)).EndInit();
+            this.groupBox_Scenarios_Scenario_Scenarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Scenario)).EndInit();
+            this.tabPage_Scenarios_CheckPoint.ResumeLayout(false);
             this.tabPage_Database.ResumeLayout(false);
             this.tabControl_Database.ResumeLayout(false);
             this.tabPage_Database_Connection.ResumeLayout(false);
@@ -1689,13 +1829,10 @@
             this.tabControl.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Language)).EndInit();
-            this.groupBox_Language_Translation.ResumeLayout(false);
-            this.groupBox_Language_Translation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Section)).EndInit();
-            this.groupBox_Scenarios_Scenario_Scenarios.ResumeLayout(false);
-            this.groupBox_Scenarios_Scenario_Section.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_Scenario_Scenario)).EndInit();
+            this.groupBox_Scenarios_CheckPoint_Operations.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_CheckPoint_Operations)).EndInit();
+            this.groupBox_Scenarios_CheckPoint_CheckPoints.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Scenarios_CheckPoint_CheckPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1841,6 +1978,17 @@
         private System.Windows.Forms.Button button_Scenarios_Scenario_Delete;
         private System.Windows.Forms.TreeView treeView_Scenarios_Scenario;
         private System.Windows.Forms.Button button_Scenarios_Scenario_Add;
+        private System.Windows.Forms.Button button_Scenarios_CheckPoint_Delete;
+        private System.Windows.Forms.TreeView treeView_Scenarios_CheckPoint;
+        private System.Windows.Forms.Button button_Scenarios_CheckPoint_Add;
+        private System.Windows.Forms.GroupBox groupBox_Scenarios_CheckPoint_Operations;
+        private System.Windows.Forms.DataGridView dataGridView_Scenarios_CheckPoint_Operations;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.GroupBox groupBox_Scenarios_CheckPoint_CheckPoints;
+        private System.Windows.Forms.DataGridView dataGridView_Scenarios_CheckPoint_CheckPoints;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
     }
 }
 
