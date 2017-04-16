@@ -212,7 +212,7 @@ namespace Service.Database_Operation
 
             // Delete CheckPoints_Operations Connections
             sql = "INSERT INTO [Scenarios_Sections] (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (";
-            sql += id_Scenario + ", " + id_Section + ", " + ", " + id_CheckPoint + ", " + order_Number + ")"; ;
+            sql += id_Scenario + ", " + id_Section + ", " + id_CheckPoint + ", " + order_Number + ")";
             myCommand = new SqlCommand(sql, myConnection);
             myCommand.ExecuteNonQuery();
         }

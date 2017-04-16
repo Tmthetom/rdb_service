@@ -560,10 +560,11 @@ namespace Service
                 if (id_Scenarios.Contains(scenario.id_Scenario))
                 {
                     // ---------- 2. Find all scenario - sections ----------
-                    SortedDictionary<int, string> scenario_Sections = new SortedDictionary<int, string>();  // Array of sections (with order)
+                    // SortedDictionary<orderNumber, KeyValuePair<sectionName, List<checkPoints>>>
+                    SortedDictionary<int, KeyValuePair<string, List<string>>> scenario_Sections = new SortedDictionary<int, KeyValuePair<string, List<string>>>();  // Array of sections (with order)
                     foreach (Database_Objects.Scenarios_Sections connection in connections)
                     {
-                        // If connection found
+                        // If connection found (same scenario)
                         if (scenario.id_Scenario == connection.GetId_Scenario())
                         {
                             // Find sections name
@@ -577,70 +578,55 @@ namespace Service
                                 }
                             }
 
+                            // If new section (new orderNumber), add as new
                             if (!scenario_Sections.Keys.ToList().Contains(connection.GetOrder_Number()))
                             {
-                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
-                            }
-                            
-                            /*
-                            // If section is not in scenario yet
-                            if (!scenario_Sections.Values.ToList().Contains(sectionName))
-                            {
-                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
-                            }*/
-                            /*
-                            // Same section as before
-                            if (previousSection == sectionName)
-                            {
+                                List<string> currentCheckPoints = new List<string>();
+                                KeyValuePair<string, List<string>> currentSection = new KeyValuePair<string, List<string>>(sectionName, currentCheckPoints);
+                                scenario_Sections.Add(connection.GetOrder_Number(), currentSection);
 
-                            }
-
-                            // If different section then before
-                            else
-                            {
-                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
-                            }
-
-                            previousSection = sectionName;
-                            */
-                            /*
-                            // If section is already in scenario (more sections with different order number)
-                            else
-                            {
-
-                            }*/
-                            /*
-                            // ---------- 3. Find all section - checkPoints ----------
-                            List<string> section_CheckPoints = new List<string>();  // Array of sections (no order)
-                            foreach (Database_Objects.Scenarios_Sections conn in connections)
-                            {
-                                // If connection found
-                                if (scenario.id_Scenario == conn.GetId_Scenario() && connection.GetId_Section() == conn.GetId_Section())
+                                // ---------- 3. Find all section - checkPoints ----------
+                                List<string> section_CheckPoints = new List<string>();  // Array of sections (no order)
+                                foreach (Database_Objects.Scenarios_Sections conn in connections)
                                 {
-                                    // Find checkPoint name
-                                    string checkPointName = "NAME NOT FOUNDED";
-                                    foreach (Database_Objects.CheckPoint_Translation checkPoint in checkPoints)
+                                    // If connection found (Same scenario, section and orderNumber)
+                                    if (scenario.id_Scenario == conn.GetId_Scenario() && connection.GetId_Section() == conn.GetId_Section() && connection.GetOrder_Number() == conn.GetOrder_Number())
                                     {
-                                        if (conn.GetId_CheckPoint() == checkPoint.id_CheckPoint)
+                                        // Find checkPoint name
+                                        string checkPointName = "NAME NOT FOUNDED";
+                                        foreach (Database_Objects.CheckPoint_Translation checkPoint in checkPoints)
                                         {
-                                            checkPointName = checkPoint.name;
-                                            break;
+                                            if (conn.GetId_CheckPoint() == checkPoint.id_CheckPoint)
+                                            {
+                                                checkPointName = checkPoint.name;
+                                                break;
+                                            }
                                         }
+                                        currentCheckPoints.Add(checkPointName);
                                     }
                                 }
-                            }*/
+                            }
                         }
                     }
 
-                    // Connect Sections_CheckPoints
-
-
-                    // Connect Scenario_Sections
-                    TreeNode[] sectionNodes = new TreeNode[scenario_Sections.Count];
+                    // Build sections
+                    TreeNode[] sectionNodes = new TreeNode[scenario_Sections.Keys.Count];
                     for (int i = 0; i < sectionNodes.Length; i++)
                     {
-                        sectionNodes[i] = new TreeNode(scenario_Sections.Values.ElementAt(i));
+                        // Build checkPoints
+                        KeyValuePair<string, List<string>> currentSection = scenario_Sections.Values.ElementAt(i);
+                        List<string> currentCheckPoints = currentSection.Value;
+                        TreeNode[] checkPointsNodes = new TreeNode[currentCheckPoints.Count];
+                        for (int j = 0; j < checkPointsNodes.Length; j++)
+                        {
+                            checkPointsNodes[j] = new TreeNode(currentCheckPoints[j]);
+                        }
+
+                        // Connect section and checkPoints
+                        sectionNodes[i] = new TreeNode(currentSection.Key, checkPointsNodes);
                     }
+
+                    // Connect scenario and section
                     TreeNode scenarioNode = new TreeNode(scenario.name, sectionNodes);
 
                     // Show them
@@ -657,24 +643,30 @@ namespace Service
         /// <param name="e"></param>
         private void Button_Scenarios_Scenario_Delete_Click(object sender, EventArgs e)
         {
+            // Get selected items rows
+            int selectedRow_Scenario = dataGridView_Scenarios_Scenario_Scenarios.CurrentCell.RowIndex;
+            int selectedRow_Section = dataGridView_Scenarios_Scenario_Sections.CurrentCell.RowIndex;
+            int selectedRow_CheckPoint = dataGridView_Scenarios_Scenario_CheckPoints.CurrentCell.RowIndex;
+
             // Get selected items IDs
-            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
-            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
-            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
-            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+            int selectedScenarioID = (Int32)dataGridView_Scenarios_Scenario_Scenarios.Rows[selectedRow_Scenario].Cells[0].Value;
+            int selectedSectionID = (Int32)dataGridView_Scenarios_Scenario_Sections.Rows[selectedRow_Section].Cells[0].Value;
+            int selectedCheckPointID = (Int32)dataGridView_Scenarios_Scenario_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
 
             // Delete selected
-            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
-            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            List<Database_Objects.Scenarios_Sections> connections = Database_Operation.Get.Scenarios_Sections(myConnection);
+            foreach (Database_Objects.Scenarios_Sections o in connections)
             {
-                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                // If row is what we want to delete
+                if (o.GetId_Scenario() == selectedScenarioID && o.GetId_Section() == selectedSectionID && o.GetId_CheckPoint() == selectedCheckPointID)
                 {
-                    Database_Operation.Delete.CheckPoints_Operations(o.GetId_CheckPoint(), o.GetId_Operation(), o.GetOrder_Number(), myConnection);
+                    // Delete row
+                    Database_Operation.Delete.Scenarios_Sections(selectedScenarioID, selectedSectionID, selectedCheckPointID, o.GetOrder_Number(), myConnection);
                 }
             }
 
             // Refresh form
-            Scenarios_CheckPoint_Init();
+            Scenarios_Scenario_Init();
         }
 
         /// <summary>
@@ -684,29 +676,55 @@ namespace Service
         /// <param name="e"></param>
         private void Button_Scenarios_Scenario_Add_Click(object sender, EventArgs e)
         {
-            // Get selected items IDs
-            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
-            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
-            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
-            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+            // Get selected items rows
+            int selectedRow_Scenario = dataGridView_Scenarios_Scenario_Scenarios.CurrentCell.RowIndex;
+            int selectedRow_Section = dataGridView_Scenarios_Scenario_Sections.CurrentCell.RowIndex;
+            int selectedRow_CheckPoint = dataGridView_Scenarios_Scenario_CheckPoints.CurrentCell.RowIndex;
 
-            // Find new orderNumber
-            int biggestOrderNumber = 0;
-            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
-            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            // Get selected items IDs
+            int selectedScenarioID = (Int32)dataGridView_Scenarios_Scenario_Scenarios.Rows[selectedRow_Scenario].Cells[0].Value;
+            int selectedSectionID = (Int32)dataGridView_Scenarios_Scenario_Sections.Rows[selectedRow_Section].Cells[0].Value;
+            int selectedCheckPointID = (Int32)dataGridView_Scenarios_Scenario_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+
+            // Find biggest orderNumber in scenario
+            int biggestScenarioOrderNumber = 0;
+            List<Database_Objects.Scenarios_Sections> connections = Database_Operation.Get.Scenarios_Sections(myConnection);
+            foreach (Database_Objects.Scenarios_Sections o in connections)
             {
-                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetOrder_Number() > biggestOrderNumber)
+                if (o.GetId_Scenario() == selectedScenarioID && o.GetOrder_Number() > biggestScenarioOrderNumber)
                 {
-                    biggestOrderNumber = o.GetOrder_Number();
+                    biggestScenarioOrderNumber = o.GetOrder_Number();
                 }
             }
-            biggestOrderNumber++;
 
+            // Find new orderNumber
+            int newOrderNumber = 0;
+            foreach (Database_Objects.Scenarios_Sections o in connections)
+            {
+                // Last section (biggest order number)
+                if (o.GetId_Scenario() == selectedScenarioID && o.GetOrder_Number() == biggestScenarioOrderNumber)
+                {
+                    // If this section is as new one
+                    if (o.GetId_Section() == selectedSectionID)
+                    {
+                        // Order number will be the same
+                        newOrderNumber = o.GetOrder_Number();
+                    }
+
+                    // If its different section
+                    else
+                    {
+                        // We must add new section for this checkPoint
+                        newOrderNumber = o.GetOrder_Number() + 1;
+                    }
+                }
+            }
+            
             // Add selected
-            Database_Operation.Insert.CheckPoints_Operations(selectedCheckpointID, selectedOperationID, biggestOrderNumber, myConnection);
+            Database_Operation.Insert.Scenarios_Sections(selectedScenarioID, selectedSectionID, selectedCheckPointID, newOrderNumber, myConnection);
 
             // Refresh form
-            Scenarios_CheckPoint_Init();
+            Scenarios_Scenario_Init();
         }
 
         /// <summary>
