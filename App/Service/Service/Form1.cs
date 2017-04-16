@@ -427,7 +427,7 @@ namespace Service
         /// </summary>
         private void Scenarios_Init()
         {
-
+            Scenarios_CheckPoint_Init();
         }
 
         /// <summary>
@@ -435,11 +435,93 @@ namespace Service
         /// </summary>
         private void Scenarios_Clear()
         {
-
+            Scenarios_CheckPoint_Clear();
         }
 
         #region Scenario
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Scenarios_CheckPoint_Init()
+        {
+            Scenarios_CheckPoint_Clear();
+            Scenarios_CheckPoint_LoadTables();
+        }
 
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Scenarios_CheckPoint_Clear()
+        {
+            dataGridView_Scenarios_CheckPoint_CheckPoints.Rows.Clear();
+            dataGridView_Scenarios_CheckPoint_Operations.Rows.Clear();
+            treeView_Scenarios_CheckPoint.Nodes.Clear();
+        }
+
+        /// <summary>
+        /// Table load in tab
+        /// </summary>
+        private void Scenarios_CheckPoint_LoadTables()
+        {
+            Scenarios_CheckPoint_LoadParents();
+            Scenarios_CheckPoint_LoadChilds();
+            Scenarios_CheckPoint_LoadTree();
+        }
+
+        /// <summary>
+        /// Load parent tables
+        /// </summary>
+        private void Scenarios_CheckPoint_LoadParents()
+        {
+            // Get objects
+            List<Database_Objects.CheckPoint_Translation> objects = Database_Operation.Get.CheckPoints(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            foreach (Database_Objects.CheckPoint_Translation o in objects)
+            {
+                dataGridView_Scenarios_CheckPoint_CheckPoints.Rows.Add(o.id_CheckPoint, o.name);
+            }
+        }
+
+        /// <summary>
+        /// Load selected parent childs table
+        /// </summary>
+        private void Scenarios_CheckPoint_LoadChilds()
+        {
+            // Get objects
+            List<Database_Objects.Operation_Translation> objects = Database_Operation.Get.Operations(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            foreach (Database_Objects.Operation_Translation o in objects)
+            {
+                dataGridView_Scenarios_CheckPoint_Operations.Rows.Add(o.id_Operation, o.name);
+            }
+            /*
+            // If no parents
+            if (dataGridView_Scenarios_CheckPoint_CheckPoints.Rows.Count <= 0)
+            {
+                return;
+            }
+
+            // For selected parent
+            int selectedParent = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+            string parentId = dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedParent].Cells[0].Value.ToString();
+            */
+        }
+
+        /// <summary>
+        /// Load treeView
+        /// </summary>
+        private void Scenarios_CheckPoint_LoadTree()
+        {
+            // Get objects
+            List<Database_Objects.CheckPoint_Translation> checkPoints = Database_Operation.Get.CheckPoints(selectedLanguage.Text, myConnection);
+            List<Database_Objects.Operation_Translation> operations = Database_Operation.Get.Operations(selectedLanguage.Text, myConnection);
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+
+            
+
+        }
         #endregion Scenario
 
         #region Section

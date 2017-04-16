@@ -54,6 +54,34 @@ namespace Service.Database_Operation
         }
 
         /// <summary>
+        /// Get all connection for checkPoints_Operations
+        /// </summary>
+        /// <param name="id_CheckPoint">Id of parent</param>
+        /// <param name="connection">Database connection</param>
+        /// <returns>List of operations</returns>
+        public static List<Database_Objects.CheckPoints_Operations> CheckPoints_Operations(Connection connection)
+        {
+            // Database operations
+            SqlCommand myCommand;
+            SqlDataReader reader;
+            SqlConnection myConnection = connection.GetConnection();
+
+            // All connections
+            List<Database_Objects.CheckPoints_Operations> checkPoints_Operations = new List<Database_Objects.CheckPoints_Operations>();
+            myCommand = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection);
+            reader = myCommand.ExecuteReader();
+            Database_Objects.CheckPoints_Operations current_connection;
+            while (reader.Read())
+            {
+                current_connection = new Database_Objects.CheckPoints_Operations(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2));
+                checkPoints_Operations.Add(current_connection);
+            }
+            reader.Close();
+            
+            return checkPoints_Operations;
+        }
+
+        /// <summary>
         /// Get all scenarios for selected language
         /// </summary>
         /// <param name="language">Selected language</param>

@@ -56,11 +56,13 @@
     <Compile Include="Database_Export\Scenario.cs" />
     <Compile Include="Database_Export\Section.cs" />
     <Compile Include="Database_Objects\CheckPoint.cs" />
+    <Compile Include="Database_Objects\CheckPoints_Operations.cs" />
     <Compile Include="Database_Objects\CheckPoint_Translation.cs" />
     <Compile Include="Database_Objects\Language.cs" />
     <Compile Include="Database_Objects\Operation.cs" />
     <Compile Include="Database_Objects\Operation_Translation.cs" />
     <Compile Include="Database_Objects\Scenario.cs" />
+    <Compile Include="Database_Objects\Scenarios_Sections.cs" />
     <Compile Include="Database_Objects\Scenario_Translation.cs" />
     <Compile Include="Database_Objects\Section.cs" />
     <Compile Include="Database_Objects\Section_Translation.cs" />
