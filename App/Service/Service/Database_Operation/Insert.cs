@@ -173,5 +173,48 @@ namespace Service.Database_Operation
             myCommand = new SqlCommand(identityON + sql + identityOFF, myConnection);
             myCommand.ExecuteNonQuery();
         }
+
+        /// <summary>
+        /// Insert CheckPoints_Operation connection into database
+        /// </summary>
+        /// <param name="id_CheckPoint">Id of parent</param>
+        /// <param name="id_Operation">Id of child</param>
+        /// <param name="order_Number">Order number of child in parent</param>
+        /// <param name="connection">Database connection</param>
+        public static void CheckPoints_Operations(int id_CheckPoint, int id_Operation, int order_Number, Connection connection)
+        {
+            // Database
+            SqlConnection myConnection = connection.GetConnection();
+            SqlCommand myCommand;
+            string sql;
+
+            // Delete CheckPoints_Operations Connections
+            sql = "INSERT INTO [CheckPoints_Operations] (ID_CheckPoint, ID_Operation, Order_Number) VALUES (";
+            sql += id_CheckPoint + ", " + id_Operation + ", " + order_Number + ")"; ;
+            myCommand = new SqlCommand(sql, myConnection);
+            myCommand.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Insert Scenarios_Sections connection into database
+        /// </summary>
+        /// <param name="id_Scenario">Id of parent</param>
+        /// <param name="id_Section">Id of child</param>
+        /// <param name="id_CheckPoint">Id of child of child</param>
+        /// <param name="order_Number">Order number of child in parent</param>
+        /// <param name="connection">Database connection</param>
+        public static void Scenarios_Sections(int id_Scenario, int id_Section, int id_CheckPoint, int order_Number, Connection connection)
+        {
+            // Database
+            SqlConnection myConnection = connection.GetConnection();
+            SqlCommand myCommand;
+            string sql;
+
+            // Delete CheckPoints_Operations Connections
+            sql = "INSERT INTO [Scenarios_Sections] (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (";
+            sql += id_Scenario + ", " + id_Section + ", " + ", " + id_CheckPoint + ", " + order_Number + ")"; ;
+            myCommand = new SqlCommand(sql, myConnection);
+            myCommand.ExecuteNonQuery();
+        }
     }
 }

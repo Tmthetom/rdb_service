@@ -57,17 +57,5 @@
         {
             return order_Number;
         }
-
-        /// <summary>
-        /// Setter change order of child in parent
-        /// </summary>
-        /// <param name="order_Number">New order number of child in parent</param>
-        public void SetOrder_Number(int order_Number)
-        {
-            if (order_Number > 0)
-            {
-                this.order_Number = order_Number;
-            }
-        }
     }
 }

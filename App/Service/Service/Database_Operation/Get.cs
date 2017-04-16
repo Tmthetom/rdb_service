@@ -56,9 +56,8 @@ namespace Service.Database_Operation
         /// <summary>
         /// Get all connection for checkPoints_Operations
         /// </summary>
-        /// <param name="id_CheckPoint">Id of parent</param>
         /// <param name="connection">Database connection</param>
-        /// <returns>List of operations</returns>
+        /// <returns>CheckPoints_Operations connections</returns>
         public static List<Database_Objects.CheckPoints_Operations> CheckPoints_Operations(Connection connection)
         {
             // Database operations
@@ -79,6 +78,33 @@ namespace Service.Database_Operation
             reader.Close();
             
             return checkPoints_Operations;
+        }
+
+        /// <summary>
+        /// Get all connection for scenarios_Sections
+        /// </summary>
+        /// <param name="connection">Database connection</param>
+        /// <returns>Scenarios_Sections connections</returns>
+        public static List<Database_Objects.Scenarios_Sections> Scenarios_Sections(Connection connection)
+        {
+            // Database operations
+            SqlCommand myCommand;
+            SqlDataReader reader;
+            SqlConnection myConnection = connection.GetConnection();
+
+            // All connections
+            List<Database_Objects.Scenarios_Sections> scenarios_Sections = new List<Database_Objects.Scenarios_Sections>();
+            myCommand = new SqlCommand("SELECT [ID_Scenario], [ID_Section], [ID_CheckPoint], [Order_Number] FROM [Scenarios_Sections]", myConnection);
+            reader = myCommand.ExecuteReader();
+            Database_Objects.Scenarios_Sections current_connection;
+            while (reader.Read())
+            {
+                current_connection = new Database_Objects.Scenarios_Sections(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3));
+                scenarios_Sections.Add(current_connection);
+            }
+            reader.Close();
+
+            return scenarios_Sections;
         }
 
         /// <summary>

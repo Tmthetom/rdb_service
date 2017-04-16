@@ -429,6 +429,7 @@ namespace Service
         /// </summary>
         private void Scenarios_Init()
         {
+            Scenarios_Scenario_Init();
             Scenarios_CheckPoint_Init();
         }
 
@@ -437,17 +438,297 @@ namespace Service
         /// </summary>
         private void Scenarios_Clear()
         {
+            Scenarios_Scenario_Clear();
             Scenarios_CheckPoint_Clear();
         }
         #endregion Init
 
-        #region Scenario
+        #region Scenario - Section - CheckPoint
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Scenarios_Scenario_Init()
+        {
+            Scenarios_Scenario_Clear();
+            Scenarios_Scenario_LoadTables();
+            DataGridView_Scenarios_Scenario_SelectionChanged(this, new EventArgs());
+        }
 
-        #endregion Scenario
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Scenarios_Scenario_Clear()
+        {
+            dataGridView_Scenarios_Scenario_Scenarios.Rows.Clear();
+            dataGridView_Scenarios_Scenario_Sections.Rows.Clear();
+            dataGridView_Scenarios_Scenario_CheckPoints.Rows.Clear();
+            treeView_Scenarios_Scenario.Nodes.Clear();
+        }
 
-        #region Section
+        /// <summary>
+        /// Table load in tab
+        /// </summary>
+        private void Scenarios_Scenario_LoadTables()
+        {
+            Scenarios_Scenario_LoadParents();
+            Scenarios_Scenario_LoadChilds();
+            Scenarios_Scenario_LoadChildsOfChild();
+            Scenarios_Scenario_LoadTree();
+        }
 
-        #endregion Section
+        /// <summary>
+        /// Load parent tables
+        /// </summary>
+        private void Scenarios_Scenario_LoadParents()
+        {
+            // Get objects
+            List<Database_Objects.Scenario_Translation> objects = Database_Operation.Get.Scenarios(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            foreach (Database_Objects.Scenario_Translation o in objects)
+            {
+                dataGridView_Scenarios_Scenario_Scenarios.Rows.Add(o.id_Scenario, o.name);
+            }
+        }
+
+        /// <summary>
+        /// Load selected parent childs table
+        /// </summary>
+        private void Scenarios_Scenario_LoadChilds()
+        {
+            // Get objects
+            List<Database_Objects.Section_Translation> objects = Database_Operation.Get.Sections(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            foreach (Database_Objects.Section_Translation o in objects)
+            {
+                dataGridView_Scenarios_Scenario_Sections.Rows.Add(o.id_Section, o.name);
+            }
+        }
+
+        /// <summary>
+        /// Load selected parent childs of selected child
+        /// </summary>
+        private void Scenarios_Scenario_LoadChildsOfChild()
+        {
+            // Get objects
+            List<Database_Objects.CheckPoint_Translation> objects = Database_Operation.Get.CheckPoints(selectedLanguage.Text, myConnection);
+
+            // Add new objects
+            foreach (Database_Objects.CheckPoint_Translation o in objects)
+            {
+                dataGridView_Scenarios_Scenario_CheckPoints.Rows.Add(o.id_CheckPoint, o.name);
+            }
+        }
+
+        /// <summary>
+        /// Load treeView
+        /// </summary>
+        private void Scenarios_Scenario_LoadTree()
+        {
+            // Get objects
+            List<Database_Objects.Scenario_Translation> scenarios = Database_Operation.Get.Scenarios(selectedLanguage.Text, myConnection);
+            List<Database_Objects.Section_Translation> sections = Database_Operation.Get.Sections(selectedLanguage.Text, myConnection);
+            List<Database_Objects.CheckPoint_Translation> checkPoints = Database_Operation.Get.CheckPoints(selectedLanguage.Text, myConnection);
+            List<Database_Objects.Scenarios_Sections> connections = Database_Operation.Get.Scenarios_Sections(myConnection);
+
+            // Collect all ids
+            List<int> id_Scenarios = new List<int>();
+            List<int> id_Sections = new List<int>();
+            foreach (Database_Objects.Scenarios_Sections connection in connections)
+            {
+                // Scenario ids
+                int current_ScenarioID = connection.GetId_Scenario();
+                if (!id_Scenarios.Contains(current_ScenarioID))
+                {
+                    id_Scenarios.Add(current_ScenarioID);
+                }
+
+                // Sections ids
+                int current_SectionID = connection.GetId_Section();
+                if (!id_Sections.Contains(current_SectionID))
+                {
+                    id_Sections.Add(current_SectionID);
+                }
+            }
+
+            // ---------- 1. For all scenarios ----------
+            foreach (Database_Objects.Scenario_Translation scenario in scenarios)
+            {
+                // If scenario have connections
+                if (id_Scenarios.Contains(scenario.id_Scenario))
+                {
+                    // ---------- 2. Find all scenario - sections ----------
+                    SortedDictionary<int, string> scenario_Sections = new SortedDictionary<int, string>();  // Array of sections (with order)
+                    foreach (Database_Objects.Scenarios_Sections connection in connections)
+                    {
+                        // If connection found
+                        if (scenario.id_Scenario == connection.GetId_Scenario())
+                        {
+                            // Find sections name
+                            string sectionName = "NAME NOT FOUNDED";
+                            foreach (Database_Objects.Section_Translation section in sections)
+                            {
+                                if (connection.GetId_Section() == section.id_Section)
+                                {
+                                    sectionName = section.name;
+                                    break;
+                                }
+                            }
+
+                            // ---------- 3. Find all section - checkPoints ----------
+                            List<string> section_CheckPoints = new List<string>();  // Array of sections (no order)
+                            foreach (Database_Objects.Scenarios_Sections conn in connections)
+                            {
+                                // If connection found
+                                if (scenario.id_Scenario == conn.GetId_Scenario() && connection.GetId_Section() == conn.GetId_Section())
+                                {
+                                    // Find checkPoint name
+                                    string checkPointName = "NAME NOT FOUNDED";
+                                    foreach (Database_Objects.CheckPoint_Translation checkPoint in checkPoints)
+                                    {
+                                        if (conn.GetId_CheckPoint() == checkPoint.id_CheckPoint)
+                                        {
+                                            checkPointName = checkPoint.name;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
+                        }
+                    }
+
+                    // Connect Scenario_Sections
+                    TreeNode[] sectionNodes = new TreeNode[scenario_Sections.Count];
+                    for (int i = 0; i < sectionNodes.Length; i++)
+                    {
+                        sectionNodes[i] = new TreeNode(scenario_Sections.Values.ElementAt(i));
+                    }
+                    TreeNode scenarioNode = new TreeNode(scenario.name, sectionNodes);
+
+                    // Show them
+                    treeView_Scenarios_Scenario.Nodes.Add(scenarioNode);
+                }
+            }
+            treeView_Scenarios_Scenario.ExpandAll();
+        }
+
+        /// <summary>
+        /// Delete selected child from selected parent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Scenarios_Scenario_Delete_Click(object sender, EventArgs e)
+        {
+            // Get selected items IDs
+            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+
+            // Delete selected
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                {
+                    Database_Operation.Delete.CheckPoints_Operations(o.GetId_CheckPoint(), o.GetId_Operation(), o.GetOrder_Number(), myConnection);
+                }
+            }
+
+            // Refresh form
+            Scenarios_CheckPoint_Init();
+        }
+
+        /// <summary>
+        /// Add selected child into selected parent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Scenarios_Scenario_Add_Click(object sender, EventArgs e)
+        {
+            // Get selected items IDs
+            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+
+            // Find new orderNumber
+            int biggestOrderNumber = 0;
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetOrder_Number() > biggestOrderNumber)
+                {
+                    biggestOrderNumber = o.GetOrder_Number();
+                }
+            }
+            biggestOrderNumber++;
+
+            // Add selected
+            Database_Operation.Insert.CheckPoints_Operations(selectedCheckpointID, selectedOperationID, biggestOrderNumber, myConnection);
+
+            // Refresh form
+            Scenarios_CheckPoint_Init();
+        }
+
+        /// <summary>
+        /// When tables selection changed, check what is possible (delete, insert)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Scenarios_Scenario_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get selected items IDs
+            int selectedRow_CheckPoint;
+            int selectedRow_Operation;
+            try
+            {
+                selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+                selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            }
+            catch
+            {
+                return;
+            }
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+
+            // Get all connections
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+
+            // Check delete and add button (if can be deleted, cant be added, because its already in)
+            bool canBeDeleted = false;
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                {
+                    canBeDeleted = true;
+
+                    // Set delete button
+                    button_Scenarios_CheckPoint_Delete.Enabled = true;
+                    button_Scenarios_CheckPoint_Delete.BackColor = Color.LightCoral;
+
+                    // Set add button
+                    button_Scenarios_CheckPoint_Add.Enabled = false;
+                    button_Scenarios_CheckPoint_Add.BackColor = Color.Transparent;
+                    break;
+                }
+            }
+            if (!canBeDeleted)
+            {
+                // Set delete button
+                button_Scenarios_CheckPoint_Delete.Enabled = false;
+                button_Scenarios_CheckPoint_Delete.BackColor = Color.Transparent;
+
+                // Set add button
+                button_Scenarios_CheckPoint_Add.Enabled = true;
+                button_Scenarios_CheckPoint_Add.BackColor = Color.LightGreen;
+            }
+        }
+        #endregion Scenario - Section - CheckPoint
 
         #region CheckPoint
         /// <summary>
@@ -586,7 +867,7 @@ namespace Service
             int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
             int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
 
-            // Check delete button
+            // Delete selected
             List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
             foreach (Database_Objects.CheckPoints_Operations o in connections)
             {
@@ -607,7 +888,29 @@ namespace Service
         /// <param name="e"></param>
         private void Button_Scenarios_CheckPoint_Add_Click(object sender, EventArgs e)
         {
+            // Get selected items IDs
+            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
 
+            // Find new orderNumber
+            int biggestOrderNumber = 0;
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetOrder_Number() > biggestOrderNumber)
+                {
+                    biggestOrderNumber = o.GetOrder_Number();
+                }
+            }
+            biggestOrderNumber++;
+
+            // Add selected
+            Database_Operation.Insert.CheckPoints_Operations(selectedCheckpointID, selectedOperationID, biggestOrderNumber, myConnection);
+
+            // Refresh form
+            Scenarios_CheckPoint_Init();
         }
 
         /// <summary>
@@ -625,35 +928,44 @@ namespace Service
                 selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
                 selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
             }
-            catch (Exception exception)
+            catch
             {
                 return;
             }
             int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
             int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
 
-            // Check delete button
-            bool canBeDeleted = false;
+            // Get all connections
             List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+
+            // Check delete and add button (if can be deleted, cant be added, because its already in)
+            bool canBeDeleted = false;
             foreach (Database_Objects.CheckPoints_Operations o in connections)
             {
                 if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
                 {
                     canBeDeleted = true;
+
+                    // Set delete button
                     button_Scenarios_CheckPoint_Delete.Enabled = true;
                     button_Scenarios_CheckPoint_Delete.BackColor = Color.LightCoral;
+
+                    // Set add button
+                    button_Scenarios_CheckPoint_Add.Enabled = false;
+                    button_Scenarios_CheckPoint_Add.BackColor = Color.Transparent;
                     break;
                 }
             }
             if (!canBeDeleted)
             {
+                // Set delete button
                 button_Scenarios_CheckPoint_Delete.Enabled = false;
                 button_Scenarios_CheckPoint_Delete.BackColor = Color.Transparent;
-            }
 
-            // Check add button
-            // Add can be done everytime...
-            button_Scenarios_CheckPoint_Add.BackColor = Color.LightGreen;
+                // Set add button
+                button_Scenarios_CheckPoint_Add.Enabled = true;
+                button_Scenarios_CheckPoint_Add.BackColor = Color.LightGreen;
+            }
         }
         #endregion CheckPoint
 
