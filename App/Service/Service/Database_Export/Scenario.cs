@@ -34,20 +34,24 @@ namespace Service.Database_Export
         /// <param name="section">Section object</param>
         public void AddSection(int order_Number, Database_Objects.Section_Translation section)
         {
-            sections.Add(order_Number, section);
+            if (!sections.ContainsKey(order_Number))
+            {
+                // There was problem, that sections objects where same and thery shared checkPoints
+                // So we need to do copy of translation, with everything sare, but without checkPoints
+                sections.Add(order_Number, new Database_Objects.Section_Translation(section));
+            }
         }
 
         /// <summary>
         /// Add checkPoint into section
         /// </summary>
-        /// <param name="section_OrderNumber">Section order number in scenario</param>
-        /// <param name="checkPoint_OrderNumber">CheckPoint order number in section</param>
+        /// <param name="section_OrderNumber">Section order number in scenario, where checkpoint is</param>
         /// <param name="checkPoint">CheckPoint object</param>
         public void AddCheckPoint(int section_OrderNumber, CheckPoint checkPoint)
         {
             foreach (KeyValuePair<int, Database_Objects.Section_Translation> section in sections)
             {
-                if (sections.ContainsKey(section_OrderNumber))
+                if (section.Key == section_OrderNumber)
                 {
                     section.Value.checkPoints.Add(checkPoint);
                     break;
@@ -72,22 +76,17 @@ namespace Service.Database_Export
             // Create Scenario
             string json = "{\"name\":\"" + name + "\",";
             json += "\"sections\":[";
-            bool arrayOpen = false;
 
             // Create Sections
             foreach (KeyValuePair<int, Database_Objects.Section_Translation> section in sections)
             {
-                arrayOpen = true;
                 json += "{\"" + section.Key + "\":";
                 json += JsonConvert.SerializeObject(section.Value) + "},";
             }
 
             // Final improvements
             json = json.Remove(json.LastIndexOf(','));
-            if (arrayOpen)
-            {
-                json += "]";
-            }
+            json += "]";
             json += "}";
             return JValue.Parse(json).ToString(Formatting.Indented);
         }

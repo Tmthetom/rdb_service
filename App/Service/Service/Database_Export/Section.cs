@@ -5,6 +5,10 @@ namespace Service.Database_Export
 {
     class Section
     {
+        /// <summary>
+        /// THIS OBJECT IS NOT USED, IAM USING SECTION_TRANSLATION FOR NOW
+        /// </summary>
+
         public string language_Code;
         public string name;
 

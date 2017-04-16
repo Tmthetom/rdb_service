@@ -548,7 +548,7 @@
             this.groupBox_Editor_Scenario_New.Size = new System.Drawing.Size(285, 115);
             this.groupBox_Editor_Scenario_New.TabIndex = 2;
             this.groupBox_Editor_Scenario_New.TabStop = false;
-            this.groupBox_Editor_Scenario_New.Text = "Add New";
+            this.groupBox_Editor_Scenario_New.Text = "Add New (EN Only)";
             // 
             // textBox_Editor_Scenario_NewName
             // 
@@ -712,7 +712,7 @@
             this.groupBox_Editor_Section_New.Size = new System.Drawing.Size(285, 115);
             this.groupBox_Editor_Section_New.TabIndex = 5;
             this.groupBox_Editor_Section_New.TabStop = false;
-            this.groupBox_Editor_Section_New.Text = "Add New";
+            this.groupBox_Editor_Section_New.Text = "Add New (EN Only)";
             // 
             // textBox_Editor_Section_NewName
             // 
@@ -875,7 +875,7 @@
             this.groupBox_Editor_CheckPoint_New.Size = new System.Drawing.Size(285, 115);
             this.groupBox_Editor_CheckPoint_New.TabIndex = 5;
             this.groupBox_Editor_CheckPoint_New.TabStop = false;
-            this.groupBox_Editor_CheckPoint_New.Text = "Add New";
+            this.groupBox_Editor_CheckPoint_New.Text = "Add New (EN Only)";
             // 
             // textBox_Editor_CheckPoint_NewName
             // 
@@ -1037,7 +1037,7 @@
             this.groupBox_Editor_Operation_New.Size = new System.Drawing.Size(285, 115);
             this.groupBox_Editor_Operation_New.TabIndex = 5;
             this.groupBox_Editor_Operation_New.TabStop = false;
-            this.groupBox_Editor_Operation_New.Text = "Add New";
+            this.groupBox_Editor_Operation_New.Text = "Add New (EN Only)";
             // 
             // textBox_Editor_Operation_NewName
             // 

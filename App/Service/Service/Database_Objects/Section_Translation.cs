@@ -13,10 +13,18 @@ namespace Service.Database_Objects
 
         public Section_Translation(int id_Section, string language_Code, string name)
         {
-            checkPoints = new List<Database_Export.CheckPoint>();
+            this.checkPoints = new List<Database_Export.CheckPoint>();
             this.id_Section = id_Section;
             this.language_Code = language_Code;
             this.name = name;
+        }
+
+        public Section_Translation(Section_Translation parent)
+        {
+            this.checkPoints = new List<Database_Export.CheckPoint>();
+            this.id_Section = parent.id_Section;
+            this.language_Code = parent.language_Code;
+            this.name = parent.name;
         }
 
         public int GetID()

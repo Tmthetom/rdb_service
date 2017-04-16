@@ -197,15 +197,7 @@ namespace Service.Database_Export
                             selected_Section = sections[reader[1].ToString()];
                             selected_CheckPoint = export_checkpoints[reader[2].ToString()];
 
-                            try
-                            {
-                                selected_Scenario.AddSection(reader.GetInt32(3), selected_Section);
-                            }
-                            catch
-                            {
-                                ;
-                            }
-                            
+                            selected_Scenario.AddSection(reader.GetInt32(3), selected_Section);
                             selected_Scenario.AddCheckPoint(reader.GetInt32(3), selected_CheckPoint);
                         }
                     }

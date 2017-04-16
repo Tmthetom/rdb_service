@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -1094,7 +1095,7 @@ namespace Service
         {
             try
             {
-                string language = selectedLanguage.Text;
+                string language = "EN";
                 string newName = textBox_Editor_Scenario_NewName.Text;
 
                 if (newName != "")
@@ -1242,7 +1243,7 @@ namespace Service
         {
             try
             {
-                string language = selectedLanguage.Text;
+                string language = "EN";
                 string newName = textBox_Editor_Section_NewName.Text;
 
                 if (newName != "")
@@ -1390,7 +1391,7 @@ namespace Service
         {
             try
             {
-                string language = selectedLanguage.Text;
+                string language = "EN";
                 string newName = textBox_Editor_CheckPoint_NewName.Text;
 
                 if (newName != "")
@@ -1538,7 +1539,7 @@ namespace Service
         {
             try
             {
-                string language = selectedLanguage.Text;
+                string language = "EN";
                 string newName = textBox_Editor_Operation_NewName.Text;
 
                 if (newName != "")
@@ -1718,12 +1719,12 @@ namespace Service
                 if (comboBox_Export_ExportLanguage.Text != "" || comboBox_Export_ExportLanguage.Text != null)
                 {
                     Database_Export.ExportToJson.Generate(comboBox_Export_ExportLanguage.Text, myConnection);
+                    Process.Start("explorer.exe", AppDomain.CurrentDomain.BaseDirectory);
                 }
                 else
                 {
                     Message("Database is empty.");
                 }
-                
             }
             catch (Exception exception)
             {
