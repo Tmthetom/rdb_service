@@ -519,7 +519,56 @@ namespace Service
             List<Database_Objects.Operation_Translation> operations = Database_Operation.Get.Operations(selectedLanguage.Text, myConnection);
             List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
 
-            
+            // Collect all connected checkPoints
+            List<int> id_CheckPoints = new List<int>();
+            foreach (Database_Objects.CheckPoints_Operations connection in connections)
+            {
+                int current_id = connection.GetId_CheckPoint();
+                if (!id_CheckPoints.Contains(current_id))
+                {
+                    id_CheckPoints.Add(current_id);
+                }
+            }
+
+            // Set operations for checkPoints
+            foreach (Database_Objects.CheckPoint_Translation checkPoint in checkPoints)
+            {
+                // If checkPoint have connections
+                if (id_CheckPoints.Contains(checkPoint.id_CheckPoint))
+                {
+                    // Create new array of his operations
+                    SortedDictionary<int, string> checkPoint_Operations = new SortedDictionary<int, string>();
+
+                    // Find all his operations
+                    foreach (Database_Objects.CheckPoints_Operations connection in connections)
+                    {
+                        // If connection found
+                        if (checkPoint.id_CheckPoint == connection.GetId_CheckPoint())
+                        {
+                            // Found operation name
+                            string name = "NAME NOT FOUNDED";
+                            foreach (Database_Objects.Operation_Translation operation in operations)
+                            {
+                                if (connection.GetId_Operation() == operation.id_Operation)
+                                {
+                                    name = operation.name;
+                                    break;
+                                }
+                            }
+                            checkPoint_Operations.Add(connection.GetOrder_Number(), name);
+                        }
+                    }
+
+                    // Show them
+                    TreeNode[] operationNodes = new TreeNode[checkPoint_Operations.Count];
+                    for (int i = 0; i < operationNodes.Length; i++)
+                    {
+                        operationNodes[i] = new TreeNode(checkPoint_Operations.Values.ElementAt(i));
+                    }
+                    TreeNode checkPointNode = new TreeNode(checkPoint.name, operationNodes);
+                    treeView_Scenarios_CheckPoint.Nodes.Add(checkPointNode);
+                }
+            }
 
         }
         #endregion Scenario
