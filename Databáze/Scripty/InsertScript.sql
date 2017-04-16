@@ -146,17 +146,17 @@ INSERT INTO Sections_CheckPoints (ID_Section, ID_CheckPoint, Order_Number) VALUE
 /* CRITICAL ============= Variants: Scenarios_Sections */
 
 INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 1, 1)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 2, 2)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 4, 3)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 2, 2, 4)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 3, 5)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 2, 1)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 4, 1)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 2, 2, 2)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (1, 1, 3, 3)
 
 INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 1, 1, 1)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 1, 2, 2)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 2, 4, 3)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 1, 3, 4)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 4, 2, 5)
-INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 3, 3, 6)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 1, 2, 1)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 2, 4, 2)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 1, 3, 3)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 4, 2, 4)
+INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (2, 3, 3, 5)
 
 INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (3, 1, 1, 1)
 INSERT INTO Scenarios_Sections (ID_Scenario, ID_Section, ID_CheckPoint, Order_Number) VALUES (3, 4, 1, 2)

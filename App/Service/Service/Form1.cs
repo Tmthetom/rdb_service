@@ -35,7 +35,7 @@ namespace Service
             {
                 Scenarios_Init();
                 Editor_Init();
-                Export_Init();
+                 Export_Init();
             }
         }
 
@@ -576,6 +576,39 @@ namespace Service
                                 }
                             }
 
+                            if (!scenario_Sections.Keys.ToList().Contains(connection.GetOrder_Number()))
+                            {
+                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
+                            }
+                            
+                            /*
+                            // If section is not in scenario yet
+                            if (!scenario_Sections.Values.ToList().Contains(sectionName))
+                            {
+                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
+                            }*/
+                            /*
+                            // Same section as before
+                            if (previousSection == sectionName)
+                            {
+
+                            }
+
+                            // If different section then before
+                            else
+                            {
+                                scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
+                            }
+
+                            previousSection = sectionName;
+                            */
+                            /*
+                            // If section is already in scenario (more sections with different order number)
+                            else
+                            {
+
+                            }*/
+                            /*
                             // ---------- 3. Find all section - checkPoints ----------
                             List<string> section_CheckPoints = new List<string>();  // Array of sections (no order)
                             foreach (Database_Objects.Scenarios_Sections conn in connections)
@@ -594,11 +627,12 @@ namespace Service
                                         }
                                     }
                                 }
-                            }
-
-                            scenario_Sections.Add(connection.GetOrder_Number(), sectionName);
+                            }*/
                         }
                     }
+
+                    // Connect Sections_CheckPoints
+
 
                     // Connect Scenario_Sections
                     TreeNode[] sectionNodes = new TreeNode[scenario_Sections.Count];
@@ -1757,10 +1791,6 @@ namespace Service
         {
             MessageBox.Show(message);
         }
-
-
-
-
         #endregion Message
     }
 }

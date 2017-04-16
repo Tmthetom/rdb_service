@@ -153,15 +153,18 @@ namespace Service.Database_Export
             Database_Objects.Operation_Translation selected_Operation;
 
             // Get connections
-            SqlCommand myCommand = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection);
-            SqlDataReader reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            using (SqlCommand myCommand = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection))
             {
-                selected_Operation = operations[reader[1].ToString()];
-                selected_checkPoint = export_checkpoints[reader[0].ToString()];
-                selected_checkPoint.AddOperation(reader.GetInt32(2), selected_Operation);
+                using (SqlDataReader reader = myCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        selected_Operation = operations[reader[1].ToString()];
+                        selected_checkPoint = export_checkpoints[reader[0].ToString()];
+                        selected_checkPoint.AddOperation(reader.GetInt32(2), selected_Operation);
+                    }
+                }
             }
-            reader.Close();
         }
 
         /// <summary>
@@ -181,19 +184,37 @@ namespace Service.Database_Export
             Database_Objects.Section_Translation selected_Section;
             Database_Export.CheckPoint selected_CheckPoint;
 
-            // Get connections
-            SqlCommand myCommand = new SqlCommand("SELECT [ID_Scenario], [ID_Section], [ID_CheckPoint], [Order_Number] FROM [Scenarios_Sections]", myConnection);
-            SqlDataReader reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                selected_Scenario = export_scenarios[reader[0].ToString()];
-                selected_Section = sections[reader[1].ToString()];
-                selected_CheckPoint = export_checkpoints[reader[2].ToString()];
+                // Get connections
+                using (SqlCommand myCommand = new SqlCommand("SELECT [ID_Scenario], [ID_Section], [ID_CheckPoint], [Order_Number] FROM [Scenarios_Sections]", myConnection))
+                {
+                    using (SqlDataReader reader = myCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            selected_Scenario = export_scenarios[reader[0].ToString()];
+                            selected_Section = sections[reader[1].ToString()];
+                            selected_CheckPoint = export_checkpoints[reader[2].ToString()];
 
-                selected_Scenario.AddSection(reader.GetInt32(3), selected_Section);
-                selected_Scenario.AddCheckPoint(reader.GetInt32(3), selected_CheckPoint);
+                            try
+                            {
+                                selected_Scenario.AddSection(reader.GetInt32(3), selected_Section);
+                            }
+                            catch
+                            {
+                                ;
+                            }
+                            
+                            selected_Scenario.AddCheckPoint(reader.GetInt32(3), selected_CheckPoint);
+                        }
+                    }
+                }
             }
-            reader.Close();
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.ToString());
+            }
         }
 
         /// <summary>
@@ -209,26 +230,31 @@ namespace Service.Database_Export
 
             // Object ID
             List<int> all = new List<int>();
-            myCommand = new SqlCommand("SELECT [ID_Scenario] FROM [Scenarios]", myConnection);
-            reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Scenario] FROM [Scenarios]", myConnection))
             {
-                all.Add(reader.GetInt32(0));
+                using (reader = myCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        all.Add(reader.GetInt32(0));
+                    }
+                }
             }
-            reader.Close();
-
 
             // Object translations
             List<Database_Objects.Scenario_Translation> all_Translations = new List<Database_Objects.Scenario_Translation>();
-            myCommand = new SqlCommand("SELECT [ID_Scenario], [Language_Code], [Name] FROM [Scenarios_Translation]", myConnection);
-            reader = myCommand.ExecuteReader();
-            Database_Objects.Scenario_Translation current_Translation;
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Scenario], [Language_Code], [Name] FROM [Scenarios_Translation]", myConnection))
             {
-                current_Translation = new Database_Objects.Scenario_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
-                all_Translations.Add(current_Translation);
+                using (reader = myCommand.ExecuteReader())
+                {
+                    Database_Objects.Scenario_Translation current_Translation;
+                    while (reader.Read())
+                    {
+                        current_Translation = new Database_Objects.Scenario_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                        all_Translations.Add(current_Translation);
+                    }
+                }
             }
-            reader.Close();
 
             // Select wanted translation, if not here, use EN
             bool haveTranslation;
@@ -276,27 +302,32 @@ namespace Service.Database_Export
 
             // Object ID
             List<int> all = new List<int>();
-            myCommand = new SqlCommand("SELECT [ID_Section] FROM [Sections]", myConnection);
-            reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Section] FROM [Sections]", myConnection))
             {
-                all.Add(reader.GetInt32(0));
+                using (reader = myCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        all.Add(reader.GetInt32(0));
+                    }
+                }
             }
-            reader.Close();
-
 
             // Object translations
             List<Database_Objects.Section_Translation> all_Translations = new List<Database_Objects.Section_Translation>();
-            myCommand = new SqlCommand("SELECT [ID_Section], [Language_Code], [Name] FROM [Sections_Translation]", myConnection);
-            reader = myCommand.ExecuteReader();
-            Database_Objects.Section_Translation current_Translation;
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Section], [Language_Code], [Name] FROM [Sections_Translation]", myConnection))
             {
-                current_Translation = new Database_Objects.Section_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
-                all_Translations.Add(current_Translation);
+                using (reader = myCommand.ExecuteReader())
+                {
+                    Database_Objects.Section_Translation current_Translation;
+                    while (reader.Read())
+                    {
+                        current_Translation = new Database_Objects.Section_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                        all_Translations.Add(current_Translation);
+                    }
+                }
             }
-            reader.Close();
-
+            
             // Select wanted translation, if not here, use EN
             bool haveTranslation;
             foreach (int id in all)
@@ -343,27 +374,32 @@ namespace Service.Database_Export
 
             // Object ID
             List<int> all = new List<int>();
-            myCommand = new SqlCommand("SELECT [ID_CheckPoint] FROM [CheckPoints]", myConnection);
-            reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_CheckPoint] FROM [CheckPoints]", myConnection))
             {
-                all.Add(reader.GetInt32(0));
+                using (reader = myCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        all.Add(reader.GetInt32(0));
+                    }
+                }
             }
-            reader.Close();
-
-
+                        
             // Object translations
             List<Database_Objects.CheckPoint_Translation> all_Translations = new List<Database_Objects.CheckPoint_Translation>();
-            myCommand = new SqlCommand("SELECT [ID_CheckPoint], [Language_Code], [Name] FROM [CheckPoints_Translation]", myConnection);
-            reader = myCommand.ExecuteReader();
-            Database_Objects.CheckPoint_Translation current_Translation;
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_CheckPoint], [Language_Code], [Name] FROM [CheckPoints_Translation]", myConnection))
             {
-                current_Translation = new Database_Objects.CheckPoint_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
-                all_Translations.Add(current_Translation);
+                using (reader = myCommand.ExecuteReader())
+                {
+                    Database_Objects.CheckPoint_Translation current_Translation;
+                    while (reader.Read())
+                    {
+                        current_Translation = new Database_Objects.CheckPoint_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                        all_Translations.Add(current_Translation);
+                    }
+                }
             }
-            reader.Close();
-
+            
             // Select wanted translation, if not here, use EN
             bool haveTranslation;
             foreach (int id in all)
@@ -410,26 +446,31 @@ namespace Service.Database_Export
 
             // Object ID
             List<int> all = new List<int>();
-            myCommand = new SqlCommand("SELECT [ID_Operation] FROM [Operations]", myConnection);
-            reader = myCommand.ExecuteReader();
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Operation] FROM [Operations]", myConnection))
             {
-                all.Add(reader.GetInt32(0));
+                using (reader = myCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        all.Add(reader.GetInt32(0));
+                    }
+                }
             }
-            reader.Close();
-
-
+            
             // Object translations
             List<Database_Objects.Operation_Translation> all_Translations = new List<Database_Objects.Operation_Translation>();
-            myCommand = new SqlCommand("SELECT [ID_Operation], [Language_Code], [Name] FROM [Operations_Translation]", myConnection);
-            reader = myCommand.ExecuteReader();
-            Database_Objects.Operation_Translation current_Translation;
-            while (reader.Read())
+            using (myCommand = new SqlCommand("SELECT [ID_Operation], [Language_Code], [Name] FROM [Operations_Translation]", myConnection))
             {
-                current_Translation = new Database_Objects.Operation_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
-                all_Translations.Add(current_Translation);
+                using (reader = myCommand.ExecuteReader())
+                {
+                    Database_Objects.Operation_Translation current_Translation;
+                    while (reader.Read())
+                    {
+                        current_Translation = new Database_Objects.Operation_Translation(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString());
+                        all_Translations.Add(current_Translation);
+                    }
+                }
             }
-            reader.Close();
 
             // Select wanted translation, if not here, use EN
             bool haveTranslation;
