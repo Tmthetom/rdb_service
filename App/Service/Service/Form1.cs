@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Service
@@ -32,10 +27,16 @@ namespace Service
         /// </summary>
         private void Form_Initialize()
         {
+            // Load languages
             Language_Init();
-            Scenarios_Init();
-            Editor_Init();
-            Export_Init();
+
+            // If no language selected, there are no tables or rows
+            if (selectedLanguage.Text != "")
+            {
+                Scenarios_Init();
+                Editor_Init();
+                Export_Init();
+            }
         }
 
         /// <summary>
@@ -422,6 +423,7 @@ namespace Service
 
         #region Scenarios
 
+        #region Init
         /// <summary>
         /// Initialize scenarios tab
         /// </summary>
@@ -437,8 +439,17 @@ namespace Service
         {
             Scenarios_CheckPoint_Clear();
         }
+        #endregion Init
 
         #region Scenario
+
+        #endregion Scenario
+
+        #region Section
+
+        #endregion Section
+
+        #region CheckPoint
         /// <summary>
         /// Initialize tab
         /// </summary>
@@ -446,6 +457,7 @@ namespace Service
         {
             Scenarios_CheckPoint_Clear();
             Scenarios_CheckPoint_LoadTables();
+            DataGridView_Scenarios_CheckPoint_SelectionChanged(this, new EventArgs());
         }
 
         /// <summary>
@@ -496,17 +508,6 @@ namespace Service
             {
                 dataGridView_Scenarios_CheckPoint_Operations.Rows.Add(o.id_Operation, o.name);
             }
-            /*
-            // If no parents
-            if (dataGridView_Scenarios_CheckPoint_CheckPoints.Rows.Count <= 0)
-            {
-                return;
-            }
-
-            // For selected parent
-            int selectedParent = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
-            string parentId = dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedParent].Cells[0].Value.ToString();
-            */
         }
 
         /// <summary>
@@ -569,22 +570,98 @@ namespace Service
                     treeView_Scenarios_CheckPoint.Nodes.Add(checkPointNode);
                 }
             }
+            treeView_Scenarios_CheckPoint.ExpandAll();
+        }
+
+        /// <summary>
+        /// Delete selected child from selected parent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Scenarios_CheckPoint_Delete_Click(object sender, EventArgs e)
+        {
+            // Get selected items IDs
+            int selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+            int selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+
+            // Check delete button
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                {
+                    Database_Operation.Delete.CheckPoints_Operations(o.GetId_CheckPoint(), o.GetId_Operation(), o.GetOrder_Number(), myConnection);
+                }
+            }
+
+            // Refresh form
+            Scenarios_CheckPoint_Init();
+        }
+
+        /// <summary>
+        /// Add selected child into selected parent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Scenarios_CheckPoint_Add_Click(object sender, EventArgs e)
+        {
 
         }
-        #endregion Scenario
 
-        #region Section
+        /// <summary>
+        /// When tables selection changed, check what is possible (delete, insert)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView_Scenarios_CheckPoint_SelectionChanged(object sender, EventArgs e)
+        {
+            // Get selected items IDs
+            int selectedRow_CheckPoint;
+            int selectedRow_Operation;
+            try
+            {
+                selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
+                selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+            }
+            catch (Exception exception)
+            {
+                return;
+            }
+            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
+            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
 
-        #endregion Section
+            // Check delete button
+            bool canBeDeleted = false;
+            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            {
+                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                {
+                    canBeDeleted = true;
+                    button_Scenarios_CheckPoint_Delete.Enabled = true;
+                    button_Scenarios_CheckPoint_Delete.BackColor = Color.LightCoral;
+                    break;
+                }
+            }
+            if (!canBeDeleted)
+            {
+                button_Scenarios_CheckPoint_Delete.Enabled = false;
+                button_Scenarios_CheckPoint_Delete.BackColor = Color.Transparent;
+            }
 
-        #region CheckPoint
-
+            // Check add button
+            // Add can be done everytime...
+            button_Scenarios_CheckPoint_Add.BackColor = Color.LightGreen;
+        }
         #endregion CheckPoint
 
         #endregion Scenarios
 
         #region Editor
 
+        #region Init
         /// <summary>
         /// Initialize editor tab
         /// </summary>
@@ -606,6 +683,7 @@ namespace Service
             Editor_CheckPoint_Clear();
             Editor_Operation_Clear();
         }
+        #endregion Init
 
         #region Scenario
         /// <summary>
@@ -1225,11 +1303,6 @@ namespace Service
         /// </summary>
         private void Language_SelectedLanguageRefresh()
         {
-            /*
-            selectedLanguage.Items.Add("EN");
-            selectedLanguage.SelectedIndex = 0;
-            */
-
             try
             {
                 // Load languages
@@ -1247,9 +1320,9 @@ namespace Service
                 // Select first item
                 selectedLanguage.SelectedIndex = 0;
             }
-            catch (Exception exception)
+            catch
             {
-                Message(exception.Message);
+                Message("Database is empty");
             }
         }
 

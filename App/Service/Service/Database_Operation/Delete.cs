@@ -33,6 +33,7 @@ namespace Service.Database_Operation
             myCommand = new SqlCommand(sql, myConnection);
             myCommand.ExecuteNonQuery();
         }
+
         /// <summary>
         /// Delete section from database
         /// </summary>
@@ -118,6 +119,50 @@ namespace Service.Database_Operation
 
             // Delete Operation
             sql = "DELETE FROM [Operations] WHERE [ID_Operation] = " + id;
+            myCommand = new SqlCommand(sql, myConnection);
+            myCommand.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Delete CheckPoints_Operation connection from database
+        /// </summary>
+        /// <param name="id_CheckPoint">Id of parent</param>
+        /// <param name="id_Operation">Id of child</param>
+        /// <param name="order_Number">Order number of child in parent</param>
+        /// <param name="connection">Database connection</param>
+        public static void CheckPoints_Operations(int id_CheckPoint, int id_Operation, int order_Number, Connection connection)
+        {
+            // Database
+            SqlConnection myConnection = connection.GetConnection();
+            SqlCommand myCommand;
+            string sql;
+
+            // Delete CheckPoints_Operations Connections
+            sql = "DELETE FROM [CheckPoints_Operations] WHERE [ID_CheckPoint] = " + id_CheckPoint;
+            sql += " AND [ID_Operation] = " + id_Operation + " AND [Order_Number] = " + order_Number;
+            myCommand = new SqlCommand(sql, myConnection);
+            myCommand.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Delete Scenarios_Sections connection from database
+        /// </summary>
+        /// <param name="id_Scenario">Id of parent</param>
+        /// <param name="id_Section">Id of child</param>
+        /// <param name="id_CheckPoint">Id of child of child</param>
+        /// <param name="order_Number">Order number of child in parent</param>
+        /// <param name="connection">Database connection</param>
+        public static void Scenarios_Sections(int id_Scenario, int id_Section, int id_CheckPoint, int order_Number, Connection connection)
+        {
+            // Database
+            SqlConnection myConnection = connection.GetConnection();
+            SqlCommand myCommand;
+            string sql;
+
+            // Delete CheckPoints_Operations Connections
+            sql = "DELETE FROM [Scenarios_Sections] WHERE [ID_Scenario] = " + id_Scenario;
+            sql += " AND [ID_Section] = " + id_Section + " AND [ID_CheckPoint] = " + id_CheckPoint;
+            sql += " AND [Order_Number] = " + order_Number;
             myCommand = new SqlCommand(sql, myConnection);
             myCommand.ExecuteNonQuery();
         }
