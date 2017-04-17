@@ -1,6 +1,6 @@
 /*
 Created		27.03.2017
-Modified		06.04.2017
+Modified		17.04.2017
 Project		
 Model			
 Company		
@@ -98,6 +98,17 @@ Create table [Scenarios_Translation]
 	[Language_Code] Char(2) NOT NULL,
 	[Name] Nvarchar(30) NOT NULL,
 Primary Key ([ID_Scenario],[Language_Code])
+) 
+go
+
+Create table [Log]
+(
+	[ID_Log] Integer Identity NOT NULL,
+	[Time] Datetime NOT NULL,
+	[Table] Nvarchar(50) NOT NULL,
+	[Operation] Nvarchar(50) NOT NULL,
+	[User] Nvarchar(256) NOT NULL,
+Primary Key ([ID_Log])
 ) 
 go
 
