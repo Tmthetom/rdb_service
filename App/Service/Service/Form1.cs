@@ -734,51 +734,58 @@ namespace Service
         /// <param name="e"></param>
         private void DataGridView_Scenarios_Scenario_SelectionChanged(object sender, EventArgs e)
         {
-            // Get selected items IDs
+            // Get selected items rows
+            int selectedRow_Scenario;
+            int selectedRow_Section;
             int selectedRow_CheckPoint;
-            int selectedRow_Operation;
+
+            // Try to load data
             try
             {
-                selectedRow_CheckPoint = dataGridView_Scenarios_CheckPoint_CheckPoints.CurrentCell.RowIndex;
-                selectedRow_Operation = dataGridView_Scenarios_CheckPoint_Operations.CurrentCell.RowIndex;
+                selectedRow_Scenario = dataGridView_Scenarios_Scenario_Scenarios.CurrentCell.RowIndex;
+                selectedRow_Section = dataGridView_Scenarios_Scenario_Sections.CurrentCell.RowIndex;
+                selectedRow_CheckPoint = dataGridView_Scenarios_Scenario_CheckPoints.CurrentCell.RowIndex;
             }
             catch
             {
                 return;
             }
-            int selectedCheckpointID = (Int32)dataGridView_Scenarios_CheckPoint_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
-            int selectedOperationID = (Int32)dataGridView_Scenarios_CheckPoint_Operations.Rows[selectedRow_Operation].Cells[0].Value;
+
+            // Get selected items IDs
+            int selectedScenarioID = (Int32)dataGridView_Scenarios_Scenario_Scenarios.Rows[selectedRow_Scenario].Cells[0].Value;
+            int selectedSectionID = (Int32)dataGridView_Scenarios_Scenario_Sections.Rows[selectedRow_Section].Cells[0].Value;
+            int selectedCheckPointID = (Int32)dataGridView_Scenarios_Scenario_CheckPoints.Rows[selectedRow_CheckPoint].Cells[0].Value;
 
             // Get all connections
-            List<Database_Objects.CheckPoints_Operations> connections = Database_Operation.Get.CheckPoints_Operations(myConnection);
+            List<Database_Objects.Scenarios_Sections> connections = Database_Operation.Get.Scenarios_Sections(myConnection);
 
             // Check delete and add button (if can be deleted, cant be added, because its already in)
             bool canBeDeleted = false;
-            foreach (Database_Objects.CheckPoints_Operations o in connections)
+            foreach (Database_Objects.Scenarios_Sections o in connections)
             {
-                if (o.GetId_CheckPoint() == selectedCheckpointID && o.GetId_Operation() == selectedOperationID)
+                if (o.GetId_Scenario() == selectedScenarioID && o.GetId_Section() == selectedSectionID && o.GetId_CheckPoint() == selectedCheckPointID)
                 {
                     canBeDeleted = true;
 
                     // Set delete button
-                    button_Scenarios_CheckPoint_Delete.Enabled = true;
-                    button_Scenarios_CheckPoint_Delete.BackColor = Color.LightCoral;
+                    button_Scenarios_Scenario_Delete.Enabled = true;
+                    button_Scenarios_Scenario_Delete.BackColor = Color.LightCoral;
 
                     // Set add button
-                    button_Scenarios_CheckPoint_Add.Enabled = false;
-                    button_Scenarios_CheckPoint_Add.BackColor = Color.Transparent;
+                    button_Scenarios_Scenario_Add.Enabled = false;
+                    button_Scenarios_Scenario_Add.BackColor = Color.Transparent;
                     break;
                 }
             }
             if (!canBeDeleted)
             {
                 // Set delete button
-                button_Scenarios_CheckPoint_Delete.Enabled = false;
-                button_Scenarios_CheckPoint_Delete.BackColor = Color.Transparent;
+                button_Scenarios_Scenario_Delete.Enabled = false;
+                button_Scenarios_Scenario_Delete.BackColor = Color.Transparent;
 
                 // Set add button
-                button_Scenarios_CheckPoint_Add.Enabled = true;
-                button_Scenarios_CheckPoint_Add.BackColor = Color.LightGreen;
+                button_Scenarios_Scenario_Add.Enabled = true;
+                button_Scenarios_Scenario_Add.BackColor = Color.LightGreen;
             }
         }
         #endregion Scenario - Section - CheckPoint
