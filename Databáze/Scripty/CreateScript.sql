@@ -472,3 +472,24 @@ BEGIN
 		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
 END
 GO
+
+/* Instead of Triggers */
+
+CREATE TRIGGER t_Check_Languages
+   ON Languages
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @Language_Code Char(2)
+	DECLARE @Name NVarchar(30)
+	
+	SET @Language_Code = (SELECT Language_Code FROM inserted)
+	SET @Name = (SELECT Name FROM inserted)
+
+	if(DATALENGTH(@Language_Code) > 1)
+	begin
+		INSERT INTO Languages(Language_Code, Name) VALUES(@Language_Code, @Name)
+	end	
+END
+GO
