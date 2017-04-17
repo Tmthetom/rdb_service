@@ -69,14 +69,14 @@ namespace Service.Database_Operation
 
             // All logs
             List<Database_Objects.Log> logs = new List<Database_Objects.Log>();
-            using (myCommand = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection))
+            using (myCommand = new SqlCommand("SELECT [ID_Log], [TimeDate], [TableName], [Operation], [UserName] FROM [Log]", myConnection))
             {
                 using (reader = myCommand.ExecuteReader())
                 {
-                    Database_Objects.CheckPoints_Operations current_log;
+                    Database_Objects.Log current_log;
                     while (reader.Read())
                     {
-                        current_log = new Database_Objects.CheckPoints_Operations(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2));
+                        current_log = new Database_Objects.Log(reader.GetInt32(0), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
                         logs.Add(current_log);
                     }
                     reader.Close();
