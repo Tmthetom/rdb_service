@@ -27,6 +27,7 @@ namespace Service.Database_Operation
                     }
                 }
             }
+
             return tables;
         }
 
@@ -50,7 +51,40 @@ namespace Service.Database_Operation
                     }
                 }
             }
+
             return languages;
+        }
+
+        /// <summary>
+        /// Get all database logs
+        /// </summary>
+        /// <param name="connection">Database connection</param>
+        /// <returns>All database logs</returns>
+        public static List<Database_Objects.Log> Logs(Connection connection)
+        {
+            // Database operations
+            SqlCommand myCommand;
+            SqlDataReader reader;
+            SqlConnection myConnection = connection.GetConnection();
+
+            // All logs
+            List<Database_Objects.Log> logs = new List<Database_Objects.Log>();
+            using (myCommand = new SqlCommand("SELECT [ID_CheckPoint], [ID_Operation], [Order_Number] FROM [CheckPoints_Operations]", myConnection))
+            {
+                using (reader = myCommand.ExecuteReader())
+                {
+                    Database_Objects.CheckPoints_Operations current_log;
+                    while (reader.Read())
+                    {
+                        current_log = new Database_Objects.CheckPoints_Operations(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2));
+                        logs.Add(current_log);
+                    }
+                    reader.Close();
+                }
+                    
+            }
+
+            return logs;
         }
 
         /// <summary>

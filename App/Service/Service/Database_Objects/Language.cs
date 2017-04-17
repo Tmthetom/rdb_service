@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Service.Database_Objects
+﻿namespace Service.Database_Objects
 {
     class Language
     {

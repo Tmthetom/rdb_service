@@ -185,8 +185,10 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox_Database_Log = new System.Windows.Forms.GroupBox();
             this.dataGridView_Database_Log = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Table = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Export.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage_Language.SuspendLayout();
@@ -1870,8 +1872,10 @@
             this.dataGridView_Database_Log.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Database_Log.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Database_Log.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24});
+            this.Time,
+            this.Table,
+            this.Operation,
+            this.User});
             this.dataGridView_Database_Log.Location = new System.Drawing.Point(6, 19);
             this.dataGridView_Database_Log.MultiSelect = false;
             this.dataGridView_Database_Log.Name = "dataGridView_Database_Log";
@@ -1881,19 +1885,29 @@
             this.dataGridView_Database_Log.Size = new System.Drawing.Size(529, 80);
             this.dataGridView_Database_Log.TabIndex = 3;
             // 
-            // dataGridViewTextBoxColumn23
+            // Time
             // 
-            this.dataGridViewTextBoxColumn23.FillWeight = 31.41988F;
-            this.dataGridViewTextBoxColumn23.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn24
+            // Table
             // 
-            this.dataGridViewTextBoxColumn24.FillWeight = 249.9309F;
-            this.dataGridViewTextBoxColumn24.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            this.Table.HeaderText = "Table";
+            this.Table.Name = "Table";
+            this.Table.ReadOnly = true;
+            // 
+            // Operation
+            // 
+            this.Operation.HeaderText = "Operation";
+            this.Operation.Name = "Operation";
+            this.Operation.ReadOnly = true;
+            // 
+            // User
+            // 
+            this.User.HeaderText = "User";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
             // 
             // Form1
             // 
@@ -2135,8 +2149,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox_Database_Log;
         private System.Windows.Forms.DataGridView dataGridView_Database_Log;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Table;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Operation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn User;
     }
 }
 
