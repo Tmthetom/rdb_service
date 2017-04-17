@@ -59,6 +59,7 @@
     <Compile Include="Database_Objects\CheckPoints_Operations.cs" />
     <Compile Include="Database_Objects\CheckPoint_Translation.cs" />
     <Compile Include="Database_Objects\Language.cs" />
+    <Compile Include="Database_Objects\Log.cs" />
     <Compile Include="Database_Objects\Operation.cs" />
     <Compile Include="Database_Objects\Operation_Translation.cs" />
     <Compile Include="Database_Objects\Scenario.cs" />

@@ -37,6 +37,7 @@ namespace Service
                 Scenarios_Init();
                 Editor_Init();
                 Export_Init();
+                Database_Log_Init();
             }
         }
 
@@ -49,6 +50,7 @@ namespace Service
             Scenarios_Clear();
             Editor_Clear();
             Export_Clear();
+            Database_Log_Clear();
         }
         #endregion Initialization
 
@@ -211,6 +213,43 @@ namespace Service
             }
         }
         #endregion Database_Connection
+
+        #region Log Table
+        /// <summary>
+        /// Initialize tab
+        /// </summary>
+        private void Database_Log_Init()
+        {
+            // Clear old table
+            Database_Log_Clear();
+
+            // Get all logs objects
+            List<Database_Objects.Log> logs = Database_Operation.Get.Logs(myConnection);
+
+            // Sort list descending
+            int newID = Int32.MaxValue;
+            SortedList<int, Database_Objects.Log> logs_sorted = new SortedList<int, Database_Objects.Log>();
+            foreach (Database_Objects.Log log in logs)
+            {
+                logs_sorted.Add(newID, log);
+                newID--;
+            }
+
+            // Add them into table (sorted by ID)
+            foreach (Database_Objects.Log log in logs_sorted.Values)
+            {
+                dataGridView_Database_Log.Rows.Add(log.timeDate, log.tableName, log.operation, log.userName);
+            }
+        }
+
+        /// <summary>
+        /// Clear tab
+        /// </summary>
+        private void Database_Log_Clear()
+        {
+            dataGridView_Database_Log.Rows.Clear();
+        }
+        #endregion
 
         #region Do Scripts
         /// <summary>
@@ -453,6 +492,7 @@ namespace Service
             Scenarios_Scenario_Clear();
             Scenarios_Scenario_LoadTables();
             DataGridView_Scenarios_Scenario_SelectionChanged(this, new EventArgs());
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -799,6 +839,7 @@ namespace Service
             Scenarios_CheckPoint_Clear();
             Scenarios_CheckPoint_LoadTables();
             DataGridView_Scenarios_CheckPoint_SelectionChanged(this, new EventArgs());
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -1065,6 +1106,7 @@ namespace Service
         {
             Editor_Scenario_Clear();
             Editor_Scenario_LoadTable();
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -1213,6 +1255,7 @@ namespace Service
         {
             Editor_Section_Clear();
             Editor_Section_LoadTable();
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -1361,6 +1404,7 @@ namespace Service
         {
             Editor_CheckPoint_Clear();
             Editor_CheckPoint_LoadTable();
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -1509,6 +1553,7 @@ namespace Service
         {
             Editor_Operation_Clear();
             Editor_Operation_LoadTable();
+            Database_Log_Init();
         }
 
         /// <summary>
@@ -1658,6 +1703,7 @@ namespace Service
         private void Language_Init()
         {
             Language_SelectedLanguageRefresh();
+            Database_Log_Init();
         }
 
         /// <summary>

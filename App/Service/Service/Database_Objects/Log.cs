@@ -2,11 +2,11 @@
 {
     class Log
     {
-        private int id_Log;
-        private string timeDate;
-        private string tableName;
-        private string operation;
-        private string userName;
+        public int id_Log;
+        public string timeDate;
+        public string tableName;
+        public string operation;
+        public string userName;
 
         /// <summary>
         /// Create new log
