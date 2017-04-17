@@ -36,7 +36,7 @@ namespace Service
             {
                 Scenarios_Init();
                 Editor_Init();
-                 Export_Init();
+                Export_Init();
             }
         }
 
