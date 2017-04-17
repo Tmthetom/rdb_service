@@ -1744,7 +1744,7 @@ namespace Service
                 if (comboBox_Export_ExportLanguage.Text != "" || comboBox_Export_ExportLanguage.Text != null)
                 {
                     Database_Export.ExportToJson.Generate(comboBox_Export_ExportLanguage.Text, myConnection);
-                    Process.Start("explorer.exe", AppDomain.CurrentDomain.BaseDirectory);
+                    Process.Start("explorer.exe", AppDomain.CurrentDomain.BaseDirectory + "export\\");
                 }
                 else
                 {
