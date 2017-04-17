@@ -1,14 +1,4 @@
-/*
-Created		27.03.2017
-Modified		17.04.2017
-Project		
-Model			
-Company		
-Author		
-Version		
-Database		MS SQL 2005 
-*/
-
+/* Tables */
 
 Create table [Languages]
 (
@@ -104,10 +94,10 @@ go
 Create table [Log]
 (
 	[ID_Log] Integer Identity NOT NULL,
-	[Time] Datetime NOT NULL,
-	[Table] Nvarchar(50) NOT NULL,
+	[TimeDate] Datetime NOT NULL,
+	[TableName] Nvarchar(50) NOT NULL,
 	[Operation] Nvarchar(50) NOT NULL,
-	[User] Nvarchar(256) NOT NULL,
+	[UserName] Nvarchar(256) NOT NULL,
 Primary Key ([ID_Log])
 ) 
 go
@@ -140,4 +130,345 @@ go
 Set quoted_identifier off
 go
 
+/* Triggers */
 
+CREATE TRIGGER t_Languages
+   ON Languages
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Scenarios
+   ON Scenarios
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Scenarios_Translation
+   ON Scenarios_Translation
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Sections
+   ON Sections
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Sections_Translation
+   ON Sections_Translation
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_CheckPoints
+   ON CheckPoints
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_CheckPoints_Translation
+   ON CheckPoints_Translation
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Operations
+   ON Operations
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Operations_Translation
+   ON Operations_Translation
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_Scenarios_Sections
+   ON Scenarios_Sections
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
+
+CREATE TRIGGER t_CheckPoints_Operations
+   ON CheckPoints_Operations
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'Update'
+		ELSE
+			SELECT @event_type = 'Insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'Delete'
+	ELSE
+		SELECT @event_type = 'None'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO Log(TimeDate, TableName, Operation, UserName) 
+		VALUES(GetDate(), @table_name, @event_type, USER_NAME())
+END
+GO
