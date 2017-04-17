@@ -1,0 +1,1117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="createLogTriggers" xml:space="preserve">
+    <value>CREATE TRIGGER t_checkAttributesLogger
+   ON  check_attributes
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_checkContainsLogger
+   ON  check_contains
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_checkOperationsLogger
+   ON  check_operations
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_checkPointLogger
+   ON  check_point
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_operationLogger
+   ON  operation
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_operationAttributesLogger
+   ON  operation_attributes
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_operationContainsLogger
+   ON  operation_contains
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_scenarioLogger
+   ON  scenario
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_scenarioAttributesLogger
+   ON  Scenario_attributes
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_scenarioContainsLogger
+   ON  Scenario_contains
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_scenarioChecksLogger
+   ON  scenario_checks
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_sectionLogger
+   ON  section
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_sectionAttributesLogger
+   ON  section_attributes
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO
+
+CREATE TRIGGER t_sectionContainsLogger
+   ON  section_contains
+   AFTER INSERT,DELETE,UPDATE
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @event_type varchar(6)
+	IF EXISTS(SELECT * FROM inserted)
+		IF EXISTS(SELECT * FROM deleted)
+			SELECT @event_type = 'update'
+		ELSE
+			SELECT @event_type = 'insert'
+	ELSE
+	IF EXISTS(SELECT * FROM deleted)
+		SELECT @event_type = 'delete'
+	ELSE
+		SELECT @event_type = 'nochng'
+
+	DECLARE @table_name varchar(64)
+	SELECT
+		@table_name = OBJECT_NAME(parent_id)
+	FROM
+		sys.triggers
+	WHERE
+		object_id = @@PROCID
+
+	INSERT INTO log([user], operation, time_of_event, table_name, computer_name) 
+		VALUES(USER_NAME(), @event_type, GetDate(), @table_name, HOST_NAME())
+END
+GO</value>
+  </data>
+  <data name="createProcedures" xml:space="preserve">
+    <value>CREATE PROCEDURE [sp_connectScenario]
+  @selectedLanguage nvarchar(5)
+  AS
+  SELECT s.scenario_code, s.name, s.description, sa.type, sa.value, sa.language
+  FROM scenario s
+  LEFT JOIN scenario_contains sc ON s.scenario_code = sc.scenario_code
+  LEFT JOIN scenario_attributes sa ON sc.attribute_code = sa.attribute_code AND (sa.language = @selectedLanguage OR sa.language IS NULL)
+  RETURN
+GO
+
+CREATE PROCEDURE [sp_connectSection]
+  @selectedLanguage nvarchar(5)
+  AS
+  SELECT s.section_code, s.name, s.description, sa.type, sa.value, sa.language
+  FROM section s
+  LEFT JOIN section_contains sc ON s.section_code = sc.section_code
+  LEFT JOIN section_attributes sa ON sc.attribute_code = sa.attribute_code AND (sa.language = @selectedLanguage OR sa.language IS NULL)
+  RETURN
+GO
+
+CREATE PROCEDURE [sp_connectCheck]
+  @selectedLanguage nvarchar(5)
+  AS
+  SELECT cp.check_code, cp.name, cp.description, ca.type, ca.value, ca.language
+  FROM check_point cp
+  LEFT JOIN check_contains cc ON cp.check_code = cc.check_code
+  LEFT JOIN check_attributes ca ON cc.attribute_code = ca.attribute_code AND (ca.language = @selectedLanguage OR ca.language IS NULL)
+  RETURN
+GO
+
+CREATE PROCEDURE [sp_connectOperation]
+  @selectedLanguage nvarchar(5)
+  AS
+  SELECT o.operation_code, o.name, o.description, oa.type, oa.value, oa.language
+  FROM operation o
+  LEFT JOIN operation_contains oc ON o.operation_code = oc.operation_code
+  LEFT JOIN operation_attributes oa ON oc.attribute_code = oa.attribute_code AND (oa.language = @selectedLanguage OR oa.language IS NULL)
+  RETURN
+GO</value>
+  </data>
+  <data name="createTables" xml:space="preserve">
+    <value>Create table [operation]
+(
+	[operation_code] Integer Identity NOT NULL, UNIQUE ([operation_code]),
+	[name] Text NOT NULL,
+	[description] Text NOT NULL,
+Primary Key ([operation_code])
+) 
+go
+
+Create table [section]
+(
+	[section_code] Integer Identity NOT NULL, UNIQUE ([section_code]),
+	[name] Text NOT NULL,
+	[description] Text NOT NULL,
+Primary Key ([section_code])
+) 
+go
+
+Create table [scenario]
+(
+	[scenario_code] Integer Identity NOT NULL, UNIQUE ([scenario_code]),
+	[name] Text NOT NULL,
+	[description] Text NOT NULL,
+Primary Key ([scenario_code])
+) 
+go
+
+Create table [check_point]
+(
+	[check_code] Integer Identity NOT NULL, UNIQUE ([check_code]),
+	[name] Text NOT NULL,
+	[description] Text NOT NULL,
+Primary Key ([check_code])
+) 
+go
+
+Create table [check_operations]
+(
+	[operation_code] Integer NOT NULL,
+	[check_code] Integer NOT NULL,
+	[order] Integer NOT NULL,
+Primary Key ([operation_code],[check_code])
+) 
+go
+
+Create table [operation_attributes]
+(
+	[attribute_code] Integer Identity NOT NULL, UNIQUE ([attribute_code]),
+	[type] Nvarchar(20) NOT NULL,
+	[language] Nvarchar(5) NULL,
+	[value] Text NOT NULL,
+Primary Key ([attribute_code])
+) 
+go
+
+Create table [operation_contains]
+(
+	[attribute_code] Integer NOT NULL,
+	[operation_code] Integer NOT NULL,
+Primary Key ([attribute_code],[operation_code])
+) 
+go
+
+Create table [check_attributes]
+(
+	[attribute_code] Integer Identity NOT NULL, UNIQUE ([attribute_code]),
+	[type] Nvarchar(20) NOT NULL,
+	[language] Nvarchar(5) NULL,
+	[value] Text NOT NULL,
+Primary Key ([attribute_code])
+) 
+go
+
+Create table [section_attributes]
+(
+	[attribute_code] Integer Identity NOT NULL, UNIQUE ([attribute_code]),
+	[type] Nvarchar(20) NOT NULL,
+	[language] Nvarchar(5) NULL,
+	[value] Text NOT NULL,
+Primary Key ([attribute_code])
+) 
+go
+
+Create table [scenario_attributes]
+(
+	[attribute_code] Integer Identity NOT NULL, UNIQUE ([attribute_code]),
+	[type] Nvarchar(20) NOT NULL,
+	[language] Nvarchar(5) NULL,
+	[value] Text NOT NULL,
+Primary Key ([attribute_code])
+) 
+go
+
+Create table [check_contains]
+(
+	[attribute_code] Integer NOT NULL,
+	[check_code] Integer NOT NULL,
+Primary Key ([attribute_code],[check_code])
+) 
+go
+
+Create table [section_contains]
+(
+	[section_code] Integer NOT NULL,
+	[attribute_code] Integer NOT NULL,
+Primary Key ([section_code],[attribute_code])
+) 
+go
+
+Create table [scenario_contains]
+(
+	[scenario_code] Integer NOT NULL,
+	[attribute_code] Integer NOT NULL,
+Primary Key ([scenario_code],[attribute_code])
+) 
+go
+
+Create table [scenario_checks]
+(
+	[section_order] Integer NOT NULL,
+	[scenario_code] Integer NOT NULL,
+	[section_code] Integer NOT NULL,
+	[check_code] Integer NOT NULL,
+	[check_order] Integer NOT NULL,
+Primary Key ([section_order],[scenario_code],[section_code],[check_code])
+) 
+go
+Create table [log]
+(
+	[user] Nvarchar(256) NOT NULL,
+	[operation] Nvarchar(6) NOT NULL,
+	[time_of_event] Datetime NOT NULL,
+	[table_name] Nvarchar(256) NOT NULL,
+	[computer_name] Nvarchar(256) NOT NULL,
+) 
+go
+
+
+Alter table [check_operations] add  foreign key([operation_code]) references [operation] ([operation_code])  on update no action on delete no action 
+go
+Alter table [operation_contains] add  foreign key([operation_code]) references [operation] ([operation_code])  on update no action on delete cascade 
+go
+Alter table [section_contains] add  foreign key([section_code]) references [section] ([section_code])  on update no action on delete cascade 
+go
+Alter table [scenario_checks] add  foreign key([section_code]) references [section] ([section_code])  on update no action on delete no action 
+go
+Alter table [scenario_contains] add  foreign key([scenario_code]) references [scenario] ([scenario_code])  on update no action on delete cascade 
+go
+Alter table [scenario_checks] add  foreign key([scenario_code]) references [scenario] ([scenario_code])  on update no action on delete no action 
+go
+Alter table [check_operations] add  foreign key([check_code]) references [check_point] ([check_code])  on update no action on delete no action 
+go
+Alter table [check_contains] add  foreign key([check_code]) references [check_point] ([check_code])  on update no action on delete cascade 
+go
+Alter table [scenario_checks] add  foreign key([check_code]) references [check_point] ([check_code])  on update no action on delete no action 
+go
+Alter table [operation_contains] add  foreign key([attribute_code]) references [operation_attributes] ([attribute_code])  on update no action on delete cascade 
+go
+Alter table [check_contains] add  foreign key([attribute_code]) references [check_attributes] ([attribute_code])  on update no action on delete cascade 
+go
+Alter table [section_contains] add  foreign key([attribute_code]) references [section_attributes] ([attribute_code])  on update no action on delete cascade 
+go
+Alter table [scenario_contains] add  foreign key([attribute_code]) references [scenario_attributes] ([attribute_code])  on update no action on delete cascade 
+go</value>
+  </data>
+  <data name="createValidationTriggers" xml:space="preserve">
+    <value>CREATE TRIGGER t_checkAttributesValidation
+   ON  check_attributes
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @type NVarchar(20)
+	DECLARE @value bit
+	DECLARE @language NVarchar(5)
+	
+	SET @type = (SELECT type FROM inserted)
+	SET @language = (SELECT language FROM inserted)
+	SET @value = (SELECT DATALENGTH(value) FROM inserted)
+
+	if(DATALENGTH(@type) &gt; 0 and DATALENGTH(@value) &gt; 0)
+	begin
+		INSERT INTO check_attributes(type, value, language) VALUES(@type, (SELECT value FROM inserted), @language)
+	end	
+END
+GO
+
+CREATE TRIGGER t_operationAttributesValidation
+   ON  operation_attributes
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @type NVarchar(20)
+	DECLARE @value bit
+	DECLARE @language NVarchar(5)
+	
+	SET @type = (SELECT type FROM inserted)
+	SET @language = (SELECT language FROM inserted)
+	SET @value = (SELECT DATALENGTH(value) FROM inserted)
+
+	if(DATALENGTH(@type) &gt; 0 and DATALENGTH(@value) &gt; 0)
+	begin
+		INSERT INTO operation_attributes(type, value, language) VALUES(@type, (SELECT value FROM inserted), @language)
+	end	
+END
+GO
+
+CREATE TRIGGER t_sectionAttributesValidation
+   ON  section_attributes
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @type NVarchar(20)
+	DECLARE @value bit
+	DECLARE @language NVarchar(5)
+	
+	SET @type = (SELECT type FROM inserted)
+	SET @language = (SELECT language FROM inserted)
+	SET @value = (SELECT DATALENGTH(value) FROM inserted)
+
+	if(DATALENGTH(@type) &gt; 0 and DATALENGTH(@value) &gt; 0)
+	begin
+		INSERT INTO section_attributes(type, value, language) VALUES(@type, (SELECT value FROM inserted), @language)
+	end	
+END
+GO
+
+CREATE TRIGGER t_scenarioAttributesValidation
+   ON  scenario_attributes
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @type NVarchar(20)
+	DECLARE @value bit
+	DECLARE @language NVarchar(5)
+	
+	SET @type = (SELECT type FROM inserted)
+	SET @language = (SELECT language FROM inserted)
+	SET @value = (SELECT DATALENGTH(value) FROM inserted)
+
+	if(DATALENGTH(@type) &gt; 0 and DATALENGTH(@value) &gt; 0)
+	begin
+		INSERT INTO scenario_attributes(type, value, language) VALUES(@type, (SELECT value FROM inserted), @language)
+	end	
+END
+GO
+
+CREATE TRIGGER t_checkPointValidation
+   ON  check_point
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @name bit
+	DECLARE @description bit
+		
+	SET @name = (SELECT DATALENGTH(name) FROM inserted)
+	SET @description = (SELECT DATALENGTH(description) FROM inserted)
+
+	if(@name &gt; 0 and @description &gt; 0)
+	begin
+		INSERT INTO check_point(name, description) VALUES((SELECT name FROM inserted), (SELECT description FROM inserted))
+	end	
+END
+GO
+
+CREATE TRIGGER t_operationValidation
+   ON  operation
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @name bit
+	DECLARE @description bit
+		
+	SET @name = (SELECT DATALENGTH(name) FROM inserted)
+	SET @description = (SELECT DATALENGTH(description) FROM inserted)
+
+	if(@name &gt; 0 and @description &gt; 0)
+	begin
+		INSERT INTO operation(name, description) VALUES((SELECT name FROM inserted), (SELECT description FROM inserted))
+	end	
+END
+GO
+
+CREATE TRIGGER t_sectionValidation
+   ON  section
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @name bit
+	DECLARE @description bit
+		
+	SET @name = (SELECT DATALENGTH(name) FROM inserted)
+	SET @description = (SELECT DATALENGTH(description) FROM inserted)
+
+	if(@name &gt; 0 and @description &gt; 0)
+	begin
+		INSERT INTO section(name, description) VALUES((SELECT name FROM inserted), (SELECT description FROM inserted))
+	end	
+END
+GO
+
+CREATE TRIGGER t_scenarioValidation
+   ON  scenario
+   INSTEAD OF INSERT
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @name bit
+	DECLARE @description bit
+		
+	SET @name = (SELECT DATALENGTH(name) FROM inserted)
+	SET @description = (SELECT DATALENGTH(description) FROM inserted)
+
+	if(@name &gt; 0 and @description &gt; 0)
+	begin
+		INSERT INTO scenario(name, description) VALUES((SELECT name FROM inserted), (SELECT description FROM inserted))
+	end	
+END
+GO</value>
+  </data>
+  <data name="dropProcedures" xml:space="preserve">
+    <value>Drop procedure sp_connectScenario
+go
+Drop procedure sp_connectSection
+go
+Drop procedure sp_connectCheck
+go
+Drop procedure sp_connectOperation
+go</value>
+  </data>
+  <data name="dropTables" xml:space="preserve">
+    <value>Drop table [log] 
+go
+Drop table [scenario_checks] 
+go
+Drop table [scenario_contains] 
+go
+Drop table [section_contains] 
+go
+Drop table [check_contains] 
+go
+Drop table [scenario_attributes] 
+go
+Drop table [section_attributes] 
+go
+Drop table [check_attributes] 
+go
+Drop table [operation_contains] 
+go
+Drop table [operation_attributes] 
+go
+Drop table [check_operations] 
+go
+Drop table [check_point] 
+go
+Drop table [scenario] 
+go
+Drop table [section] 
+go
+Drop table [operation] 
+go</value>
+  </data>
+  <data name="fillTables" xml:space="preserve">
+    <value>Insert into operation(name, description) values('Operation_1', 'Description_1')
+go
+Insert into operation(name, description) values('Operation_2', 'Description_2')
+go
+Insert into operation(name, description) values('Operation_3', 'Description_3')
+go
+Insert into operation(name, description) values('Operation_4', 'Description_4')
+go                                    
+Insert into operation(name, description) values('Operation_5', 'Description_5')
+go
+Insert into operation(name, description) values('Operation_6', 'Description_6')
+go
+
+Insert into operation_attributes(type, language, value) values('name', 'en_US', 'Operation_1_enUS')
+go
+Insert into operation_attributes(type, language, value) values('desc', 'en_US', 'Description_1_enUS')
+go
+Insert into operation_attributes(type, value) values('image', 'url')
+go
+Insert into operation_attributes(type, language, value) values('name', 'cs_CZ', 'Operation_3_csCZ')
+go
+
+Insert into operation_contains(attribute_code, operation_code) values(1, 1)
+go
+Insert into operation_contains(attribute_code, operation_code) values(2, 1)
+go
+Insert into operation_contains(attribute_code, operation_code) values(3, 2)
+go
+Insert into operation_contains(attribute_code, operation_code) values(4, 3)
+go
+
+
+
+Insert into check_point(name, description) values('Check_point_1', 'Description_1')
+go
+Insert into check_point(name, description) values('Check_point_2', 'Description_2')
+go
+Insert into check_point(name, description) values('Check_point_3', 'Description_3')
+go
+Insert into check_point(name, description) values('Check_point_4', 'Description_4')
+go
+Insert into check_point(name, description) values('Check_point_5', 'Description_5')
+go
+Insert into check_point(name, description) values('Check_point_6', 'Description_6')
+go
+
+Insert into check_attributes(type, language, value) values('name', 'en_US', 'Check_point_1_enUS')
+go
+Insert into check_attributes(type, language, value) values('desc', 'en_GB', 'Description_2_enGB')
+go
+Insert into check_attributes(type, value) values('packet', 'Kd01')
+go
+Insert into check_attributes(type, language, value) values('name', 'cs_CZ', 'Check_point_4_csCZ')
+go
+
+Insert into check_contains(attribute_code, check_code) values(1, 1)
+go
+Insert into check_contains(attribute_code, check_code) values(2, 2)
+go
+Insert into check_contains(attribute_code, check_code) values(3, 5)
+go
+Insert into check_contains(attribute_code, check_code) values(4, 4)
+go
+
+
+
+Insert into section(name, description) values('Section_1', 'Description_1')
+go
+Insert into section(name, description) values('Section_2', 'Description_2')
+go
+Insert into section(name, description) values('Section_3', 'Description_3')
+go
+Insert into section(name, description) values('Section_4', 'Description_4')
+go
+Insert into section(name, description) values('Section_5', 'Description_5')
+go
+Insert into section(name, description) values('Section_6', 'Description_6')
+go
+
+Insert into section_attributes(type, language, value) values('name', 'en_US', 'Section_1_enUS')
+go
+Insert into section_attributes(type, language, value) values('desc', 'en_GB', 'Description_2_enGB')
+go
+Insert into section_attributes(type, value) values('info', 'More descriptive info')
+go
+Insert into section_attributes(type, language, value) values('name', 'cs_CZ', 'Section_4_csCZ')
+go
+
+Insert into section_contains(attribute_code, section_code) values(1, 1)
+go
+Insert into section_contains(attribute_code, section_code) values(2, 2)
+go
+Insert into section_contains(attribute_code, section_code) values(3, 5)
+go
+Insert into section_contains(attribute_code, section_code) values(4, 4)
+go
+
+
+
+Insert into scenario(name, description) values('Scenario_1', 'Description_1')
+go
+Insert into scenario(name, description) values('Scenario_2', 'Description_2')
+go
+Insert into scenario(name, description) values('Scenario_3', 'Description_3')
+go
+Insert into scenario(name, description) values('Scenario_4', 'Description_4')
+go
+Insert into scenario(name, description) values('Scenario_5', 'Description_5')
+go
+Insert into scenario(name, description) values('Scenario_6', 'Description_6')
+go
+
+Insert into scenario_attributes(type, language, value) values('name', 'en_US', 'Scenario_1_enUS')
+go
+Insert into scenario_attributes(type, language, value) values('desc', 'en_GB', 'Description_2_enGB')
+go
+Insert into scenario_attributes(type, language, value) values('name', 'cs_CZ', 'Scenario_4_csCZ')
+go
+
+Insert into scenario_contains(attribute_code, scenario_code) values(1, 1)
+go
+Insert into scenario_contains(attribute_code, scenario_code) values(2, 2)
+go
+Insert into scenario_contains(attribute_code, scenario_code) values(3, 4)
+go
+
+
+
+Insert into scenario_checks(section_order, scenario_code, section_code, check_code, check_order) values(1, 1, 1, 1, 1)
+go
+Insert into scenario_checks(section_order, scenario_code, section_code, check_code, check_order) values(1, 1, 1, 3, 2)
+go
+Insert into scenario_checks(section_order, scenario_code, section_code, check_code, check_order) values(2, 1, 3, 4, 1)
+go
+Insert into scenario_checks(section_order, scenario_code, section_code, check_code, check_order) values(3, 1, 1, 1, 1)
+go
+
+
+Insert into check_operations(operation_code, check_code, [order]) values(1, 1, 1)
+go
+Insert into check_operations(operation_code, check_code, [order]) values(5, 1, 2)
+go
+Insert into check_operations(operation_code, check_code, [order]) values(6, 1, 3)
+go
+Insert into check_operations(operation_code, check_code, [order]) values(4, 3, 1)
+go
+Insert into check_operations(operation_code, check_code, [order]) values(5, 3, 2)
+go
+Insert into check_operations(operation_code, check_code, [order]) values(6, 4, 1)
+go</value>
+  </data>
+</root>
