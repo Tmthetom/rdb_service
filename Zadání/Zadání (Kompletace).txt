@@ -1,0 +1,26 @@
+[RDB] Na vyžádání posílám detailní popis Tylových pøání, která se v prùbìhu cvièení mìnila jako poèasí, ale vìøím, že jsem vše zachytil tak jak si to pøál naposledy.
+
+Aplikace:
+
+-> Pøipojení k databázi (Stabilní pøipojení na libovolný server, primárnì však pøipojení na školní server a local u nás na PC).
+-> Zapínání scriptù (CreateScript, DropScript, InsertScript).
+-> Vytváøení vazeb (Scénáø-Sekce, Sekce-Bod, Bod-Operace).
+-> Editace (Vytváøení, mazání, úpravy) existujících komponent (scénáø, sekce, bod, operace).
+-> Zmìna jazyka (Pøepnutí zobrazení celé aplikace, pokud neexistuje pøeklad, zobrazení se výchozí jazyk).
+-> Vytvoøení nového jazyka a následné pøeklady do nìj.
+-> Exportování všech scénáøù ve zvoleném jazyce (Export do JSON).
+
+Model:
+
+-> Aplikace má být pro správu servisních kontrol, oprav, atd.., díky které technik vždy ví, co má pøi kterém scénáøi (prohlídka, oprava, ...) dìlat.
+-> Každý "Scénáø" (napø. roèní prohlídka, ...) má své "Sekce" vozu (napøíklad pøedek vozu, podvozek, ...) a ty se mohou opakovat (napøíklad nejdøíve zkontrolujeme pøedek vozu, zadek vozu a poté znovu pøedek vozu, nicménì pokaždé u nich provádíme jiné úkony). "Sekce" má své "Kontrolní body" (napøíklad pro pøedek vozu, mùže mít kontrolu èelního skla, kontrolu svìtel, kontrolu laku, ...) a každý "Kontrolní bod" má své operace (napøíklad kontrola svìtel, mùže mít kontrolu dálkových svìtel, kontrolu mlhovek, ...). Poøadí dùležitosti je tedy Scénáø -> Sekce -> Kontrolní bod -> Operace.
+-> Každá èást (scénáø, sekce, kontrolní bod, operace) má svùj základní jazyk (Angliètina) ve kterém je popsána, u každé èásti je vždy napsán její název a detailní popis. Dále je možné každou èást pøeložit do jiného jazyka, tedy napøíklad do èeštiny. Pøí exportu, pokud není èást pøeložená, použije se výchozí jazyk.
+-> Vždy každá èást (scénáø, sekce, kontrolní bod, operace), mùže být pøiøazena na více místech, napøíklad operace mùže být ve více kontrolních bodech, stejnì tak naopak, kontrolní bod mùže mít více operace.
+-> V rámci jednotlivých èástí (scénáø, sekce, kontrolní bod) se mohou body, které pod nì spadají, opakovat (napøíklad pod scénáø spadají sekce).
+-> V rámci jednotlivých èástí (scénáø, sekce, kontrolní bod) lze mìnit poøadí bodù, které pod nì spadají (napøíklad pod scénáø spadají sekce).
+-> Logovací trigger (Zapisuje vždy pøi insert, update, delete, na všechny tabulky).
+-> Instead of trigger (Libovolný, pouze abychom ukázali, že ho ovládáme).
+-> Insert script, který naplní databázi jazyky a daty.
+-> Create script, drop script.
+
+Snad je to vše... Dále pøidávám ilustraèní fotografie od Tyla.

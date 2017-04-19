@@ -220,25 +220,32 @@ namespace Service
         /// </summary>
         private void Database_Log_Init()
         {
-            // Clear old table
-            Database_Log_Clear();
-
-            // Get all logs objects
-            List<Database_Objects.Log> logs = Database_Operation.Get.Logs(myConnection);
-
-            // Sort list descending
-            int newID = Int32.MaxValue;
-            SortedList<int, Database_Objects.Log> logs_sorted = new SortedList<int, Database_Objects.Log>();
-            foreach (Database_Objects.Log log in logs)
+            try
             {
-                logs_sorted.Add(newID, log);
-                newID--;
+                // Clear old table
+                Database_Log_Clear();
+
+                // Get all logs objects
+                List<Database_Objects.Log> logs = Database_Operation.Get.Logs(myConnection);
+
+                // Sort list descending
+                int newID = Int32.MaxValue;
+                SortedList<int, Database_Objects.Log> logs_sorted = new SortedList<int, Database_Objects.Log>();
+                foreach (Database_Objects.Log log in logs)
+                {
+                    logs_sorted.Add(newID, log);
+                    newID--;
+                }
+
+                // Add them into table (sorted by ID)
+                foreach (Database_Objects.Log log in logs_sorted.Values)
+                {
+                    dataGridView_Database_Log.Rows.Add(log.timeDate, log.tableName, log.operation, log.userName);
+                }
             }
-
-            // Add them into table (sorted by ID)
-            foreach (Database_Objects.Log log in logs_sorted.Values)
+            catch
             {
-                dataGridView_Database_Log.Rows.Add(log.timeDate, log.tableName, log.operation, log.userName);
+                ;
             }
         }
 
